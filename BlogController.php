@@ -7,19 +7,19 @@
 class BlogController{
 
 	public function listAction($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param;  
+		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
 	}
 
 	public function detailAction($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param;  
-
+		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
 	}
 
 	public function catAction($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param;  
+		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
 	}
 
 	public function callAction($tab_param){
+
 		/*
 		swich()
 		case x :
