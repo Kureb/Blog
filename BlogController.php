@@ -2,6 +2,7 @@
 <?php
 /* Gère les actions des visiteurs et
  * la navigation sur le blog
+ * BOULANGER Vincent & DAUSSY Alexandre
  */
 class BlogController{
 
@@ -32,7 +33,9 @@ class BlogController{
 
 }
 
+/* Permet de tester nos fonctions */
 $b = new BlogController();
 $b->listAction(1);
+/* Fin des tests */
 
 ?>
