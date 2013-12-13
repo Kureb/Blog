@@ -3,7 +3,7 @@
  * Gestion du blog
  * BOULANGER Vincent & DAUSSY Alexandre
  */
-include 'Controller.php';
+include_once('Controller.php');
 class AdminController extends Controller {
 
 
@@ -33,8 +33,8 @@ class AdminController extends Controller {
 		//Voir BlogController.php pour voir les commentaires
 		foreach ($tab as $key => $value) {
 			switch ($value) {
-				case 'addM'
-:					$this->addMessage($key);
+				case 'addM':
+					$this->addMessage($key);
 					break;
 
 				case 'saveM':

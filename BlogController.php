@@ -4,7 +4,7 @@
  * la navigation sur le blog
  * BOULANGER Vincent & DAUSSY Alexandre
  */
-include 'Controller.php';
+include_once('Controller.php');
 class BlogController extends Controller{
 
 	public function listAction($param){
