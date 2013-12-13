@@ -34,30 +34,26 @@ class BlogController{
 			//echo "key : $key <br>  value : $value <br>";
 			switch ($value) {
 				case 'list':
-					echo "LIST <br>";
 					$this->listAction($key);
 					break;
 
 				case 'detail':
-					echo "DETAIL <br>";
 					$this->detailAction($key);
-					if(array_search('id', array_keys($tab))==false) echo "lol"; 
+					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
 					else echo "id : " . $tab['id'];
 					break;
 
 				case 'cat':
-					echo "CAT <br>";
 					$this->catAction($key);
-					if(array_search('id', array_keys($tab))==false) echo "lol"; 
+					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
 					else echo "id : " . $tab['id'];
 					break;
 
 				default:
+					//if(array_search('id', array_keys($tab))==false)
+						echo "action impossible <br>";
 					break;
 			}
-			//if($key=='id') echo "ca a un id bitch ! ID : " . $tab['id'];
-			
-
 		}
 	}
 
@@ -66,13 +62,15 @@ class BlogController{
 }
 
 /* Permet de tester nos fonctions */
-$b = new BlogController();
+
+/*$b = new BlogController();
 $b->listAction("param1"); echo "<br>";
 $b->detailAction("param2"); echo "<br>";
 echo "<p>Pour tester la methode callAction, ajoutez \"?cle=valeur\" 
 a la fin de l'URL (ce que vous voulez, ex ?nom=Daussy ou ?nom=Daussy?id=5) et reactualisez<br></p>";
 $tab = $_GET;
-if ($tab != null) $b->callAction($tab);
+if ($tab != null) $b->callAction($tab);*/
 /* Fin des tests */
+
 
 ?>
