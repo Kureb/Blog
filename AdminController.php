@@ -3,7 +3,8 @@
  * Gestion du blog
  * BOULANGER Vincent & DAUSSY Alexandre
  */
-class AdminController{
+include 'Controller.php';
+class AdminController extends Controller {
 
 
 	/* Affichage d'un formulaire pour ajouter un message */
@@ -32,8 +33,8 @@ class AdminController{
 		//Voir BlogController.php pour voir les commentaires
 		foreach ($tab as $key => $value) {
 			switch ($value) {
-				case 'addM':
-					$this->addMessage($key);
+				case 'addM'
+:					$this->addMessage($key);
 					break;
 
 				case 'saveM':

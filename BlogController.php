@@ -4,7 +4,8 @@
  * la navigation sur le blog
  * BOULANGER Vincent & DAUSSY Alexandre
  */
-class BlogController{
+include 'Controller.php';
+class BlogController extends Controller{
 
 	public function listAction($param){
 		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
