@@ -27,6 +27,7 @@ class Base{
 				$connexion = new PDO($dns, $user,$pass,	
 					array(PDO::ERRMODE_EXCEPTION=>true, 
 					PDO::ATTR_PERSISTENT=>true));
+				$connexion->exec("SET CHARACTER SET utf8");
 				}catch(PDOException $e){				
 					throw new BaseException("connection: $dsn ".$e->getMessage(). '<br/>');
 				}
