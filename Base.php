@@ -2,6 +2,7 @@
  /*
   * Permet d'établir la connexion
   * avec la base de données
+  * BOULANGER Vincent & DAUSSY Alexandre
   */
 class Base{
 
@@ -17,17 +18,19 @@ class Base{
 		if(isset(self::$connexion)){ //si on a déjà une connexion OU isset($this->connection)
 			return self::$connexion; //on la retourne
 			//return $this->connexion;
+			//echo "deja connecte";
 		}else{//sinon
 			require_once 'param_co.php';
-			global $host_db, $user_db, $password_db, $bdd_db;
+			global $host, $user, $pass, $base;
 			try{
 				$dns="mysql:host=$host;dbname=$base";
-				$connexion = new PDO($dsn, $user,$pass, 
-				array(PDO::ERRMODE_EXCEPTION=>true, 
-				PDO::ATTR_PERSISTENT=>true));
+				$connexion = new PDO($dns, $user,$pass,	
+					array(PDO::ERRMODE_EXCEPTION=>true, 
+					PDO::ATTR_PERSISTENT=>true));
 				}catch(PDOException $e){				
 					throw new BaseException("connection: $dsn ".$e->getMessage(). '<br/>');
 				}
+				//echo "connexion !";
 				return $connexion;
 		}
 	}
