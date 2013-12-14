@@ -6,7 +6,7 @@ include_once 'Categorie.php';
 
 echo "<h1>Blog test ....</h1>";
 
-echo "<b>Test 1 : parcours des catégories : </b><br/>" ;
+echo "<b>Test 1 : parcours des cat&eacutegories : </b><br/>" ;
 $lc = Categorie::findAll();
 foreach ($lc as $cat) {
     echo "id : " . $cat->id . "<br/>" ;
@@ -15,7 +15,7 @@ foreach ($lc as $cat) {
 
 }
 
-echo "<b>Test 2 : ajout d'une catégorie : </b><br/>" ;
+echo "<b>Test 2 : ajout d'une cat&eacutegorie : </b><br/>" ;
 
 $c= new Categorie();
 $c->titre = "categorie test";
