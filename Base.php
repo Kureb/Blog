@@ -15,25 +15,27 @@ class Base{
 	 */
 	public static function getConnection(){
 		
-		if(isset(self::$connexion)){ //si on a déjà une connexion OU isset($this->connection)
-			return self::$connexion; //on la retourne
-			//return $this->connexion;
-			//echo "deja connecte";
-		}else{//sinon
-			require_once 'param_co.php';
-			global $host, $user, $pass, $base;
-			try{
-				$dns="mysql:host=$host;dbname=$base";
-				$connexion = new PDO($dns, $user,$pass,	
-					array(PDO::ERRMODE_EXCEPTION=>true, 
-					PDO::ATTR_PERSISTENT=>true));
-				$connexion->exec("SET CHARACTER SET utf8");
-				}catch(PDOException $e){				
-					throw new BaseException("connection: $dsn ".$e->getMessage(). '<br/>');
-				}
-				//echo "connexion !";
-				return $connexion;
+		if (isset(self::$connexion)) {
+			return self::$connexion ;
+		}else{
+			self::$connexion = self::connect();
+			return self::$connexion ;
 		}
+	}
+
+
+	public static function connect(){
+		require_once 'param_co.php';
+		global $host, $user, $pass, $base;
+		try{
+			$dns="mysql:host=$host;dbname=$base";
+			$connexion = new PDO($dns, $user,$pass,	
+				array(PDO::ERRMODE_EXCEPTION=>true, 
+				PDO::ATTR_PERSISTENT=>true));
+			$connexion->exec("SET CHARACTER SET utf8");
+			}catch(PDOException $e){				
+				throw new BaseException("connection: $dsn ".$e->getMessage(). '<br/>');
+			}
 	}
 
 }
