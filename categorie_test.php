@@ -21,7 +21,7 @@ $c= new Categorie();
 $c->titre = "categorie test";
 $c->description = "description de la categorie de test";
 $c->insert();
-echo "Id de la nvelle categorie : " . $c->id .'<br/>';
+echo "Id de la nouvelle categorie : " . $c->id .'<br/>';
 
 echo "nouvelle liste : <br/>";
 foreach (Categorie::findAll() as $cat) {

@@ -224,22 +224,32 @@ class Categorie {
    *   @return Categorie renvoie un objet de type Categorie
    */
     public static function findById($id) {
-
+      /* Code de base
       $c = Base::getConnection();
-      $query = $c->prepare("select * from Categorie where id=?") ;
+      $query = $c->prepare("select * from categorie where id=?") ;
       $query->bindParam(1, $id, PDO::PARAM_INT);
       $dbres = $query->execute();
 
       $d = $query->fetch(PDO::FETCH_BOTH);
-      
+      */
 
-      //Fait par Vincent et Alexandre
+
+      $pdo = Base::getConnection();
+      $query = 'select * from categorie where id= :id';
+      $dbres = $pdo->prepare($query);
+      $dbres->bindparam(':id', $id);
+      $dbres->execute();
+      $categorie = false;
+      $d=$dbres->fetch(PDO::FETCH_OBJ) ;
       $categorie = new Categorie();
       $categorie->setAttr("id", $d->id);
       $categorie->setAttr("titre", $d->titre);
       $categorie->setAttr("description", $d->description);
 
       return $categorie;
+
+
+
     }
 
     
