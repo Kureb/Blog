@@ -1,8 +1,8 @@
 <?php
 
-$base = 'blog';
-$pass = '';
-$user = 'root';
-$host = 'localhost';
+	$base = 'blog';
+	$pass = '';
+	$user = 'root';
+	$host = 'localhost';
 
 ?>

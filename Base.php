@@ -1,41 +1,41 @@
 <?php
  /*
-  * Permet d'établir la connexion
+  * Permet d'établir la connection
   * avec la base de données
   * BOULANGER Vincent & DAUSSY Alexandre
   */
+ require_once 'param_co.php';
 class Base{
 
 
-	private static $connexion;
+	private static $connection;
 
-	/* Permet d'obtenir une connexion à la base 
-	 * (Les paramètres de connexions sont stockés dans un fichier) 
-	 * Il faut créer une connexion PDO distante
+	/* Permet d'obtenir une connection à la base 
+	 * (Les paramètres de connections sont stockés dans un fichier) 
+	 * Il faut créer une connection PDO distante
 	 */
 	public static function getConnection(){
-		
-		if (isset(self::$connexion)) {
-			return self::$connexion ;
+		if (isset(self::$connection)) {
+			return self::$connection;
 		}else{
-			self::$connexion = self::connect();
-			return self::$connexion ;
-		}
+			self::$connection = self::connect();
+			return self::$connection;
+		}		
 	}
 
 
 	public static function connect(){
-		require_once 'param_co.php';
 		global $host, $user, $pass, $base;
 		try{
-			$dns="mysql:host=$host;dbname=$base";
-			$connexion = new PDO($dns, $user,$pass,	
-				array(PDO::ERRMODE_EXCEPTION=>true, 
-				PDO::ATTR_PERSISTENT=>true));
-			$connexion->exec("SET CHARACTER SET utf8");
-			}catch(PDOException $e){				
-				throw new BaseException("connection: $dsn ".$e->getMessage(). '<br/>');
-			}
+			$dns = "mysql:host=$host;dbname=$base";
+			$connection = new PDO($dns, $user, $pass,	
+					array(PDO::ERRMODE_EXCEPTION=>true, 
+					PDO::ATTR_PERSISTENT=>true));
+			return($connection);
+		}catch (Exception $e){
+			die('Erreur : ' . $e->getMessage());
+		}
+		
 	}
 
 }

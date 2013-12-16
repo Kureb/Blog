@@ -111,6 +111,14 @@ class Categorie {
   }
 
 
+  public function setAttr($attr_name, $attr_val) {
+    if (property_exists( __CLASS__, $attr_name)){
+      $this->$attr_name = $attr_val;
+    }
+    $emess = __CLASS__ . ": unknown member $attr_name (setAttr)";
+    //throw new Exception("methode setAttr à écrire");    
+  }
+
   /**
    *   mise a jour de la ligne courante
    *   
@@ -218,7 +226,7 @@ class Categorie {
     public static function findById($id) {
 
       $c = Base::getConnection();
-      $query = $c->prepare("select * from categorie where id=?") ;
+      $query = $c->prepare("select * from Categorie where id=?") ;
       $query->bindParam(1, $id, PDO::PARAM_INT);
       $dbres = $query->execute();
 
@@ -232,9 +240,6 @@ class Categorie {
       $categorie->setAttr("description", $d->description);
 
       return $categorie;
-
-      throw new Exception("méthode findById() à completer");
-
     }
 
     
@@ -246,8 +251,7 @@ class Categorie {
      *  
      *   @static
      *   @return Array renvoie un tableau de categorie
-     */
-    
+     */    
     public static function findAll() {
 
     /**
@@ -257,7 +261,7 @@ class Categorie {
      *
      *
      */
-    
+
     $query = "select * from categorie";
     $pdo = Base::getConnection();
     $dbres = $pdo->prepare($query);
@@ -272,7 +276,11 @@ class Categorie {
       array_push($tab, $cat);
     }
     return $tab;
+
+
   }
+
+  
     
 
 }
