@@ -234,9 +234,9 @@ class Categorie {
       */
 
 
-      $pdo = Base::getConnection();
+      $c = Base::getConnection();
       $query = 'select * from categorie where id= :id';
-      $dbres = $pdo->prepare($query);
+      $dbres = $c->prepare($query);
       $dbres->bindparam(':id', $id);
       $dbres->execute();
       $categorie = false;
@@ -286,6 +286,34 @@ class Categorie {
       array_push($tab, $cat);
     }
     return $tab;
+  }
+
+
+
+  /**
+    * Find par titre
+    *
+    * Permet de retrouver des catégories
+    * à partir de leur titre
+    *
+    */
+  public static function findByTitre($titre){
+    $query = "select * from categorie where titre = :titre";
+    $dbres = $c->prepare($query);
+    $dbres->bindparam(':titre', $titre);
+    $dbres->execute();
+    $categorie = false;
+      if($dbres!=false){
+        $d=$dbres->fetch(PDO::FETCH_OBJ) ;
+        $categorie = new Categorie();
+        $categorie->setAttr("id", $d->id);
+        $categorie->setAttr("titre", $d->titre);
+        $categorie->setAttr("description", $d->description);
+      }else{
+        echo "Erreur, categorie introuvable";
+      }
+
+      return $categorie;
 
 
   }
