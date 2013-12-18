@@ -31,6 +31,7 @@ class Base{
 			$connection = new PDO($dns, $user, $pass,	
 					array(PDO::ERRMODE_EXCEPTION=>true, 
 					PDO::ATTR_PERSISTENT=>true));
+			$connection->exec("SET CHARACTER SET utf8");
 			return($connection);
 		}catch (Exception $e){
 			die('Erreur : ' . $e->getMessage());

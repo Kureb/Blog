@@ -141,7 +141,7 @@ class Categorie {
 				                   where id=?");
     
     /* 
-     * liaison des paramêtres : 
+     * liaison des paramètres : 
     */
     $query->bindParam (1, $this->titre, PDO::PARAM_STR);
     $query->bindParam (2, $this->description, PDO::PARAM_STR); 
@@ -237,7 +237,7 @@ class Categorie {
       $c = Base::getConnection();
       $query = 'select * from categorie where id= :id';
       $dbres = $c->prepare($query);
-      $dbres->bindparam(':id', $id);
+      $dbres->bindParam(':id', $id);
       $dbres->execute();
       $categorie = false;
       $d=$dbres->fetch(PDO::FETCH_OBJ) ;
@@ -299,6 +299,7 @@ class Categorie {
     */
   public static function findByTitre($titre){
     $query = "select * from categorie where titre = :titre";
+    $c = Base::getConnection();
     $dbres = $c->prepare($query);
     $dbres->bindparam(':titre', $titre);
     $dbres->execute();
