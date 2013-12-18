@@ -1,0 +1,39 @@
+h1 {
+	color: green;
+}
+
+body {
+
+	background-image:url(LOLL.jpg);
+}
+#banniere {
+	background-image:url(LOL.jpg);
+}
+#Auteur {
+	background-color: blue;
+	float: left;
+	width: 22%;
+	border-radius:20px ;
+	margin-right: 10px;
+	overflow: auto;
+	padding: 1%;
+	height: 50%;
+}
+
+
+#Article {
+	display: inline-block;
+	background-position: center;
+	background-color: yellow;
+*/	float: right;
+	min-width: 75%;
+	text-align: center;
+	margin-right: 2%px;
+	margin-left: auto;
+	border-radius:20px;
+}
+
+iframe {
+	height : 500px;
+	width: 500px;
+}
