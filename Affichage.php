@@ -10,10 +10,8 @@ class Affichage{
 		$content = file_get_contents($file);
 		$artc = "mesarticles";
 		$cat = "mescategories";
-		//$link = "(suite)";
 		$content = str_replace($artc, "$articles", $content);
 		$content = str_replace($cat, "$categorie", $content);
-		//$content = str_replace($link, '<a href="http://9gag.com/">(suite)</a>', $content);
 		echo $content;
 }
 
@@ -36,8 +34,26 @@ class Affichage{
 	 * sous la forme d'un tableau */
 	static function afficheListeBillets($liste){
 		$code = "";
-		if(sizeof($liste)==0)
-			$code = "Aucun billet";
+		//var_dump($liste);
+		if(sizeof($liste)==0){
+			$code = "<div id = \"Article\">\n";
+			$code = $code . "Aucun billet";
+			$code = $code . "</div>";
+		}else if(sizeof($liste)==1){
+			foreach ($liste as $billet) {
+				$id = $billet->getAttr("id");
+				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
+				$date = $billet->getAttr("date");
+				$date = substr($date, 0, 11) . "à " . substr($date, 11);
+				$code = $code . "<div id = \"Article\" >\n" .
+						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
+						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
+						"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
+						"</div>\n";
+				$code = $code . "</div>\n";
+			}
+			//$code = self::afficherBillet();
+		}
 		else{
 			$code = $code . "<table>\n";
 			foreach($liste as $billet){
@@ -55,8 +71,25 @@ class Affichage{
 				//$code = $code . self::afficherBillet($billet);
 				$code = $code . "\n</td></tr>\n";
 			}
-			$code = $code . "</table>\n";
+			
+		$code = $code . "</table>\n";
 		}
+		$page = $_GET;
+		foreach ($page as $key => $value) {
+			if ($key=="page") $num = $value; break;
+		}
+		$pagination = '<div id = "pagination">Page numéro : << '.$num.' >> </div>';
+		$prec = "<<";
+		$suiv = ">>";
+		$nb_billets = Billet::getNbBillet();
+		if($num>1)
+			$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
+		
+		if($nb_billets > $num*5)
+			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
+		
+		$code = $code . $pagination;
+		
 		return $code;
 	}
 
