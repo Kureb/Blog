@@ -10,10 +10,10 @@ class Affichage{
 		$content = file_get_contents($file);
 		$artc = "mesarticles";
 		$cat = "mescategories";
-		$link = "(suite)";
+		//$link = "(suite)";
 		$content = str_replace($artc, "$articles", $content);
 		$content = str_replace($cat, "$categorie", $content);
-		$content = str_replace($link, '<a href="http://9gag.com/">(suite)</a>', $content);
+		//$content = str_replace($link, '<a href="http://9gag.com/">(suite)</a>', $content);
 		echo $content;
 }
 
@@ -26,7 +26,7 @@ class Affichage{
 		$code = "<div id = \"Article\" >\n" .
 				"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
-				"<p>" . $date . "</p>\n" .
+				"<i>" . "publié le " . $date. "</i>\n" .
 				"</div>";
 
 		return $code;
@@ -41,12 +41,14 @@ class Affichage{
 		else{
 			$code = $code . "<table>\n";
 			foreach($liste as $billet){
+				$id = $billet->getAttr("id");
+				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 				$code = $code . "<tr><td>\n";
 				$code = $code . "<div id = \"Article\" >\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
-						"<p>" . substr($billet->getAttr("body"),0,220) . "...(suite)</p>\n" .
+						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
 						"<i>" . "publié le " . $date. "</i>\n" .
 						"</div>\n";
 				$code = $code . "</div>\n";
