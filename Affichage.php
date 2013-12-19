@@ -21,10 +21,12 @@ class Affichage{
 
 	/* Fonction qui retourne le code HTML pour un billet */
 	static function afficherBillet($billet){
+		$date = $billet->getAttr("date");
+		$date = substr($date, 0, 11) . "à " . substr($date, 11);
 		$code = "<div id = \"Article\" >\n" .
 				"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
-				"<p>" . $billet->getAttr("date") . "</p>\n" .
+				"<p>" . $date . "</p>\n" .
 				"</div>";
 
 		return $code;
@@ -39,11 +41,13 @@ class Affichage{
 		else{
 			$code = $code . "<table>\n";
 			foreach($liste as $billet){
+				$date = $billet->getAttr("date");
+				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 				$code = $code . "<tr><td>\n";
 				$code = $code . "<div id = \"Article\" >\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "...(suite)</p>\n" .
-						"<i>" . "publié le " . $billet->getAttr("date") . "</i>\n" .
+						"<i>" . "publié le " . $date. "</i>\n" .
 						"</div>\n";
 				$code = $code . "</div>\n";
 				//$code = $code . self::afficherBillet($billet);
@@ -64,7 +68,11 @@ class Affichage{
 		else{
 			$code = "<b>Liste des catégories</b><br>\n\t";
 			foreach ($liste as $categorie) {
-				$code = $code . $categorie->getAttr("titre") . " <br>\n\t";
+				$titre = $categorie->getAttr("titre");
+				$span = $categorie->getAttr("description");
+				$code = $code . $titre . "<br>";
+				//TODO Ajouter span et petit icone, en faire une liste
+				//$code = $code . "<span TITLE =\"" . $span . ">" . $titre . "</span> <br>\n\t";
 			}
 		}
 		return $code;
@@ -72,18 +80,18 @@ class Affichage{
 
 }
 
-$a = new Affichage();
+//$a = new Affichage();
 
 /*
 $b = Billet::findById(4);
 $c = $a->afficherBillet($b);
 $a->affichageGeneral($c);
 */
-
+/*
 $b = Billet::findAll();
 $cat = Categorie::findAll();
 $lol = $a->afficheListeCategorie($cat);
 $c = $a->afficheListeBillets($b);
 $a->affichageGeneral($c, $lol);
-
+*/
 ?>

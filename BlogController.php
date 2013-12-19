@@ -5,14 +5,34 @@
  * BOULANGER Vincent & DAUSSY Alexandre
  */
 include_once('Controller.php');
+include('Affichage.php');
+
 class BlogController extends Controller{
 
 	public function listAction($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
+		//echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
+		//include('Affichage.php');
+		//Afficheur::afficherListeBillet();
+		$a = new Affichage();
+		$b = Billet::findAll();
+		$cat = Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$c = $a->afficheListeBillets($b);
+		$a->affichageGeneral($c, $lol);
+		
 	}
 
 	public function detailAction($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
+		//echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
+		//var_dump($param);
+		$a = new Affichage();
+		$b = Billet::findById($param);
+		$c = $a->afficherBillet($b);
+		$cat = Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$a->affichageGeneral($c, $lol);
+		
+		
 	}
 
 	public function catAction($param){
@@ -39,20 +59,20 @@ class BlogController extends Controller{
 					break;
 
 				case 'detail':
-					$this->detailAction($key);
 					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
-					else echo "id : " . $tab['id'];
+					else /*echo "id : " . $tab['id'];*/
+					$this->detailAction($tab['id']);
 					break;
 
 				case 'cat':
-					$this->catAction($key);
 					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
-					else echo "id : " . $tab['id'];
+					else /*echo "id : " . $tab['id'];*/
+					$this->catAction($key);
 					break;
 
 				default:
 					//if(array_search('id', array_keys($tab))==false)
-						echo "action impossible <br>";
+					//echo "action impossible <br>";
 					break;
 			}
 		}

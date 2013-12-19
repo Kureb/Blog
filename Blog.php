@@ -2,7 +2,9 @@
 include_once('BlogController.php');
 include_once('AdminController.php');
 include_once('Base.php');
-echo "<p>passez des parametres valides (cf sujet) pour tester !</p>";
+
+//echo "<p>passez des parametres valides (cf sujet) pour tester !</p>";
+
 $c = new BlogController;
 $c->callAction( $_GET );
 
