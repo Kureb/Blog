@@ -69,4 +69,8 @@ foreach(Billet::findUnCertainNombre(0,2) as $billet){
 }
 
 
+echo "<b>Test 7 : afficher le nombre de billets </b><br>";
+$nb = Billet::getNbBillet();
+echo $nb;
+
 ?>

@@ -191,6 +191,18 @@ public function __toString(){
 
 	}
 
+
+
+	public static function getNbBillet(){
+		$query = "select count(*) as nb from billets";
+		$c = Base::getConnection();
+		$res = $c->query($query);
+		$data = $res->fetch();
+		$nb = $data['nb'];
+
+		return $nb;
+	}
+
 }
 
 ?>
