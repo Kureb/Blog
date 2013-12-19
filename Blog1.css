@@ -1,3 +1,4 @@
+
 h1 {
 	color: green;
 }
@@ -6,18 +7,54 @@ body {
 
 	background-image:url(LOLL.jpg);
 }
-#banniere {
-	background-image:url(LOL.jpg);
+#ban {
+	border-radius: 150px 80px 150px 80px;
+	height: 70px;
+	width: 100%;
+}
+
+#sharing {
+	position: fixed;
+	z-index: -1;
+	margin-top: -60px;
+	margin-left: 10px;
+}
+
+
+#gauche {
+	float: left;
+	width: 22%;
+	border-radius: 20px;
+	overflow: auto;
+	padding: 1px;
+	height: 85%;
+	margin-top: 0;
+	margin-bottom: 0;
+
+	position: fixed;
 }
 #Auteur {
 	background-color: blue;
-	float: left;
-	width: 22%;
 	border-radius:20px ;
-	margin-right: 10px;
+	overflow: auto;
+	height: 25%;
+	padding: 1%;
+
+	margin-top: 0;
+	margin-bottom: 3%;
+
+
+}
+#categorie {
+	background-color: green;
+	border-radius:20px ;
 	overflow: auto;
 	padding: 1%;
-	height: 50%;
+	height: 71%;
+	
+	margin-top: 0;
+	margin-bottom: 0;
+
 }
 
 
@@ -25,12 +62,15 @@ body {
 	display: inline-block;
 	background-position: center;
 	background-color: yellow;
-*/	float: right;
+	float: right;
 	min-width: 75%;
 	text-align: center;
-	margin-right: 2%px;
-	margin-left: auto;
+	margin-right: 0;
 	border-radius:20px;
+	padding:1%;
+	margin-top: 1%;
+
+	position: relative;
 }
 
 iframe {
