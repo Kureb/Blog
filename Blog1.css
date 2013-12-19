@@ -11,13 +11,7 @@ body {
 	border-radius: 150px 80px 150px 80px;
 	height: 70px;
 	width: 100%;
-}
-
-#sharing {
-	position: fixed;
-	z-index: -1;
-	margin-top: -60px;
-	margin-left: 10px;
+	z-index: 1;
 }
 
 
@@ -27,20 +21,27 @@ body {
 	border-radius: 20px;
 	overflow: auto;
 	padding: 1px;
-	height: 85%;
-	margin-top: 0;
+	height: 95%;
+	margin-top: -80px;
 	margin-bottom: 0;
+	z-index: -1;
 
 	position: fixed;
+}
+
+#sharing {
+	z-index: -1;
+	width: 90%;
+	border-radius: 186px 46px;
 }
 #Auteur {
 	background-color: blue;
 	border-radius:20px ;
 	overflow: auto;
-	height: 25%;
+	height: 30%;
 	padding: 1%;
 
-	margin-top: 0;
+	margin-top: 15px;
 	margin-bottom: 3%;
 
 
@@ -50,7 +51,7 @@ body {
 	border-radius:20px ;
 	overflow: auto;
 	padding: 1%;
-	height: 71%;
+	height: 53%;
 	
 	margin-top: 0;
 	margin-bottom: 0;
