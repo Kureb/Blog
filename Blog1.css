@@ -6,6 +6,7 @@ h1 {
 body {
 
 	background-image:url(LOLL.jpg);
+	background-attachment: fixed;
 }
 #ban {
 	border-radius: 150px 80px 150px 80px;
@@ -85,4 +86,12 @@ body {
 
 #date {
 	text-align: right;
+}
+
+
+#pagination{
+	background-color: DeepPink;
+	color: black;
+	text-align: center;
+	bottom: 1;
 }
