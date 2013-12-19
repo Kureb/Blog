@@ -1,5 +1,6 @@
 h1 {
 	color: green;
+	text-align: center;
 }
 
 body {
@@ -67,7 +68,7 @@ body {
 	background-position: center;
 	display: inline-block;
 	background-color: yellow;
-	text-align: center;
+	text-align: justify;
 	margin-right: 0;
 	border-radius:20px;
 	padding:1%;
@@ -78,7 +79,10 @@ body {
 }
 
 
-
 #footer {
 	background-color: grey;
+}
+
+#date {
+	text-align: right;
 }
