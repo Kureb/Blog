@@ -26,7 +26,7 @@ class Affichage{
 		$code = "<div id = \"Article\" >\n" .
 				"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
-				"<i>" . "publié le " . $date. "</i>\n" .
+				"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 				"</div>";
 
 		return $code;
@@ -49,7 +49,7 @@ class Affichage{
 				$code = $code . "<div id = \"Article\" >\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
-						"<i>" . "publié le " . $date. "</i>\n" .
+						"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
 				$code = $code . "</div>\n";
 				//$code = $code . self::afficherBillet($billet);
