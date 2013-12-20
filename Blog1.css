@@ -64,7 +64,7 @@ body {
 
 }*/
 
-#Article {
+.Article {
 	background-position: center;
 	display: inline-block;
 	background-color: yellow;
