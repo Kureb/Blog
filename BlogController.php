@@ -5,14 +5,46 @@
  * BOULANGER Vincent & DAUSSY Alexandre
  */
 include_once('Controller.php');
+include('Affichage.php');
+
 class BlogController extends Controller{
 
 	public function listAction($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
+		//echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
+		//include('Affichage.php');
+		//Afficheur::afficherListeBillet();
+		$a = new Affichage();
+		$b = Billet::findAll();
+		$cat = Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$c = $a->afficheListeBillets($b);
+		$a->affichageGeneral($c, $lol);
+		
+	}
+
+
+	public function listAction2($param){
+		$debut = $param * 5 - 5 ;
+		$fin = $debut + 5; 
+		$a = new Affichage();
+		$b = Billet::findUnCertainNombre($debut,$fin);
+		$cat = Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$c = $a->afficheListeBillets($b);
+		$a->affichageGeneral($c, $lol);
 	}
 
 	public function detailAction($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
+		//echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
+		//var_dump($param);
+		$a = new Affichage();
+		$b = Billet::findById($param);
+		$c = $a->afficherBillet($b);
+		$cat = Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$a->affichageGeneral($c, $lol);
+		
+		
 	}
 
 	public function catAction($param){
@@ -30,8 +62,16 @@ class BlogController extends Controller{
 		 * Si la clé est detail ou cat, on aura alors aussi
 		 * besoin de son id
 		 */
-		//echo "Contenu de \$_GET <br> ";
+		//echo "Contenu de \$_GET <br> " ;
+		//var_dump($_GET);
+
+		//si y'a pas de paramètre dans l'URL on affiche les 5 derniers articles
+		if(empty($tab)) $this->listAction2(1);
 		foreach ($tab as $key => $value) {
+			if($key == "page"){
+				//var_dump($value);
+				$this->listAction2($value);
+			}
 			//echo "key : $key <br>  value : $value <br>";
 			switch ($value) {
 				case 'list':
@@ -39,20 +79,21 @@ class BlogController extends Controller{
 					break;
 
 				case 'detail':
-					$this->detailAction($key);
 					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
-					else echo "id : " . $tab['id'];
+					else /*echo "id : " . $tab['id'];*/
+						$this->detailAction($tab['id']);
 					break;
 
 				case 'cat':
-					$this->catAction($key);
 					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
-					else echo "id : " . $tab['id'];
+					else /*echo "id : " . $tab['id'];*/
+						$this->catAction($key);
 					break;
 
 				default:
 					//if(array_search('id', array_keys($tab))==false)
-						echo "action impossible <br>";
+					//echo "action impossible <br>";
+					//$this->detailAction(null);
 					break;
 			}
 		}

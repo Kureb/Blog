@@ -50,7 +50,7 @@ class AdminController extends Controller {
 					break;
 
 				default:
-					echo "action impossible <br>";
+					//echo "action impossible <br>";
 					break;
 			}
 		}

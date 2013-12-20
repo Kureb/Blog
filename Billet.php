@@ -168,6 +168,41 @@ public function __toString(){
 		return billet;
 	}
 
+
+
+	public static function findUnCertainNombre($debut, $fin){
+		$query = "select * from billets order by date DESC LIMIT " . $debut .", " . $fin;
+		$c = Base::getConnection();
+		$dbres = $c->prepare($query);
+		$dbres->execute();
+		$d = $dbres->fetchAll();
+		$tab = Array();
+		foreach($d as $ligne){
+			$billet = new Billet();
+			$billet->setAttr("id", $ligne["id"]);
+			$billet->setAttr("titre", $ligne["titre"]);
+			$billet->setAttr("body", $ligne["body"]);
+			$billet->setAttr("cat_id", $ligne["cat_id"]);
+			$billet->setAttr("date", $ligne["date"]);
+			array_push($tab, $billet);
+		}
+
+		return $tab;
+
+	}
+
+
+
+	public static function getNbBillet(){
+		$query = "select count(*) as nb from billets";
+		$c = Base::getConnection();
+		$res = $c->query($query);
+		$data = $res->fetch();
+		$nb = $data['nb'];
+
+		return $nb;
+	}
+
 }
 
 ?>

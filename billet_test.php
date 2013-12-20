@@ -58,4 +58,19 @@ foreach(Billet::findAll() as $billet){
 }
 
 
+
+echo "<b>Test 6 : afficher que X billets </b><br>";
+foreach(Billet::findUnCertainNombre(0,2) as $billet){
+	echo "id : " . $billet->getAttr("id") . "<br>";
+	echo "titre : " . $billet->getAttr("titre") . "<br>";
+	echo "contenu : " . $billet->getAttr("body") . "<br/>";
+	echo "categeorie : " . $billet->getAttr("cat_id") . "<br/>";
+	echo "date : " . $billet->getAttr("date") . "<br/><br>";
+}
+
+
+echo "<b>Test 7 : afficher le nombre de billets </b><br>";
+$nb = Billet::getNbBillet();
+echo $nb;
+
 ?>
