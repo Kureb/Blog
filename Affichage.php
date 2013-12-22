@@ -46,7 +46,7 @@ class Affichage{
 				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
-				$code = $code . "<div id = \"Article\" >\n" .
+				$code = $code . "<div id=\"Article\" >\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
 						"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
@@ -59,11 +59,11 @@ class Affichage{
 			$code = $code . "<table>\n";
 			foreach($liste as $billet){
 				$id = $billet->getAttr("id");
-				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
+				$link = '<a id_lien =' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 				$code = $code . "<tr><td>\n";
-				$code = $code . "<div id = \"Article\" >\n" .
+				$code = $code . "<div id=\"Article\" >\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
 						"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
@@ -76,9 +76,16 @@ class Affichage{
 		$code = $code . "</table>\n";
 		}
 		$page = $_GET;
-		foreach ($page as $key => $value) {
-			if ($key=="page") $num = $value; break;
+
+		//SI GET est vide num est égal à 1 
+		if(sizeof($page)!=0){
+			
+			foreach ($page as $key => $value) {
+				if ($key=="page") $num = $value; break;
+			}
 		}
+		else $num = 1;
+		
 		$pagination = '<div id = "pagination">Page numéro : << '.$num.' >> </div>';
 		$prec = "<<";
 		$suiv = ">>";
