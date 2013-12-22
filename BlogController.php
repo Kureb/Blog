@@ -66,7 +66,11 @@ class BlogController extends Controller{
 		//var_dump($_GET);
 
 		//si y'a pas de paramètre dans l'URL on affiche les 5 derniers articles
-		if(empty($tab)) $this->listAction2(1);
+		if(sizeof($tab)==0) {
+			$tab = array("page" => 1);
+			//$this->listAction2(1);
+		}
+
 		foreach ($tab as $key => $value) {
 			if($key == "page"){
 				//var_dump($value);
@@ -75,7 +79,7 @@ class BlogController extends Controller{
 			//echo "key : $key <br>  value : $value <br>";
 			switch ($value) {
 				case 'list':
-					$this->listAction($key);
+					$this->listAction2($value);
 					break;
 
 				case 'detail':
@@ -97,6 +101,7 @@ class BlogController extends Controller{
 					break;
 			}
 		}
+		
 	}
 
 
