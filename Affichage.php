@@ -6,7 +6,7 @@ include_once 'Categorie.php';
 class Affichage{
 
 	function affichageGeneral($articles, $categorie/*$contenu_central, $menu_droite, $menu_gauche*/){
-		$file = 'Blog1.html';
+		$file = 'BlogAlex.html';
 		$content = file_get_contents($file);
 		$artc = "mesarticles";
 		$cat = "mescategories";
