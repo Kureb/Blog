@@ -21,7 +21,7 @@ class Affichage{
 	static function afficherBillet($billet){
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
-		$code = "<div id = \"Article\" >\n" .
+		$code = "<div class=\"Article\">\n" .
 				"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
 				"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
@@ -36,7 +36,7 @@ class Affichage{
 		$code = "";
 		//var_dump($liste);
 		if(sizeof($liste)==0){
-			$code = "<div id = \"Article\">\n";
+			$code = "<div class=\"Article\">\n";
 			$code = $code . "Aucun billet";
 			$code = $code . "</div>";
 			return $code;
@@ -46,10 +46,10 @@ class Affichage{
 				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
-				$code = $code . "<div id=\"Article\" >\n" .
+				$code = $code . "<div class=\"Article\" >\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
-						"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
+						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
 				//$code = $code . "</div>\n";
 			}
@@ -59,18 +59,18 @@ class Affichage{
 			$code = $code . "<table>\n";
 			foreach($liste as $billet){
 				$id = $billet->getAttr("id");
-				$link = '<a id_lien =' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
+				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 				$code = $code . "<tr><td>\n";
-				$code = $code . "<div id=\"Article\" >\n" .
+				$code = $code . "<div class=\"Article\">\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
-						"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
+						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
 				//$code = $code . "</div>\n";
 				//$code = $code . self::afficherBillet($billet);
-				$code = $code . "\n</td></tr>\n";
+				$code = $code . "</td></tr>\n";
 			}
 			
 		$code = $code . "</table>\n";
@@ -86,7 +86,7 @@ class Affichage{
 		}
 		else $num = 1;
 		
-		$pagination = '<div id = "pagination">Page numéro : << '.$num.' >> </div>';
+		$pagination = '<div id="pagination">Page numéro : << '.$num.' >> </div>';
 		$prec = "<<";
 		$suiv = ">>";
 		$nb_billets = Billet::getNbBillet();
