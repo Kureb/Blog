@@ -1,98 +1,98 @@
 h1 {
-	color: green;
-	text-align: center;
+        color: green;
+        text-align: center;
 }
 
 body {
 
-	background-image:url(LOLL.jpg);
-	background-attachment: fixed;
+        background-image:url(LOLL.jpg);
+        background-attachment: fixed;
 }
 #ban {
-	border-radius: 150px 80px 150px 80px;
-	height: 70px;
-	width: 100%;
-	z-index: 1;
+        border-radius: 150px 80px 150px 80px;
+        height: 70px;
+        width: 100%;
+        z-index: 1;
 }
 
 
 #gauche {
-	float: left;
-	width: 22%;
-	border-radius: 20px;
-	overflow: auto;
-	padding: 1px;
-	height: 86%;
-	margin-top: -80px;
-	margin-bottom: 0;
-	z-index: -1;
+        float: left;
+        width: 22%;
+        border-radius: 20px;
+        overflow: auto;
+        padding: 1px;
+        height: 86%;
+        margin-top: -80px;
+        margin-bottom: 0;
+        z-index: -1;
 
-	position: fixed;
+        position: fixed;
 }
 
 #sharing {
-	width: 90%;
-	border-radius: 186px 46px;
+        width: 90%;
+        border-radius: 186px 46px;
 }
 #Auteur {
-	background-color: blue;
-	border-radius:20px ;
-	overflow: auto;
-	height: 28%;
-	padding: 1%;
-	margin-top: 15px;
-	margin-bottom: 3%;
+        background-color: blue;
+        border-radius:20px ;
+        overflow: auto;
+        height: 28%;
+        padding: 1%;
+        margin-top: 15px;
+        margin-bottom: 3%;
 
 
 }
 #categorie {
-	background-color: green;
-	border-radius:20px ;
-	overflow: auto;
-	padding: 1%;
-	height: 53%;
-	margin-top: 0;
-	margin-bottom: 0;
+        background-color: green;
+        border-radius:20px ;
+        overflow: auto;
+        padding: 1%;
+        height: 53%;
+        margin-top: 0;
+        margin-bottom: 0;
 
 }
 
 /*#droite {
-	background-color: red;
-	float: right;
-	display: inline-block;
-	min-width: 77%;
-	z-index: -1;
+        background-color: red;
+        float: right;
+        display: inline-block;
+        min-width: 77%;
+        z-index: -1;
 
 }*/
 
 .Article {
-	background-position: center;
-	display: inline-block;
-	background-color: yellow;
-	text-align: justify;
-	margin-right: 0;
-	border-radius:20px;
-	padding:1%;
-	margin-top: 1%;
-	width: 75%;
-	float: right;
-	position: relative;
+        background-position: center;
+        display: inline-block;
+        background-color: yellow;
+        text-align: justify;
+        margin-right: 0;
+        border-radius:20px;
+        padding:1%;
+        margin-top: 1%;
+        width: 75%;
+        float: right;
+        position: relative;
 }
 
 
 #footer {
-	background-color: grey;
+        background-color: grey;
 }
 
 #date {
-	text-align: right;
+        text-align: right;
 }
 
 
 #pagination{
-	background-color: DeepPink;
-	color: black;
-	text-align: center;
-	//position: absolute;
-	bottom: 5px;
+        background-color: DeepPink;
+        color: black;
+        text-align: center;
+        //position: absolute;
+        bottom: 5px;
 }

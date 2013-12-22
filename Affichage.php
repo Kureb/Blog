@@ -90,11 +90,10 @@ class Affichage{
 		$prec = "<<";
 		$suiv = ">>";
 		$nb_billets = Billet::getNbBillet();
-		if($num>1)//ou si nb_arti
+		if($num>1)
 			$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
 
 		if($nb_billets > $num*5)
-		//if(sizeof($liste)==0)
 			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
 		
 		$code = $code . $pagination;
