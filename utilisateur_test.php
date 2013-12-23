@@ -47,7 +47,7 @@ foreach(Utilisateur::findAll() as $utilisateur){
 }
 
 
-echo "<b>Test 6 : afficher le nombre d'utilisateurs</b><br>";
+echo "<b>Test 6 : afficher le nombre d'utilisateurs </b><br>";
 $nb = Utilisateur::getNbUser();
 echo $nb;
 

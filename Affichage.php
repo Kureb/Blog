@@ -26,6 +26,7 @@ class Affichage{
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
 				"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 				"</div>";
+				//TODO Ajouter auteur
 
 		return $code;
 	}
@@ -63,12 +64,16 @@ class Affichage{
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 				$code = $code . "<tr><td>\n";
+
+				$code = $code . '<div id="lol">';
+
 				$code = $code . "<div class=\"Article\">\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
 						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
-				//$code = $code . "</div>\n";
+				
+						$code = $code . "</div>\n";
 				//$code = $code . self::afficherBillet($billet);
 				$code = $code . "</td></tr>\n";
 			}
@@ -123,18 +128,4 @@ class Affichage{
 
 }
 
-//$a = new Affichage();
-
-/*
-$b = Billet::findById(4);
-$c = $a->afficherBillet($b);
-$a->affichageGeneral($c);
-*/
-/*
-$b = Billet::findAll();
-$cat = Categorie::findAll();
-$lol = $a->afficheListeCategorie($cat);
-$c = $a->afficheListeBillets($b);
-$a->affichageGeneral($c, $lol);
-*/
 ?>
