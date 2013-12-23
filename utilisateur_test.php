@@ -49,7 +49,13 @@ foreach(Utilisateur::findAll() as $utilisateur){
 
 echo "<b>Test 6 : afficher le nombre d'utilisateurs </b><br>";
 $nb = Utilisateur::getNbUser();
-echo $nb;
+echo $nb . "<br><br>";
+
+
+
+echo "<b>Test 7 : recherche par pseudo : </b><br>";
+$ua = Utilisateur::findByLogin("login_de_test2");
+echo $ua;
 
 
 ?>
