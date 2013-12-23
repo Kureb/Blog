@@ -5,3 +5,7 @@ CREATE TABLE `utilisateurs` (
 	`mail` varchar(100),
 	UNIQUE KEY `userid` (`userid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 auto_increment=1;
+
+
+ALTER TABLE `Billets`
+ADD id_auteur int(10);
