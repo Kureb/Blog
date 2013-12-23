@@ -49,7 +49,7 @@ class Utilisateur{
 
 		$c = Base::getConnection();
 
-		$this->password = md5($this->password);
+		$this->password = sha1($this->password);
 		$query = $c->prepare("update utilisateurs set login= ?, 
 					password= ?, mail= ?
 					where userid= ?");
@@ -82,7 +82,7 @@ class Utilisateur{
 
 	public function insert(){
 		$nb = 0;
-		$query = "INSERT INTO Utilisateurs VALUES(null, '".$this->login."','".md5($this->password)."', '".$this->mail."')";
+		$query = "INSERT INTO Utilisateurs VALUES(null, '".$this->login."','".sha1($this->password)."', '".$this->mail."')";
 		$c = Base::getConnection();
 		$nb = $c->exec($query);
 		$this->setAttr("userid", $c->LastInsertId());
