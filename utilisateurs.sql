@@ -9,3 +9,6 @@ CREATE TABLE `utilisateurs` (
 
 ALTER TABLE `Billets`
 ADD id_auteur int(10);
+
+
+insert into utilisateurs values(1, "user_test", "passw_test", "user@orange.com");
