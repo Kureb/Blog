@@ -6,7 +6,7 @@ include_once 'Categorie.php';
 class Affichage{
 
 	function affichageGeneral($articles, $categorie/*$contenu_central, $menu_droite, $menu_gauche*/){
-		$file = 'Blog1.html';
+		$file = 'BlogAlex.html';
 		$content = file_get_contents($file);
 		$artc = "mesarticles";
 		$cat = "mescategories";
@@ -21,11 +21,12 @@ class Affichage{
 	static function afficherBillet($billet){
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
-		$code = "<div id = \"Article\" >\n" .
+		$code = "<div class=\"Article\">\n" .
 				"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
 				"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 				"</div>";
+				//TODO Ajouter auteur
 
 		return $code;
 	}
@@ -36,7 +37,7 @@ class Affichage{
 		$code = "";
 		//var_dump($liste);
 		if(sizeof($liste)==0){
-			$code = "<div id = \"Article\">\n";
+			$code = "<div class=\"Article\">\n";
 			$code = $code . "Aucun billet";
 			$code = $code . "</div>";
 			return $code;
@@ -46,10 +47,10 @@ class Affichage{
 				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
-				$code = $code . "<div id = \"Article\" >\n" .
+				$code = $code . "<div class=\"Article\" >\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
-						"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
+						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
 				//$code = $code . "</div>\n";
 			}
@@ -59,35 +60,45 @@ class Affichage{
 			$code = $code . "<table>\n";
 			foreach($liste as $billet){
 				$id = $billet->getAttr("id");
-				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
+				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 				$code = $code . "<tr><td>\n";
-				$code = $code . "<div id = \"Article\" >\n" .
+
+				$code = $code . '<div id="lol">';
+
+				$code = $code . "<div class=\"Article\">\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
-						"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
+						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
-				//$code = $code . "</div>\n";
+				
+						$code = $code . "</div>\n";
 				//$code = $code . self::afficherBillet($billet);
-				$code = $code . "\n</td></tr>\n";
+				$code = $code . "</td></tr>\n";
 			}
 			
 		$code = $code . "</table>\n";
 		}
 		$page = $_GET;
-		foreach ($page as $key => $value) {
-			if ($key=="page") $num = $value; break;
+
+		//SI GET est vide num est égal à 1 
+		if(sizeof($page)!=0){
+			
+			foreach ($page as $key => $value) {
+				if ($key=="page") $num = $value; break;
+			}
 		}
-		$pagination = '<div id = "pagination">Page numéro : << '.$num.' >> </div>';
+		else $num = 1;
+		
+		$pagination = '<div id="pagination">Page numéro : << '.$num.' >> </div>';
 		$prec = "<<";
 		$suiv = ">>";
 		$nb_billets = Billet::getNbBillet();
-		if($num>1)//ou si nb_arti
+		if($num>1)
 			$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
 
 		if($nb_billets > $num*5)
-		//if(sizeof($liste)==0)
 			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
 		
 		$code = $code . $pagination;
@@ -117,18 +128,4 @@ class Affichage{
 
 }
 
-//$a = new Affichage();
-
-/*
-$b = Billet::findById(4);
-$c = $a->afficherBillet($b);
-$a->affichageGeneral($c);
-*/
-/*
-$b = Billet::findAll();
-$cat = Categorie::findAll();
-$lol = $a->afficheListeCategorie($cat);
-$c = $a->afficheListeBillets($b);
-$a->affichageGeneral($c, $lol);
-*/
 ?>

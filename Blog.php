@@ -11,8 +11,8 @@ $c->callAction( $_GET );
 $a = new AdminController();
 $a->callAction( $_GET );
 
-
+/*
 $bdd = new Base();
 $bdd->getConnection();
-
+*/
 ?>
