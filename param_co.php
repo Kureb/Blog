@@ -1,7 +1,7 @@
 <?php
 
 	$base = 'blog';
-	$pass = '';
+	$pass = 'root';
 	$user = 'root';
 	$host = 'localhost';
 
