@@ -41,7 +41,7 @@ body {
         height: 28%;
         padding: 1%;
         margin-top: 15px;
-        margin-bottom: 3%;
+        margin-bottom: 2%;
 
 
 }
@@ -63,10 +63,9 @@ body {
         min-width: 77%;
         z-index: -1;
 
-}*/
-
+}
+*/
 .Article {
-<<<<<<< HEAD
 	background-position: center;
 	display: inline-block;
 	background-color: yellow;
@@ -78,33 +77,16 @@ body {
 	width: 75%;
 	float: right;
 	position: relative;
-=======
-        background-position: center;
-        display: inline-block;
-        background-color: yellow;
-        text-align: justify;
-        margin-right: 0;
-        border-radius:20px;
-        padding:1%;
-        margin-top: 1%;
-        width: 75%;
-        float: right;
-        position: relative;
->>>>>>> c89957a90040ce81cf1c6ceb9360d00cc3885d50
 }
 
 
 #footer {
-<<<<<<< HEAD
-	margin-top: 505px;
+	margin-top: 485px;
 	position: fixed;
 	background-color: red;
 	width: 22%;
 	height: 11%;
 	border-radius: 20px;
-=======
-        background-color: grey;
->>>>>>> c89957a90040ce81cf1c6ceb9360d00cc3885d50
 }
 
 #date {
@@ -116,6 +98,6 @@ body {
         background-color: DeepPink;
         color: black;
         text-align: center;
-        //position: absolute;
+        position: absolute;
         bottom: 5px;
 }
