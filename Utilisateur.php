@@ -1,7 +1,7 @@
 <?php
 
 include 'Base.php';
-
+//TODO ajout d'un champ pour voir s'il est admin
 class Utilisateur{
 
 	private $userid;
