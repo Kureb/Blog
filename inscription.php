@@ -4,7 +4,6 @@ include_once "Utilisateur.php";
 
 
 $log = '';
-//TODO : vérifier que l'adresse mail est valide (tout du moins le format)
 session_start();
 if (!empty($_SESSION['login'])){
 	$log .= 'Vous êtes déjà connecté, vous ne pouvez pas vous inscrire.<br>';
@@ -19,8 +18,11 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 		&& (isset($_POST['pass']) && !empty($_POST['pass']))
 		&& (isset($_POST['pass_c']) && !empty($_POST['pass_c']))
 		&& (isset($_POST['mail']) && !empty($_POST['mail']))){
-			
-		if($_POST['pass'] != $_POST['pass_c']){
+		//on vérifie le mail
+		if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}.[a-z]{2,4}$#", $_POST['mail'])){
+			$log .= 'Adresse mail non valide.<br>';
+		}	
+		elseif($_POST['pass'] != $_POST['pass_c']){
 			$log .= 'Les deux mots de passe ne correspondent pas.<br>';
 		}else{
 			$pseudo = htmlentities($_POST['pseudo']);
