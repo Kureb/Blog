@@ -32,9 +32,9 @@ echo "<br><br>";
 
 
 echo "<b>Test 3 : modification d'un utilisateur : </b><br>";
-$um->setAttr("login", "mr_grognon");
-$um->update();
-echo $um;
+$u->setAttr("login", "mr_grognon");
+$u->update();
+echo $u;
 echo "<br><br>";
 
 

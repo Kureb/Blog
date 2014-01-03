@@ -20,8 +20,8 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 			}else{
 				$log .= 'Connexion en cours.<br>';
 				session_start();
-				$_SESSION['pseudo'] = $_POST['pseudo'];
-				header("Refresh: 3; url=Blog.php"); 
+				$_SESSION['login'] = $_POST['pseudo'];
+				header("Refresh: 1; url=membre.php"); 
 				//header('Location: Blog.php');
 			}
 		}
@@ -38,7 +38,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 
 <html>
 	<head>
-		<title>Connection</title>
+		<title>Connexion</title>
 		<meta charset="utf-8" />
 	</head>
 
