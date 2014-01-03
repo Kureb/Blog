@@ -1,5 +1,5 @@
-
 <?php
+session_start();
 /* Gère les actions des visiteurs et
  * la navigation sur le blog
  * BOULANGER Vincent & DAUSSY Alexandre

@@ -6,12 +6,21 @@ include_once 'Categorie.php';
 class Affichage{
 
 	function affichageGeneral($articles, $categorie/*$contenu_central, $menu_droite, $menu_gauche*/){
-		$file = 'BlogAlex.html';
+				//session_start();
+				if (!empty($_SESSION['login'])){
+					$bonjour = 'Bonjour ami ' . htmlentities($_SESSION['login']);
+				
+				}else{
+					$bonjour = 'Fuck, non connecté.';
+				} 
+				
+		$file = 'BlogAlex.php';
 		$content = file_get_contents($file);
 		$artc = "mesarticles";
 		$cat = "mescategories";
 		$content = str_replace($artc, "$articles", $content);
 		$content = str_replace($cat, "$categorie", $content);
+		$content = str_replace("auteurlol", "$bonjour", $content);
 		echo $content;
 }
 
