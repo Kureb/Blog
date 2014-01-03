@@ -2,9 +2,17 @@
 include_once "Utilisateur.php";
 //error_reporting(-1);
 
-//TODO : vérifier que l'adresse mail est valide (tout du moins le format)
 
 $log = '';
+//TODO : vérifier que l'adresse mail est valide (tout du moins le format)
+session_start();
+if (!empty($_SESSION['login'])){
+	$log .= 'Vous êtes déjà connecté, vous ne pouvez pas vous inscrire.<br>';
+	header("Refresh: 2, url=membre.php");
+}
+
+
+
 //if(isset($_POST['login'], $_POST['pass'], $_POST['pass_c']!=''){
 if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 	if( (isset($_POST['pseudo']) && !empty($_POST['pseudo']))
