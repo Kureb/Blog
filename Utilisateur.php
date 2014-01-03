@@ -148,7 +148,7 @@ class Utilisateur{
 		return $user;
 
 	}
-
+/*
 	public static function findByLogin2($login) {
 		$c = Base::getConnection();
 		$query = 'select * from utilisateurs where login = :login';
@@ -185,7 +185,7 @@ class Utilisateur{
 
 		return $user;
 	}
-
+*/
 
 
 	public static function getNbUser(){
