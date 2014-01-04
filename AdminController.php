@@ -3,7 +3,7 @@
  * Gestion du blog
  * BOULANGER Vincent & DAUSSY Alexandre
  */
-include_once('Controller.php');
+include_once 'Controller.php';
 class AdminController extends Controller {
 
 

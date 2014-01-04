@@ -1,6 +1,6 @@
 <?php
 
-include 'Base.php';
+include_once 'Base.php';
 
 class Utilisateur{
 

@@ -4,7 +4,7 @@
   * avec la base de données
   * BOULANGER Vincent & DAUSSY Alexandre
   */
- require_once 'param_co.php';
+ include_once 'param_co.php';
 class Base{
 
 
