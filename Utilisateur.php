@@ -1,13 +1,14 @@
 <?php
 
 include 'Base.php';
-//TODO ajout d'un champ pour voir s'il est admin
+
 class Utilisateur{
 
 	private $userid;
 	private $login;
 	private $password;
 	private $mail;
+	private $chmod;
 
 
 	public function __toString(){
@@ -15,7 +16,8 @@ class Utilisateur{
 			userid : ". $this->userid . "<br>
 			login : ". $this->getAttr("login") ."<br>
 			password : ". $this->getAttr("password") ."<br>
-			mail : ". $this->getAttr("mail") ;
+			mail : ". $this->getAttr("mail") . "<br>
+			admin : ". $this->getAttr("chmod");
 	}
 
 
@@ -51,13 +53,14 @@ class Utilisateur{
 
 		$this->password = sha1($this->password);
 		$query = $c->prepare("update utilisateurs set login= ?, 
-					password= ?, mail= ?
+					password= ?, mail= ?, chmod= ?
 					where userid= ?");
 
 		$query->bindParam (1, $this->login, PDO::PARAM_STR);
 		$query->bindParam (2, $this->password, PDO::PARAM_STR);
 		$query->bindParam (3, $this->mail, PDO::PARAM_STR);
-		$query->bindParam (4, $this->userid, PDO::PARAM_STR);
+		$query->bindParam (4, $this->chmod, PDO::PARAM_STR);
+		$query->bindParam (5, $this->userid, PDO::PARAM_STR);
 
 
 		return $query->execute();
@@ -82,9 +85,10 @@ class Utilisateur{
 
 	public function insert(){
 		$nb = 0;
-		$query = "INSERT INTO Utilisateurs VALUES(null, '".$this->login."','".sha1($this->password)."', '".$this->mail."')";
+		$query = "INSERT INTO Utilisateurs VALUES(null, '".$this->login."','".sha1($this->password)."', '".$this->mail."', '".$this->chmod."')";
 		$c = Base::getConnection();
 		$nb = $c->exec($query);
+		$this->setAttr("chmod", "0");
 		$this->setAttr("userid", $c->LastInsertId());
 
 		return $nb;
@@ -104,6 +108,7 @@ class Utilisateur{
 			$user->setAttr("login", $ligne["login"]);
 			$user->setAttr("password", $ligne["password"]);
 			$user->setAttr("mail", $ligne["mail"]);
+			$user->setAttr("chmod", $ligne["chmod"]);
 			array_push($tab, $user);
 		}
 
@@ -125,6 +130,7 @@ class Utilisateur{
 		$user->setAttr("login", $d->login);
 		$user->setAttr("password", $d->password);
 		$user->setAttr("mail", $d->mail);
+		$user->setAttr("chmod", $d->chmod);
 
 		return $user;
 	}
@@ -144,6 +150,7 @@ class Utilisateur{
 		$user->setAttr("userid", $d->userid);
 		$user->setAttr("password", $d->password);
 		$user->setAttr("mail", $d->mail);
+		$user->setAttr("chmod", $d->chmod);
 
 		return $user;
 

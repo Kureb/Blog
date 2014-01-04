@@ -36,6 +36,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 				$user->setAttr("login", $_POST['pseudo']);
 				$user->setAttr("password", $_POST['pass']);
 				$user->setAttr("mail", $_POST['mail']);
+				//$user->setAttr("chmod", "0");
 				$user->insert();
 
 				$log .= 'Inscription prise en compte. Merci ! <br>';

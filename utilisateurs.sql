@@ -13,4 +13,10 @@ ADD id_auteur int(10);
 
 insert into utilisateurs values(1, "user_test", "passw_test", "user@orange.com");
 
+
+ALTER TABLE `utilisateurs`
+ADD chmod int(1);
+
+ALTER TABLE `utilisateurs`
+DROP COLUMN chmod;
 	
