@@ -1,0 +1,39 @@
+.message {
+	-moz-border-radius: 20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px 40px;
+	padding: 20px;
+	margin: auto;
+	width: 500px;
+	background: url('black_40p.png');
+	color: #ffffff;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
+
+
+#formulaire {
+	text-align: center;
+}
+
+.center {
+	text-align: center;
+}
+
+
+.champ {
+	text-align: center;
+}
+
+.label {
+	text-align: left;
+	vertical-align: top;
+	width: 120px;
+	display: inline-block;
+}
+
+input {
+	width: 150px;
+}
