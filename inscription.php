@@ -40,6 +40,10 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 				$user->insert();
 
 				$log .= 'Inscription prise en compte. Merci ! <br>';
+				$log .= 'Connexion en cours. <br>';
+
+				$_SESSION['login'] = $_POST['pseudo'];
+				header("Refresh: 1; url=membre.php");
 			}
 		}
 
