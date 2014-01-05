@@ -1,28 +1,43 @@
 <?php
 
-include 'Billet.php';
+include_once 'Billet.php';
 include_once 'Categorie.php';
+
 
 class Affichage{
 
+
+
 	function affichageGeneral($articles, $categorie/*$contenu_central, $menu_droite, $menu_gauche*/){
-				//session_start();
-				if (!empty($_SESSION['login'])){
-					$bonjour = 'Bonjour ami ' . htmlentities($_SESSION['login']);
-				
-				}else{
-					$bonjour = 'Fuck, non connecté.';
-				} 
-				
+		$info = self::infoUser();				
 		$file = 'BlogAlex.php';
 		$content = file_get_contents($file);
 		$artc = "mesarticles";
 		$cat = "mescategories";
 		$content = str_replace($artc, "$articles", $content);
 		$content = str_replace($cat, "$categorie", $content);
-		$content = str_replace("auteurlol", "$bonjour", $content);
+		$content = str_replace("auteurlol", "$info", $content);
 		echo $content;
-}
+	}
+
+
+	static function infoUser(){
+		if (!empty($_SESSION['login'])){
+			$info = 'Bonjour ' . htmlentities($_SESSION['login']) . '<br>';
+			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
+			include_once 'Utilisateur.php';
+			$current_user = Utilisateur::findByLogin($_SESSION['login']);
+			$admin = $current_user->getAttr("chmod");
+			if($admin==1) $info .= 'admin<br>';
+			else $info .= 'pas admin<br>';
+		}else{
+			$info = '<a href="connexion.php">Se connecter</a>';
+		}
+
+		return $info;
+	}
+
+	
 
 
 
@@ -33,7 +48,7 @@ class Affichage{
 		$code = "<div class=\"Article\">\n" .
 				"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
-				"<p id = \"date\"><i>" . "publié le " . $date. "</i></p>\n" .
+				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur")."</p>\n" .
 				"</div>";
 				//TODO Ajouter auteur
 
@@ -49,6 +64,7 @@ class Affichage{
 			$code = "<div class=\"Article\">\n";
 			$code = $code . "Aucun billet";
 			$code = $code . "</div>";
+			//TODO ajouter pagination
 			return $code;
 		}else if(sizeof($liste)==1){
 			foreach ($liste as $billet) {
@@ -89,6 +105,7 @@ class Affichage{
 			
 		$code = $code . "</table>\n";
 		}
+
 		$page = $_GET;
 
 		//SI GET est vide num est égal à 1 

@@ -10,6 +10,7 @@ class Billet{
 	private $auteur;
 	private $date;
 	private $cat_id;
+	
 
 
 	public function __construct(){}
@@ -21,7 +22,8 @@ public function __toString(){
 			titre : ". $this->getAttr("titre") ."<br>
 			body : ". $this->getAttr("body") ."<br>
 			cat_id : ". $this->getAttr("cat_id") ."<br>
-			date : ". $this->getAttr("date") ;
+			date : ". $this->getAttr("date") . "<br>
+			auteur : ". $this->getAttr("auteur");
 }
 
 	public function getAttr($attr_name){
@@ -48,7 +50,7 @@ public function __toString(){
 		$c = Base::getConnection();
 
 		$query = $c->prepare ("update billets set titre= ?, body= ?,
-								date= ?, cat_id= ?
+								date= ?, cat_id= ?, auteur- ?
 								where id= ?");
 
 		//Liaison des paramètres
@@ -58,7 +60,8 @@ public function __toString(){
 		$today = date("Y-m-d H:i:s");
 		$query->bindParam (3, $today, PDO::PARAM_STR);//date est considérée comme String
 		$query->bindParam (4, $this->cat_id, PDO::PARAM_STR);
-		$query->bindParam (5, $this->id, PDO::PARAM_STR);
+		$query->bindParam (5, $this->auteur, PDO::PARAM_STR);
+		$query->bindParam (6, $this->id, PDO::PARAM_STR);
 
 		//exécution de la requête
 		//return 
@@ -114,6 +117,7 @@ public function __toString(){
 		$bill->setAttr("body", $d->body);
 		$bill->setAttr("cat_id", $d->cat_id);
 		$bill->setAttr("date", $d->date);
+		$bill->setAttr("auteur", $d->auteur);
 
 
 		return $bill;
@@ -136,6 +140,7 @@ public function __toString(){
 			$billet->setAttr("body", $ligne["body"]);
 			$billet->setAttr("cat_id", $ligne["cat_id"]);
 			$billet->setAttr("date", $ligne["date"]);
+			$billet->setAttr("auteur", $ligne["auteur"]);
 			array_push($tab, $billet);
 		}
 
@@ -161,6 +166,7 @@ public function __toString(){
 			$billet->setAttr("body", $d->body);
 			$billet->setAttr("cat_id", $d->cat_id);
 			$billet->setAttr("date", $d->date);
+			$billet->setAttr("auteur", $d->auteur);
 		}else{
 			echo "Erreur, billet introuvable";
 		}
@@ -184,6 +190,7 @@ public function __toString(){
 			$billet->setAttr("body", $ligne["body"]);
 			$billet->setAttr("cat_id", $ligne["cat_id"]);
 			$billet->setAttr("date", $ligne["date"]);
+			$billet->setAttr("auteur", $ligne["auteur"]);
 			array_push($tab, $billet);
 		}
 
@@ -201,6 +208,31 @@ public function __toString(){
 		$nb = $data['nb'];
 
 		return $nb;
+	}
+
+
+	public static function findByAuteur($auteur){
+		$query = "select * from billets where auteur = :auteur";
+		$c = Base::getConnection();
+		$dbres = $c->prepare($query);
+		$dbres->bindParam(':auteur', $auteur);
+		$dbres->execute();
+		$billet = false;
+		if($dbres!=false){
+			$d = $dbres->fetch(PDO::FETCH_OBJ);
+			$billet = new Billet();
+			$billet = new Billet();
+			$billet->setAttr("id", $d->id);
+			$billet->setAttr("titre", $d->titre);
+			$billet->setAttr("body", $d->body);
+			$billet->setAttr("cat_id", $d->cat_id);
+			$billet->setAttr("auteur", $d->auteur);
+			$billet->setAttr("date", $d->date);
+		}else{
+			echo "Aucun billet pour cet auteur.";
+		}
+
+		return billet;
 	}
 
 }
