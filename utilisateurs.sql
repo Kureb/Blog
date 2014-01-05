@@ -21,12 +21,14 @@ ALTER TABLE `utilisateurs`
 DROP COLUMN chmod;
 
 
-ALTER TABLE `Billets`
-ADD auteur varchar(20);
-
 
 ALTER TABLE `Billets`
 DROP COLUMN id_auteur;
+
+
+ALTER TABLE `Billets`
+ADD auteur varchar(20);
+
 
 
 
