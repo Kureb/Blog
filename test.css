@@ -1,6 +1,6 @@
 .message {
-	-moz-border-radius: 20px;
-	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px 40px;
+	-webkit-border-radius: 20px 40px;
 	border-radius: 20px 40px;
 	padding: 20px;
 	margin: auto;
@@ -14,7 +14,7 @@
 
 
 
-#formulaire {
+.formulaire {
 	text-align: center;
 }
 
@@ -25,15 +25,16 @@
 
 .champ {
 	text-align: center;
+	width: 150px;
 }
 
 .label {
 	text-align: left;
 	vertical-align: top;
-	width: 120px;
+	width: 160px;
 	display: inline-block;
 }
 
-input {
-	width: 150px;
-}
+
+
+

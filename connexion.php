@@ -50,12 +50,12 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 	</head>
 
 	<body>
-		<div id="formulaire">
+		<div class="formulaire">
 		<form action="connexion.php" method="post">
 		<div class="center">
-			<span class="label">Pseudo : </span>
+			<span class="label">Pseudo</span>
 	 		<input class="champ" type="text" name="pseudo" value="<?php if (isset($_POST['pseudo'])) echo htmlentities(trim($_POST['pseudo'])); ?>"/><br>
-			<span class="label">Mot de passe : </span>
+			<span class="label">Mot de passe</span>
 			<input class="champ" type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass']))?>"/><br>
 			<input type="submit" name="connexion" value="Connexion" />
 		</div>

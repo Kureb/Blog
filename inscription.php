@@ -3,10 +3,10 @@ include_once "Utilisateur.php";
 //error_reporting(-1);
 
 
-$log = '';
+
 session_start();
 if (!empty($_SESSION['login'])){
-	$log .= 'Vous êtes déjà connecté, vous ne pouvez pas vous inscrire.<br>';
+	$log = 'Vous êtes déjà connecté, vous ne pouvez pas vous inscrire.<br>';
 	header("Refresh: 2, url=membre.php");
 }
 
@@ -20,16 +20,16 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 		&& (isset($_POST['mail']) && !empty($_POST['mail']))){
 		//on vérifie le mail
 		if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}.[a-z]{2,4}$#", $_POST['mail'])){
-			$log .= 'Adresse mail non valide.<br>';
+			$log = 'Adresse mail non valide.<br>';
 		}	
 		elseif($_POST['pass'] != $_POST['pass_c']){
-			$log .= 'Les deux mots de passe ne correspondent pas.<br>';
+			$log = 'Les deux mots de passe ne correspondent pas.<br>';
 		}else{
 			$pseudo = htmlentities($_POST['pseudo']);
 			$user = Utilisateur::findByLogin($pseudo);
 
 			if($user!=false){
-				$log .= 'Utilisateur déjà enregistré dans la base.<br>';
+				$log = 'Utilisateur déjà enregistré dans la base.<br>';
 			}
 			else{
 				$user = new Utilisateur();
@@ -39,7 +39,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 				//$user->setAttr("chmod", "0");
 				$user->insert();
 
-				$log .= 'Inscription prise en compte. Merci ! <br>';
+				$log = 'Inscription prise en compte. Merci ! <br>';
 				$log .= 'Connexion en cours. <br>';
 
 				$_SESSION['login'] = $_POST['pseudo'];
@@ -48,7 +48,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 		}
 
 	}else{
-		$log .= 'Au moins un champ est vide.<br>';
+		$log = 'Au moins un champ est vide.<br>';
 	}
 }
 
@@ -59,42 +59,29 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 	<head>
 		<title>Inscription</title>
 		<meta charset="utf-8" />
+		<style type="text/css"></style>
+		<link rel="stylesheet" href="test.css" />
 	</head>
 
 	<body>
-		<div id="formulaire">
+		<div class="formulaire">
 		<form action="inscription.php" method="post">
-	 		Pseudo : 
-	 			<input type="text" name="pseudo" value="<?php if (isset($_POST['pseudo'])) echo htmlentities(trim($_POST['pseudo'])); ?>"/><br>
-			Mot de passe : 
-				<input type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass']))?>"/><br>
-			Confirmation mot de passe :
-				<input type="password" name="pass_c" value="<?php if (isset($_POST['pass_c'])) echo htmlentities(trim($_POST['pass_c']))?>"/><br>
-			E-mail : 
-				<input type="text" name="mail" value="<?php if (isset($_POST['mail'])) echo htmlentities(trim($_POST['mail']))?>"/><br>			
+	 	<div class="center">
+	 		<span class="label">Pseudo</span>
+	 		<input class="champ" type="text" name="pseudo" value="<?php if (isset($_POST['pseudo'])) echo htmlentities(trim($_POST['pseudo'])); ?>"/><br>
+			<span class="label">Mot de passe</span>
+			<input class="champ" type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass']))?>"/><br>
+			<span class="label">Mot de passe (bis)</span>
+			<input class="champ" type="password" name="pass_c" value="<?php if (isset($_POST['pass_c'])) echo htmlentities(trim($_POST['pass_c']))?>"/><br>
+			<span class="label">E-mail</span>
+			<input class="champ" type="text" name="mail" value="<?php if (isset($_POST['mail'])) echo htmlentities(trim($_POST['mail']))?>"/><br>			
 			<input type="submit" name="inscription" value="Inscription" />
+		</div>
 		</form>
-		<?php if (isset($log)) echo '<br />' . $log; ?>
+		<?php
+			if (isset($log)) 
+				echo '<div class="message">' . $log . '</div>'; 
+		?>
 		</div>
 	</body>
 </html>
-
-<!--
-/* Pour éviter l'usage des balises dans les champs
- * j'utilise htmlentities */
-if((sizeof($_POST['pseudo'])==0) && (sizeof($_POST['mdp'])==0)){
-	$pseudo=htmlentities($_POST['pseudo']);
-	$user = Utilisateur::findByLogin($pseudo);
-	if($user!=false) {
-		$mdp=htmlentities($_POST['mdp']);
-		if(sha1($mdp)==$user->getAttr("password"))
-			echo "connexion possible";
-		else
-			echo "mdp incorrecte";
-	}//else{
-		//echo "utilisateur inconnu";
-	//}
-}//else{
-	//echo "remplissez les 2 champs svp";
-//}
--->
