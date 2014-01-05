@@ -13,6 +13,7 @@ if (!isset($_SESSION['login'])){
 	</head>
 	<body>
 		Bienvenue <?php echo $_SESSION['login']; ?><br>
+		<a href="Blog.php">Accueil</a>
 		<a href="deconnexion.php">D&eacute;connexion</a>
 
 	</body>

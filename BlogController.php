@@ -23,7 +23,7 @@ class BlogController extends Controller{
 	}
 
 
-	public function listAction2($param){
+	public function listActionParPage($param){
 		$debut = $param * 5 - 5 ;
 		$fin = $debut + 5; 
 		$a = new Affichage();
@@ -68,18 +68,18 @@ class BlogController extends Controller{
 		//si y'a pas de paramètre dans l'URL on affiche les 5 derniers articles
 		if(sizeof($tab)==0) {
 			$tab = array("page" => 1);
-			//$this->listAction2(1);
+			//$this->listActionParPage(1);
 		}
 
 		foreach ($tab as $key => $value) {
 			if($key == "page"){
 				//var_dump($value);
-				$this->listAction2($value);
+				$this->listActionParPage($value);
 			}
 			//echo "key : $key <br>  value : $value <br>";
 			switch ($value) {
 				case 'list':
-					$this->listAction2($value);
+					$this->listActionParPage($value);
 					break;
 
 				case 'detail':
