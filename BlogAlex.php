@@ -4,16 +4,21 @@
 		<title>Projet Web</title>
 		<meta charset="utf-8" />
 		<style type="text/css"></style>
-		<link rel="stylesheet" href="BlogAlex.css" />
+		<link rel="stylesheet" href="BlogAlex2.css" />
 	</head>
 
 	<body>
 		<div id="page">
 		<div id="principal">
+		
 		<div id="banniere">
 			<img id="ban" src="LOL.jpg">
 		</div>
 
+		
+		<div class="topbarre">TEST LOL</div>
+		
+		
 		<div id="gauche">
 			<img id="sharing" src="Share.png">
 			<p id="Auteur">

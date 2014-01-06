@@ -34,6 +34,17 @@ class BlogController extends Controller{
 		$a->affichageGeneral($c, $lol);
 	}
 
+
+	public function listParAuteur($param){
+		$a = new Affichage();
+		$b = Billet::findByAuteur($param);
+		$cat = Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$c = $a->afficheListeBillets($b);
+		$a->affichageGeneral($c, $lol);
+	}
+
+
 	public function detailAction($param){
 		//echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
 		//var_dump($param);
@@ -83,9 +94,28 @@ class BlogController extends Controller{
 					break;
 
 				case 'detail':
-					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
-					else /*echo "id : " . $tab['id'];*/
-						$this->detailAction($tab['id']);
+					if(array_search('id', array_keys($tab))==true){
+						if(sizeof($tab['id'])>0){
+							$this->detailAction($tab['id']);
+						}
+					}elseif (array_search('id', array_keys($tab))==false) {
+						echo "Besoin d'un ID";
+					}elseif(array_search('user', array_keys($tab))==true){
+						if(sizeof($tab['user'])>0){
+							$this->listParAuteur($tab['user']);
+						}
+					}elseif(array_search('user', array_keys($tab))==false){
+						echo "Besoin d'un ID";
+					}
+
+					//TODO gérer quand id=
+					//var_dump($tab['id']);
+					//else $this->detailAction($tab['id']);
+					/*
+					if(array_search('id', array_keys($tab))==true)	$this->detailAction($tab['id']);
+					if(array_search('user', array_keys($tab))==false) echo "Besoin d'un utilisateur";
+					if(array_search('user', array_keys($tab))==true) $this->listParAuteur($tab['user']);
+					*/
 					break;
 
 				case 'cat':

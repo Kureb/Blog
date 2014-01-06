@@ -28,6 +28,8 @@ class AdminController extends Controller {
 		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
 	}
 
+	
+
 
 	public function callAction($tab){
 		//Voir BlogController.php pour voir les commentaires

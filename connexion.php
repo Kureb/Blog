@@ -2,13 +2,13 @@
 include_once "Utilisateur.php";
 
 
-//$log = '';
 session_start();
 if (!empty($_SESSION['login'])){
 	$log = 'Vous êtes déjà connecté, vous ne pouvez pas vous reconnecter.<br>';
 	header("Refresh: 2, url=membre.php");
 }
 
+//Si on a bien envoyé le formulaire et que tout est rempli
 if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 	if (isset($_POST['pseudo']) && !empty($_POST['pseudo'])
 		&& (isset($_POST['pass']) && !empty($_POST['pass']))){
@@ -24,10 +24,8 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 				$log = 'Mot de passe incorrecte.<br>';
 			}else{
 				$log = 'Connexion en cours.<br>';
-				//session_start();
 				$_SESSION['login'] = $_POST['pseudo'];
-				header("Refresh: 1; url=membre.php"); 
-				//header('Location: Blog.php');
+				header("Refresh: 1; url=Blog.php"); 
 			}
 		}
 

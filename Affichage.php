@@ -23,13 +23,13 @@ class Affichage{
 
 	static function infoUser(){
 		if (!empty($_SESSION['login'])){
-			$info = 'Bonjour ' . htmlentities($_SESSION['login']) . '<br>';
+			$info = 'Bonjour <a href="membre.php">'.htmlentities($_SESSION['login']).'</a><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
 			include_once 'Utilisateur.php';
 			$current_user = Utilisateur::findByLogin($_SESSION['login']);
 			$admin = $current_user->getAttr("chmod");
 			if($admin==1) $info .= 'admin<br>';
-			else $info .= 'pas admin<br>';
+			else $info .= '(pas admin)<br>';
 		}else{
 			$info = '<a href="connexion.php">Se connecter</a>';
 		}

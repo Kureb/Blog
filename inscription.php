@@ -39,11 +39,11 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 				//$user->setAttr("chmod", "0");
 				$user->insert();
 
-				$log = 'Inscription prise en compte. Merci ! <br>';
+				$log = 'Inscription prise en compte. Merci '. $pseudo .' ! <br>';
 				$log .= 'Connexion en cours. <br>';
 
 				$_SESSION['login'] = $_POST['pseudo'];
-				header("Refresh: 1; url=membre.php");
+				header("Refresh: 1; url=Blog.php");
 			}
 		}
 
