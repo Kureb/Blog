@@ -4,12 +4,18 @@
  * BOULANGER Vincent & DAUSSY Alexandre
  */
 include_once 'Controller.php';
+include_once 'Affichage.php';
+
 class AdminController extends Controller {
 
 
 	/* Affichage d'un formulaire pour ajouter un message */
 	public function addMessage($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
+		//echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
+		$a = new Affichage();
+		$cat = Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$a->affichageGeneral($c, null);
 	}
 
 	/* Envoi des données pour ajouter un message */
@@ -33,6 +39,14 @@ class AdminController extends Controller {
 
 	public function callAction($tab){
 		//Voir BlogController.php pour voir les commentaires
+
+		//Si pas de paramètre dans l'url on affiche un menu
+		//nous permettant de choisir ce que l'on va faire
+		if(sizeof($tab)==0) {
+			//Faire affichage par défaut
+			//Donc faire méthode
+			//TODO faire la méthode
+		}
 		foreach ($tab as $key => $value) {
 			switch ($value) {
 				case 'addM':

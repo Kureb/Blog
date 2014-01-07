@@ -1,31 +1,67 @@
+.topbarre {
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	z-index: 3;
+	background-color: #227399;
+	height: 40px;
+	-webkit-box-shadow: 0 2px 3px rgba(0,0,0,0.25);
+	box-shadow: 0 2px 3px rgba(0,0,0,0.25);
+}
+
+.container {
+	/*position: relative;
+	margin: 0 auto;*/
+	vertical-align: middle;
+	display: inline;
+	padding-left: 25%;
+	padding-top: 25%;
+}
+
+.menu {
+	display: inline-block;
+	width: 100px;
+	font-family: "Helvetica Neue",Arial,sans-serif;
+}
+
+
 h1 {
-	color: green;
+	color: white;
+	background-color: black;
 	text-align: center;
 }
 
 body {
-
-	background-image:url(LOLL.jpg);
-	background-attachment: fixed;
+/*	background-color: #C0C0C0;
+*/	background-attachment: fixed;
+	background-image:url(background1.jpg); 
 }
+
 #ban {
 	border-radius: 150px 80px 150px 80px;
 	height: 70px;
 	width: 100%;
-	z-index: 1;
+	margin-top: 40px;
+	z-index: 10;
+}
+
+.artdiv{
+	background-color: pink;
+	float: right;
 }
 
 
 #gauche {
 	float: left;
 	width: 22%;
-	border-radius: 20px;
+	/*border-radius: 20px;*/
 	overflow: auto;
 	padding: 1px;
 	height: 86%;
-	margin-top: -80px;
+	margin-top: -67px;
 	margin-bottom: 0;
-	z-index: 2; /*-1, mais sinon je peux pas cliquer..;
+	z-index: -1; /*-1, mais sinon je peux pas cliquer..;
 	TODO trouver une solution*/
 	position: fixed;
 }
@@ -36,24 +72,30 @@ body {
 	z-index: -1;
 }
 #Auteur {
-	background-color: blue;
+	background-color: #F6F6F6;
 	border-radius:20px ;
 	overflow: auto;
 	height: 28%;
 	padding: 1%;
 	margin-top: 15px; /*35*/
 	margin-bottom: 2%;
-
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
 
 }
+
 #categorie {
-	background-color: green;
+	background-color: #F6F6F6;
 	border-radius:20px ;
 	overflow: auto;
 	padding: 1%;
 	height: 53%;
 	margin-top: 0;
 	margin-bottom: 0;
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px;
 
 }
 
@@ -69,15 +111,21 @@ body {
 .Article {
 	background-position: center;
 	display: inline-block;
-	background-color: yellow;
+	background-color: #F6F6F6;
+	border-style: solid;
+	border-width: 1px;
 	text-align: justify;
 	margin-right: 0;
 	border-radius:20px 40px;
-	padding:1%;
+	padding: 0% 1% 1% 1%;
 	margin-top: 1%;
 	width: 75%;
 	float: right;
 	position: relative;
+}
+
+.menudroitetitre {
+
 }
 
 
@@ -96,7 +144,7 @@ body {
 
 
 #pagination{
-	background-color: DeepPink;
+	background-color: #FC4349;
 	color: black;
 	text-align: center;	
 	height: 20px;

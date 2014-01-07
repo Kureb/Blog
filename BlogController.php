@@ -4,15 +4,12 @@ session_start();
  * la navigation sur le blog
  * BOULANGER Vincent & DAUSSY Alexandre
  */
-include_once('Controller.php');
-include('Affichage.php');
+include_once 'Controller.php';
+include_once 'Affichage.php';
 
 class BlogController extends Controller{
 
 	public function listAction($param){
-		//echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
-		//include('Affichage.php');
-		//Afficheur::afficherListeBillet();
 		$a = new Affichage();
 		$b = Billet::findAll();
 		$cat = Categorie::findAll();
@@ -100,13 +97,15 @@ class BlogController extends Controller{
 						}
 					}elseif (array_search('id', array_keys($tab))==false) {
 						echo "Besoin d'un ID";
+				}
+					/*
 					}elseif(array_search('user', array_keys($tab))==true){
 						if(sizeof($tab['user'])>0){
 							$this->listParAuteur($tab['user']);
 						}
 					}elseif(array_search('user', array_keys($tab))==false){
 						echo "Besoin d'un ID";
-					}
+					}*/
 
 					//TODO gérer quand id=
 					//var_dump($tab['id']);

@@ -11,18 +11,27 @@
 		<div id="page">
 		<div id="principal">
 		
+		 
 		<div id="banniere">
 			<img id="ban" src="LOL.jpg">
-		</div>
+		</div> 
+		
 
 		
-		<div class="topbarre">TEST LOL</div>
+		<div class="topbarre">
+		<div class="container">
+			<div class="menu">Accueil</div>
+			<div class="menu">Connexion</div>
+			<div class="menu">Test LOL</div>
+			<div class="menu">LOL Test</div>
+		</div>
+		</div>
 		
 		
 		<div id="gauche">
 			<img id="sharing" src="Share.png">
 			<p id="Auteur">
-				auteurlol
+				Blablabla
 			</p>
 			<p id="categorie">
 				mescategories

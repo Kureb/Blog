@@ -16,14 +16,15 @@ class Affichage{
 		$cat = "mescategories";
 		$content = str_replace($artc, "$articles", $content);
 		$content = str_replace($cat, "$categorie", $content);
-		$content = str_replace("auteurlol", "$info", $content);
+		//$content = str_replace("auteurlol", "$info", $content);
 		echo $content;
 	}
 
 
 	static function infoUser(){
+		$info = '<span class="menudroitetitre"> Utilisateur </span><br>';
 		if (!empty($_SESSION['login'])){
-			$info = 'Bonjour <a href="membre.php">'.htmlentities($_SESSION['login']).'</a><br>';
+			$info .= 'Bonjour <a href="membre.php">'.htmlentities($_SESSION['login']).'</a><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
 			include_once 'Utilisateur.php';
 			$current_user = Utilisateur::findByLogin($_SESSION['login']);
@@ -31,7 +32,7 @@ class Affichage{
 			if($admin==1) $info .= 'admin<br>';
 			else $info .= '(pas admin)<br>';
 		}else{
-			$info = '<a href="connexion.php">Se connecter</a>';
+			$info .= '<a href="connexion.php">Se connecter</a>';
 		}
 
 		return $info;
@@ -45,13 +46,25 @@ class Affichage{
 	static function afficherBillet($billet){
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
+		/*
+		$code = "<div class=\"artdiv\">\n" .
+				"<h1>" . $billet->getAttr("titre") . "</h1>\n" .
+				"<div class=\"Article\">\n" .
+				//"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
+				"<p>" . $billet->getAttr("body") . "</p>\n" . 
+				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur")."</p>\n" .
+				"</div>" .
+				"</div>";
+				//TODO Ajouter auteur
+		*/
+
 		$code = "<div class=\"Article\">\n" .
-				"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
+				"<h1>" . $billet->getAttr("titre") . "</h1>\n" .
+				//"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
 				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur")."</p>\n" .
 				"</div>";
-				//TODO Ajouter auteur
-
+				
 		return $code;
 	}
 
@@ -72,11 +85,14 @@ class Affichage{
 				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
+
+				
 				$code = $code . "<div class=\"Article\" >\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
 						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
+				
 				//$code = $code . "</div>\n";
 			}
 			//$code = self::afficherBillet();
@@ -140,7 +156,7 @@ class Affichage{
 		if(sizeof($liste)==0)
 			$code = "Aucune catégorie";
 		else{
-			$code = "<b>Liste des catégories</b><br>\n\t";
+			$code = '<span class="menudroitetitre">Liste des catégories</b><br>';
 			foreach ($liste as $categorie) {
 				$titre = $categorie->getAttr("titre");
 				$span = $categorie->getAttr("description");
