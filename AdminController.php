@@ -1,6 +1,7 @@
 <?php
+session_start();
 /*
- * Gestion du blog
+ * Gestion de la partie admin
  * BOULANGER Vincent & DAUSSY Alexandre
  */
 include_once 'Controller.php';
@@ -11,11 +12,11 @@ class AdminController extends Controller {
 
 	/* Affichage d'un formulaire pour ajouter un message */
 	public function addMessage($param){
-		//echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
 		$a = new Affichage();
 		$cat = Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
-		$a->affichageGeneral($c, null);
+		$b = $a->ajouterBillet();
+		$a->affichageGeneral($b, $lol);
 	}
 
 	/* Envoi des données pour ajouter un message */

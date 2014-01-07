@@ -2,6 +2,7 @@
 
 include_once 'Billet.php';
 include_once 'Categorie.php';
+include_once 'Utilisateur.php';
 
 
 class Affichage{
@@ -9,14 +10,14 @@ class Affichage{
 
 
 	function affichageGeneral($articles, $categorie/*$contenu_central, $menu_droite, $menu_gauche*/){
-		$info = self::infoUser();				
+		$info = self::infoUser();	
 		$file = 'BlogAlex.php';
 		$content = file_get_contents($file);
 		$artc = "mesarticles";
 		$cat = "mescategories";
 		$content = str_replace($artc, "$articles", $content);
 		$content = str_replace($cat, "$categorie", $content);
-		//$content = str_replace("auteurlol", "$info", $content);
+		$content = str_replace("auteurlol", "$info", $content);
 		echo $content;
 	}
 
@@ -27,10 +28,11 @@ class Affichage{
 			$info .= 'Bonjour <a href="membre.php">'.htmlentities($_SESSION['login']).'</a><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
 			include_once 'Utilisateur.php';
-			$current_user = Utilisateur::findByLogin($_SESSION['login']);
-			$admin = $current_user->getAttr("chmod");
-			if($admin==1) $info .= 'admin<br>';
-			else $info .= '(pas admin)<br>';
+			if(Utilisateur::estAdmin($_SESSION['login'])==true){
+				$info .= 'tu es admin/<br>';
+			}else{
+				$info .= 'tu es pas admin<br>';
+			}
 		}else{
 			$info .= '<a href="connexion.php">Se connecter</a>';
 		}
@@ -46,18 +48,6 @@ class Affichage{
 	static function afficherBillet($billet){
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
-		/*
-		$code = "<div class=\"artdiv\">\n" .
-				"<h1>" . $billet->getAttr("titre") . "</h1>\n" .
-				"<div class=\"Article\">\n" .
-				//"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
-				"<p>" . $billet->getAttr("body") . "</p>\n" . 
-				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur")."</p>\n" .
-				"</div>" .
-				"</div>";
-				//TODO Ajouter auteur
-		*/
-
 		$code = "<div class=\"Article\">\n" .
 				"<h1>" . $billet->getAttr("titre") . "</h1>\n" .
 				//"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
@@ -156,7 +146,7 @@ class Affichage{
 		if(sizeof($liste)==0)
 			$code = "Aucune catégorie";
 		else{
-			$code = '<span class="menudroitetitre">Liste des catégories</b><br>';
+			$code = '<span class="menudroitetitre">Liste des catégories</span><br>';
 			foreach ($liste as $categorie) {
 				$titre = $categorie->getAttr("titre");
 				$span = $categorie->getAttr("description");
@@ -164,6 +154,74 @@ class Affichage{
 				//TODO Ajouter span et petit icone, en faire une liste
 				//$code = $code . "<span TITLE =\"" . $span . ">" . $titre . "</span> <br>\n\t";
 			}
+		}
+		return $code;
+	}
+
+
+
+	/* FAUTE DE FAIRE UNE AUTRE CLASSE CAR TROP RÉPÉTITIVE
+	 * SERONT CI-DESSOUS LES METHODES UTILISÉES POUR L'AFFICHAGE
+	 * DE LA PARTIE ADMINISTRATEUR */
+
+
+	/* Permet d'ajouter un article */
+	static function ajouterBillet(){
+		$code = "<div class=\"Article\">\n" ;
+		if(Utilisateur::estAdmin($_SESSION['login'])==false){
+			//tu peux pas test tarba
+			$code .= "Tarba t'as rien à faire ici<br>";
+		}else{
+			$categorie = Categorie::findAll();
+			//wesh fais comme chez toi
+			$code .= "<h1>Écrire un nouvel article</h1>";
+			$code .= "
+
+			<form method=\"post\" action=\"ajoutmessage.php\">
+   			
+   			<p>
+       			<label for=\"ajouterTitre\">Titre de l'article</label><br />
+       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\" autofocus></textarea>
+   			</p>
+
+
+   			<p>
+       			<label for=\"ajouterArticle\">Zone d'écriture de l'article</label><br />
+       			<textarea name=\"ajouterArticle\" id=\"ajouterArticle\"></textarea>
+   			";
+
+   			$code .= '<input type="submit" name="envoyer" value="Envoyer" />
+   			</p>';
+   			
+   			$code .=  self::listeCategorie();
+
+   			$code .= '</form>';
+   			//TODO créer ajoutmessage.php pour insérer dans la table
+
+
+		
+		}
+		$code .= "</div>";
+
+		return $code;
+	}
+
+
+	/* Créé l'html pour afficher les catégories sous forme
+	 * d'une liste */
+	static function listeCategorie(){
+		$liste = Categorie::findAll();
+		$code = "";
+		if(sizeof($liste)==0)
+			$code = "Aucune catégorie";
+		else{
+			$code = "<p>
+       					<label for=\"pays\">Dans quelle catégorie placez-vous le billet ?</label><br />
+       					<select name=\"categ\" id=\"categ\">";
+       		foreach ($liste as $categorie) {
+       			$code .= '<option value="france">'.$categorie->getAttr("titre").'</option>';
+			}
+			$code .= "</select></p>";
 		}
 		return $code;
 	}

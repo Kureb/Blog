@@ -206,6 +206,16 @@ class Utilisateur{
 	}
 
 
+	public static function estAdmin($login){
+		$current = self::findByLogin($login);
+		$admin = $current->getAttr("chmod");
+		if($admin==1) $res = true;
+		else $res = false;
+
+		return $res;
+	}
+
+
 }
 
 ?>

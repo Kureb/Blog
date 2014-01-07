@@ -31,7 +31,7 @@
 		<div id="gauche">
 			<img id="sharing" src="Share.png">
 			<p id="Auteur">
-				Blablabla
+				auteurlol
 			</p>
 			<p id="categorie">
 				mescategories

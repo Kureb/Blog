@@ -166,3 +166,29 @@ html, body{
 #principal{
 	padding-bottom: 20px;
 }
+
+
+#ajouterArticle {
+	width: 550px;
+	height: 400px;
+	max-width: 550px;
+	max-height: 400px;
+}
+
+
+#ajouterTitre {
+	max-width: 550px;
+	max-height: 30px;
+	width: 550px;
+	height: 30px;
+}
+
+textarea {
+	text-align: left;
+}
+
+
+form>p {
+	display: inline-block;
+	vertical-align: middle;
+}
