@@ -22,6 +22,7 @@ include_once "Utilisateur.php";
 			$admin = $current_user->getAttr("chmod");
 			if($admin==1){
 				echo 'Voir ses articles.<br>';
+				echo '<a href="admin.php?a=addM">&eacutecrire un nouvel article</a>';
 			}
 		?>
 

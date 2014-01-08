@@ -48,24 +48,30 @@ class Affichage{
 			foreach ($page as $key => $value) {
 				if ($key=="page"){
 					$num = $value;
+					//var_dump($value);
 					break;
+					//=0 quand y'a des param mais pas les bons
+				}else {
+					$num = 0;
 				}  
 			}
 		}
 		else {
 			$num = 1;
 		}
-		
-		$pagination = 'Page numéro : << '.$num.' >>';
-		$prec = "<<";
-		$suiv = ">>";
-		$nb_billets = Billet::getNbBillet();
-		if($num>1)
-			$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
-
-		if($nb_billets > $num*5)
-			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
-		
+		//TODO gérer quand num page entré manuellement
+		if($num==0) $pagination = '';
+		else{
+			$pagination = 'Page numéro : << '.$num.' >>';
+			$prec = "<<";
+			$suiv = ">>";
+			$nb_billets = Billet::getNbBillet();
+			if($num>1)
+				$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
+	
+			if($nb_billets > $num*5)
+				$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
+			}
 		return $pagination;
 		
 	}
