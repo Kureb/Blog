@@ -10,20 +10,18 @@ class Affichage{
 
 
 	function affichageGeneral($articles, $categorie/*$contenu_central, $menu_droite, $menu_gauche*/){
-		$info = self::infoUser();	
 		$file = 'BlogAlex.php';
 		$content = file_get_contents($file);
-		$artc = "mesarticles";
-		$cat = "mescategories";
-		$content = str_replace($artc, "$articles", $content);
-		$content = str_replace($cat, "$categorie", $content);
-		$content = str_replace("auteurlol", "$info", $content);
+		$content = str_replace("mesarticles", "$articles", $content);
+		$content = str_replace("mescategories", "$categorie", $content);
+		$content = str_replace("auteurlol", self::infoUser(), $content);
+		$content = str_replace("mapagination", self::afficherNbPages(), $content);
 		echo $content;
 	}
 
 
 	static function infoUser(){
-		$info = '<span class="menudroitetitre"> Utilisateur </span><br>';
+		$info = 'Utilisateur<br>';
 		if (!empty($_SESSION['login'])){
 			$info .= 'Bonjour <a href="membre.php">'.htmlentities($_SESSION['login']).'</a><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
@@ -39,6 +37,43 @@ class Affichage{
 
 		return $info;
 	}
+
+
+
+	static function afficherNbPages(){
+		$page = $_GET;
+
+		//SI GET est vide num est égal à 1 
+		if(sizeof($page)!=0){
+			
+			foreach ($page as $key => $value) {
+				if ($key=="page"){
+					$num = $value;
+					break;
+				} else $num = 0;
+			}
+		}
+		else {
+			$num = 1;
+		}
+		
+		if($num==0) $pagination = '';
+
+		else{
+		$pagination = 'Page numéro : << '.$num.' >>';
+		$prec = "<<";
+		$suiv = ">>";
+		$nb_billets = Billet::getNbBillet();
+		if($num>1)
+			$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
+
+		if($nb_billets > $num*5)
+			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
+		}
+		return $pagination;
+		
+	}
+
 
 	
 
@@ -88,14 +123,12 @@ class Affichage{
 			//$code = self::afficherBillet();
 		}
 		else{
-			$code = $code . "<table>\n";
 			foreach($liste as $billet){
 				$id = $billet->getAttr("id");
 				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
-				$code = $code . "<tr><td>\n";
-
+				
 				$code = $code . '<div id="lol">';
 
 				$code = $code . "<div class=\"Article\">\n" .
@@ -106,34 +139,12 @@ class Affichage{
 				
 						$code = $code . "</div>\n";
 				//$code = $code . self::afficherBillet($billet);
-				$code = $code . "</td></tr>\n";
+				
 			}
 			
-		$code = $code . "</table>\n";
 		}
 
-		$page = $_GET;
-
-		//SI GET est vide num est égal à 1 
-		if(sizeof($page)!=0){
-			
-			foreach ($page as $key => $value) {
-				if ($key=="page") $num = $value; break;
-			}
-		}
-		else $num = 1;
 		
-		$pagination = '<div id="pagination">Page numéro : << '.$num.' >> </div>';
-		$prec = "<<";
-		$suiv = ">>";
-		$nb_billets = Billet::getNbBillet();
-		if($num>1)
-			$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
-
-		if($nb_billets > $num*5)
-			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
-		
-		$code = $code . $pagination;
 		
 		return $code;
 	}
@@ -188,6 +199,8 @@ class Affichage{
 
 					//echo $b;
 					echo $b->insert();
+					if($res==1) $log = 'Billet bien publié';
+					else $log ='Une erreur';
 
 					
 				}else{
