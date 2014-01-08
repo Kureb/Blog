@@ -8,6 +8,11 @@
 	</head>
 
 	<body>
+<<<<<<< HEAD
+=======
+		
+		 
+>>>>>>> b04bc2b5f781620a2a2f4fb319af6de0e7e0816f
 		<div id="banniere">
 			<img id="ban" src="Bannière.jpg">
 		</div> 
