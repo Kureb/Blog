@@ -10,18 +10,20 @@ class Affichage{
 
 
 	function affichageGeneral($articles, $categorie/*$contenu_central, $menu_droite, $menu_gauche*/){
+		$info = self::infoUser();	
 		$file = 'BlogAlex.php';
 		$content = file_get_contents($file);
-		$content = str_replace("mesarticles", "$articles", $content);
-		$content = str_replace("mescategories", "$categorie", $content);
-		$content = str_replace("auteurlol", self::infoUser(), $content);
-		$content = str_replace("mapagination", self::afficherNbPages(), $content);
+		$artc = "mesarticles";
+		$cat = "mescategories";
+		$content = str_replace($artc, "$articles", $content);
+		$content = str_replace($cat, "$categorie", $content);
+		$content = str_replace("auteurlol", "$info", $content);
 		echo $content;
 	}
 
 
 	static function infoUser(){
-		$info = 'Utilisateur<br>';
+		$info = '<span class="menudroitetitre"> Utilisateur </span><br>';
 		if (!empty($_SESSION['login'])){
 			$info .= 'Bonjour <a href="membre.php">'.htmlentities($_SESSION['login']).'</a><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
@@ -36,44 +38,6 @@ class Affichage{
 		}
 
 		return $info;
-	}
-
-
-	static function afficherNbPages(){
-		$page = $_GET;
-
-		//SI GET est vide num est égal à 1 
-		if(sizeof($page)!=0){
-			
-			foreach ($page as $key => $value) {
-				if ($key=="page"){
-					$num = $value;
-					//var_dump($value);
-					break;
-					//=0 quand y'a des param mais pas les bons
-				}else {
-					$num = 0;
-				}  
-			}
-		}
-		else {
-			$num = 1;
-		}
-		//TODO gérer quand num page entré manuellement
-		if($num==0) $pagination = '';
-		else{
-			$pagination = 'Page numéro : << '.$num.' >>';
-			$prec = "<<";
-			$suiv = ">>";
-			$nb_billets = Billet::getNbBillet();
-			if($num>1)
-				$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
-	
-			if($nb_billets > $num*5)
-				$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
-			}
-		return $pagination;
-		
 	}
 
 	
@@ -121,18 +85,18 @@ class Affichage{
 				
 				//$code = $code . "</div>\n";
 			}
-			
-
-		}else{
-			//$code = $code . "<table>\n";
+			//$code = self::afficherBillet();
+		}
+		else{
+			$code = $code . "<table>\n";
 			foreach($liste as $billet){
 				$id = $billet->getAttr("id");
 				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
-				//$code = $code . "<tr><td>\n";
+				$code = $code . "<tr><td>\n";
 
-				
+				$code = $code . '<div id="lol">';
 
 				$code = $code . "<div class=\"Article\">\n" .
 						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
@@ -140,14 +104,36 @@ class Affichage{
 						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
 				
-						
+						$code = $code . "</div>\n";
 				//$code = $code . self::afficherBillet($billet);
-				//$code = $code . "</td></tr>\n";
+				$code = $code . "</td></tr>\n";
 			}
 			
-		//$code = $code . "</table>\n";
+		$code = $code . "</table>\n";
 		}
 
+		$page = $_GET;
+
+		//SI GET est vide num est égal à 1 
+		if(sizeof($page)!=0){
+			
+			foreach ($page as $key => $value) {
+				if ($key=="page") $num = $value; break;
+			}
+		}
+		else $num = 1;
+		
+		$pagination = '<div id="pagination">Page numéro : << '.$num.' >> </div>';
+		$prec = "<<";
+		$suiv = ">>";
+		$nb_billets = Billet::getNbBillet();
+		if($num>1)
+			$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
+
+		if($nb_billets > $num*5)
+			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
+		
+		$code = $code . $pagination;
 		
 		return $code;
 	}
@@ -160,7 +146,7 @@ class Affichage{
 		if(sizeof($liste)==0)
 			$code = "Aucune catégorie";
 		else{
-			$code = 'Liste des catégories<br>';
+			$code = '<span class="menudroitetitre">Liste des catégories</span><br>';
 			foreach ($liste as $categorie) {
 				$titre = $categorie->getAttr("titre");
 				$span = $categorie->getAttr("description");
@@ -191,18 +177,17 @@ class Affichage{
 					$log = $titre . " " . $body . " " . $categ;
 
 					$cat = Categorie::findByTitre($categ);
+					$billet = new Billet();
 					$b = new Billet();
 					$b->setAttr("titre", $titre);
 					$b->setAttr("body", $body);
-					//$TODO faire attention aux accents
+					$b->setAttr("id", '10');
 					$b->setAttr("cat_id", $cat->getAttr("id"));
 					$b->setAttr("date", date("Y-m-d H:i:s"));
 					$b->setAttr("auteur", $_SESSION['login']);
 
-					$res =$b->insert();
-
-					if($res==1) $log = 'Billet bien publié';
-					else $log ='Une erreur';
+					//echo $b;
+					echo $b->insert();
 
 					
 				}else{

@@ -21,6 +21,9 @@ class Utilisateur{
 	}
 
 
+	
+
+
 
 	public function getAttr($attr_name){
 		if(property_exists(__CLASS__, $attr_name)){
