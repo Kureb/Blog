@@ -167,9 +167,45 @@ class Affichage{
 
 	/* Permet d'ajouter un article */
 	static function ajouterBillet(){
+		/* Je en sais pas si ça marche mais on va essayer */
+		if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer'){
+			if (isset($_POST['ajouterTitre']) && !empty($_POST['ajouterTitre'])){
+				if (isset($_POST['ajouterArticle']) && !empty($_POST['ajouterArticle'])){
+					$titre = $_POST['ajouterTitre'];
+					$body = $_POST['ajouterArticle'];
+					$categ = $_POST['categ'];
+					$log = $titre . " " . $body . " " . $categ;
+
+					$cat = Categorie::findByTitre($categ);
+					$b = new Billet();
+					$b->setAttr("titre", $titre);
+					$b->setAttr("body", $body);
+					//$TODO faire attention aux accents
+					$b->setAttr("cat_id", $cat->getAttr("id"));
+					$b->setAttr("date", date("Y-m-d H:i:s"));
+					$b->setAttr("auteur", $_SESSION['login']);
+
+					$b->insert());
+
+					
+				}else{
+					$log = "manque l'article";
+				}				
+			}else{
+				$log = "Manque un titre";
+			}
+		}
+		/* Fin du test */
+
+
+
 		$code = "<div class=\"Article\">\n" ;
 		if(Utilisateur::estAdmin($_SESSION['login'])==false){
 			//tu peux pas test tarba
+			// <label for=\"ajouterTitre\">Titre de l'article</label><br />
+			//<input id=\"ajouterTitre\" type=\"text\" name=\"titre\" autofocus>
+       			
+       			
 			$code .= "Tarba t'as rien à faire ici<br>";
 		}else{
 			$categorie = Categorie::findAll();
@@ -177,17 +213,20 @@ class Affichage{
 			$code .= "<h1>Écrire un nouvel article</h1>";
 			$code .= "
 
-			<form method=\"post\" action=\"ajoutmessage.php\">
+			<form method=\"post\" action=\"admin.php?a=addM\">
    			
-   			<p>
-       			<label for=\"ajouterTitre\">Titre de l'article</label><br />
-       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\" autofocus></textarea>
-   			</p>
+   			<p> <label for=\"ajouterTitre\">Titre de l'article</label><br>
+       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\">";
+       			if (isset($_POST['ajouterTitre'])) $code .= $_POST['ajouterTitre'];
+       			$code .= "</textarea>
+       		</p>
 
 
    			<p>
        			<label for=\"ajouterArticle\">Zone d'écriture de l'article</label><br />
-       			<textarea name=\"ajouterArticle\" id=\"ajouterArticle\"></textarea>
+       			<textarea name=\"ajouterArticle\" id=\"ajouterArticle\">";
+       			if (isset($_POST['ajouterArticle'])) $code .= $_POST['ajouterArticle'];
+       			$code .= "</textarea>
    			";
 
    			$code .= '<input type="submit" name="envoyer" value="Envoyer" />
@@ -201,7 +240,12 @@ class Affichage{
 
 		
 		}
+
+		if (isset($log)){ $code .= $log; }
+		
 		$code .= "</div>";
+
+		
 
 		return $code;
 	}
@@ -219,7 +263,7 @@ class Affichage{
        					<label for=\"pays\">Dans quelle catégorie placez-vous le billet ?</label><br />
        					<select name=\"categ\" id=\"categ\">";
        		foreach ($liste as $categorie) {
-       			$code .= '<option value="france">'.$categorie->getAttr("titre").'</option>';
+       			$code .= "<option value=". $categorie->getAttr("titre") .">" .$categorie->getAttr("titre"). "</option>";
 			}
 			$code .= "</select></p>";
 		}

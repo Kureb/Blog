@@ -18,7 +18,7 @@ class Billet{
 	
 public function __toString(){
 	return "[".__CLASS__ . "] <br>
-			id : ". $this->id . "<br>
+			id : ". $this->getAttr("id") . "<br>
 			titre : ". $this->getAttr("titre") ."<br>
 			body : ". $this->getAttr("body") ."<br>
 			cat_id : ". $this->getAttr("cat_id") ."<br>
@@ -84,15 +84,8 @@ public function __toString(){
 
 	public function insert(){
 		$nb = 0;
-	    $query = "INSERT INTO Billets VALUES(null,'".$this->titre."', '".$this->body."', '".$this->cat_id."', '".$this->date."')";
-/*
-		$query = "INSERT INTO Billets VALUES(null,
-											 ".$this->getAttr("titre").",
-											 ".$this->getAttr("body").",
-											 ".$this->getAttr("cat_id").",
-											 ".$this->getAttr("date").")";
-*/
-		$c = Base::getConnection();
+	    $query = "INSERT INTO Billets VALUES(null,'".$this->titre."', '".$this->body."', '".$this->cat_id."', '".$this->date."', '".$this->auteur."')";
+	    $c = Base::getConnection();
 		$nb = $c->exec($query);
 		$this->setAttr("id", $c->LastInsertId());
 		return $nb;
