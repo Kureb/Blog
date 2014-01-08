@@ -1,23 +1,22 @@
-
+<!DOCTYPE html>
 <html>
 	<head>
 		<title>Projet Web</title>
 		<meta charset="utf-8" />
 		<style type="text/css"></style>
-		<link rel="stylesheet" href="BlogAlex2.css" />
+		<link rel="stylesheet" href="Blogalex2.css" />
 	</head>
 
 	<body>
-		<div id="page">
-		<div id="principal">
 		
 		 
 		<div id="banniere">
-			<img id="ban" src="LOL.jpg">
+			<img id="ban" src="Bannière.jpg">
 		</div> 
 		
 
 		
+		<!-- 
 		<div class="topbarre">
 		<div class="container">
 			<div class="menu">Accueil</div>
@@ -26,26 +25,31 @@
 			<div class="menu">LOL Test</div>
 		</div>
 		</div>
-		
+		 -->
 		
 		<div id="gauche">
 			<img id="sharing" src="Share.png">
-			<p id="Auteur">
-				auteurlol
-			</p>
-			<p id="categorie">
+			<div id="Auteur">
+				<img id="avatar" src="test.jpg">
+				<p> auteurlol </p>
+			</div>
+
+			<div id="categorie">
 				mescategories
-			</p>
+			</div>
+
+			<div id="footer">
+				<p id="pagination"> mapagination </p>
+			</div>
 		</div>
 
 		<div id="droite">
 			mesarticles
 		</div>
 
-		</div> <!-- principal -->
-
-		</div> <!-- page -->
 		
-		<script href="scriptder.js"></script>
+
+
+
 	</body>
 </html>
