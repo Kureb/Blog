@@ -86,10 +86,18 @@ class Affichage{
 		$croix = '';
 		if(Utilisateur::estAdmin($_SESSION['login'])==true){
 			if($_SESSION['login']==$billet->getAttr("auteur")){
+<<<<<<< HEAD
 				$croix = ' [X]';
 			}
 		}		
 
+=======
+				$croix = ' [<a href="admin.php?a=del&id='.$billet->getAttr("id"). '">X</a>]';
+			}
+		}
+		//TOTO si article n'existe pas, ne pas afficher		
+		if ($billet)==null echo 'pas';
+>>>>>>> 12670916b5664cfac87a30e2d87bb9e10ef51875
 
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
@@ -207,8 +215,9 @@ class Affichage{
 					$b->setAttr("date", date("Y-m-d H:i:s"));
 					$b->setAttr("auteur", $_SESSION['login']);
 
+
 					//echo $b;
-					echo $b->insert();
+					$res = $b->insert();
 					if($res==1) $log = 'Billet bien publié';
 					else $log ='Une erreur';
 

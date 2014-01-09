@@ -6,3 +6,6 @@ include_once 'Base.php';
 
 $c = new AdminController();
 $c->callAction( $_GET );
+
+
+?>
