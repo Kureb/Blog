@@ -95,13 +95,13 @@ class Affichage{
 
 		if ($billet==false) echo 'pas d\'article';
 
-
+		$contenu = str_replace("\n","<br/>", $billet->getAttr("body")); 
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
 		$code = "<div class=\"Article\">\n" .
 				"<h2>" . $billet->getAttr("titre") . "</h2>\n" .
 				//"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" . 
-				"<p>" . $billet->getAttr("body") . "</p>\n" . 
+				"<p>" . $contenu . "</p>\n" . 
 				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur"). $croix . "</p>\n" .
 				"</div>";
 				
@@ -113,7 +113,7 @@ class Affichage{
 	static function afficheListeBillets($liste){
 		$code = "";
 		//var_dump($liste);
-		if(sizeof($liste)==0){
+		if(sizeof($liste)==0){@@
 			$code = "<div class=\"Article\">\n";
 			$code = $code . "Aucun billet";
 			$code = $code . "</div>";
