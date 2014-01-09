@@ -88,9 +88,12 @@ class Affichage{
 			if($_SESSION['login']==$billet->getAttr("auteur")){
 				$croix = ' [<a href="admin.php?a=del&id='.$billet->getAttr("id"). '">X</a>]';
 			}
-		}
+		}	
+
 		//TOTO si article n'existe pas, ne pas afficher		
-		if ($billet==false) echo 'pas';
+
+		if ($billet==false) echo 'pas d\'article';
+
 
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
