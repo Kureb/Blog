@@ -81,13 +81,24 @@ class Affichage{
 
 	/* Fonction qui retourne le code HTML pour un billet */
 	static function afficherBillet($billet){
+		//Un utilisateur qui n'a pas posté n'est pas censé être admin
+		//mais autant avoir 2 vérifications plutôt qu'une
+		$croix = '';
+		if(Utilisateur::estAdmin($_SESSION['login'])==true){
+			if($_SESSION['login']==$billet->getAttr("auteur")){
+				$croix = ' [<a href="admin.php?a=del&id='.$billet->getAttr("id"). '">X</a>]';
+			}
+		}
+		//TOTO si article n'existe pas, ne pas afficher		
+		if ($billet)==null echo 'pas';
+
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
 		$code = "<div class=\"Article\">\n" .
 				"<h1>" . $billet->getAttr("titre") . "</h1>\n" .
 				//"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
-				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur")."</p>\n" .
+				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur"). $croix . "</p>\n" .
 				"</div>";
 				
 		return $code;
@@ -197,8 +208,9 @@ class Affichage{
 					$b->setAttr("date", date("Y-m-d H:i:s"));
 					$b->setAttr("auteur", $_SESSION['login']);
 
+
 					//echo $b;
-					echo $b->insert();
+					$res = $b->insert();
 					if($res==1) $log = 'Billet bien publié';
 					else $log ='Une erreur';
 

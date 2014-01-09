@@ -9,7 +9,7 @@
 
 	<body>
 	<div id="banniere">
-			<img id="ban" src="Bannière.jpg">
+			<a href="blog.php"> <img id="ban" src="Banniere.jpg" border="0"> </a> 
 		</div> 
 		
 

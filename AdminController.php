@@ -19,6 +19,15 @@ class AdminController extends Controller {
 		$a->affichageGeneral($b, $lol);
 	}
 
+
+	public function supprimerArticle($param){
+		$billet = Billet::findById($param);
+		//echo $billet;
+		$n = $billet->delete();
+		if($n==1) $mes = "Suppression en cours";
+		else $mes = "Erreur";
+	}
+
 	/* Envoi des données pour ajouter un message */
 	public function saveMessage($param){
 		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
@@ -65,6 +74,15 @@ class AdminController extends Controller {
 				case 'saveC':
 					$this->saveCategorie($key);
 					break;
+
+				case 'del':
+				if(array_search('id', array_keys($tab))==true){
+						if(sizeof($tab['id'])>0){
+							$this->supprimerArticle($tab['id']);
+						}
+					}elseif (array_search('id', array_keys($tab))==false) {
+						echo "Besoin d'un ID";
+				}
 
 				default:
 					//echo "action impossible <br>";
