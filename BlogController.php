@@ -121,6 +121,7 @@ class BlogController extends Controller{
 					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
 					else /*echo "id : " . $tab['id'];*/
 						$this->catAction($key);
+						//TODO FAIRE affichage des catégories
 					break;
 
 				default:

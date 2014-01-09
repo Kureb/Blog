@@ -54,9 +54,7 @@ class AdminController extends Controller {
 		//Si pas de paramètre dans l'url on affiche un menu
 		//nous permettant de choisir ce que l'on va faire
 		if(sizeof($tab)==0) {
-			//Faire affichage par défaut
-			//Donc faire méthode
-			//TODO faire la méthode
+			header("Location: membre.php");
 		}
 		foreach ($tab as $key => $value) {
 			switch ($value) {

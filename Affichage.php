@@ -21,15 +21,15 @@ class Affichage{
 
 
 	static function infoUser(){
-		$info = 'Utilisateur<br>';
+		$info = '';
 		if (!empty($_SESSION['login'])){
-			$info .= 'Bonjour <a href="membre.php">'.htmlentities($_SESSION['login']).'</a><br>';
+			$info .= 'Bonjour <a href="membre.php" title="accéder à mon espace membre">'.htmlentities($_SESSION['login']).'</a><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
 			include_once 'Utilisateur.php';
 			if(Utilisateur::estAdmin($_SESSION['login'])==true){
-				$info .= 'tu es admin/<br>';
-			}else{
-				$info .= 'tu es pas admin<br>';
+				$info .= '';
+			}else{ //TODO mettre une image (étoile?) pour les admins
+				$info .= '';
 			}
 		}else{
 			$info .= '<a href="connexion.php">Se connecter</a>';
@@ -70,6 +70,14 @@ class Affichage{
 		if($nb_billets > $num*5)
 			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
 		}
+
+		//Lien pour revenir en arrière si on est sur une page sans article
+		//Se base sur l'historique
+		if(($num>1 && ($nb_billets < ($num-1)*5)) || $num==0){
+			$pagination = '<a href="javascript:history.back();" title="Précédent">Précédent</a>';
+		} 
+
+		
 		return $pagination;
 		
 	}
@@ -81,8 +89,6 @@ class Affichage{
 
 	/* Fonction qui retourne le code HTML pour un billet */
 	static function afficherBillet($billet){
-		//Un utilisateur qui n'a pas posté n'est pas censé être admin
-		//mais autant avoir 2 vérifications plutôt qu'une
 		$croix = '';
 		if(isset($_SESSION['login'])){
 		if($_SESSION['login']==$billet->getAttr("auteur")){
@@ -92,19 +98,22 @@ class Affichage{
 			
 
 		//TOTO si article n'existe pas, ne pas afficher		
-
-		if ($billet==false) echo 'pas d\'article';
-
-		$contenu = str_replace("\n","<br/>", $billet->getAttr("body")); 
-		$date = $billet->getAttr("date");
-		$date = substr($date, 0, 11) . "à " . substr($date, 11);
-		$code = "<div class=\"Article\">\n" .
-				"<h2>" . $billet->getAttr("titre") . "</h2>\n" .
-				//"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" . 
-				"<p>" . $contenu . "</p>\n" . 
-				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur"). $croix . "</p>\n" .
-				"</div>";
-				
+		if ($billet==false){
+			$code = '<div class="Article">'; 
+			$code .= 'Cette article n\'existe pas.';	
+			$code .= '</div>';
+		} 
+		else{
+			$contenu = str_replace("\n","<br/>", $billet->getAttr("body")); 
+			$date = $billet->getAttr("date");
+			$date = substr($date, 0, 11) . "à " . substr($date, 11);
+			$code = "<div class=\"Article\">\n" .
+					"<h2>" . $billet->getAttr("titre") . "</h2>\n" .
+					//"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" . 
+					"<p>" . $contenu . "</p>\n" . 
+					"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur"). $croix . "</p>\n" .
+					"</div>";
+		}		
 		return $code;
 	}
 
@@ -235,13 +244,18 @@ class Affichage{
 
 
 		$code = "<div class=\"AjoutArticle\">\n" ;
+		if(!isset($_SESSION['login'])){
+			$code .= "Tu n'es pas connecté, tu n'as donc pas accès à cette partie";
+			$code .= 'Peut-être veut te connecter, ou bien t\'inscrire.';
+		}else{
+
+
 		if(Utilisateur::estAdmin($_SESSION['login'])==false){
 			//tu peux pas test tarba
 			// <label for=\"ajouterTitre\">Titre de l'article</label><br />
 			//<input id=\"ajouterTitre\" type=\"text\" name=\"titre\" autofocus>
        			
-       			
-			$code .= "Tarba t'as rien à faire ici<br>";
+       		$code .= $_SESSION['login'] . ", vous n'avez pas les droits nécessaires pour écrire un nouvel article";	
 		}else{
 			$categorie = Categorie::findAll();
 			//wesh fais comme chez toi
@@ -275,7 +289,7 @@ class Affichage{
 
 		
 		}
-
+		}
 		if (isset($log)){ $code .= '<div class="message">'.$log.'</div>'; }
 		
 		$code .= "</div>";
