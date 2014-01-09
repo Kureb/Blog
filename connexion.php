@@ -33,6 +33,10 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 	}else{
 		$log = 'Au moins un champ est vide.<br>';
 	}
+}else if(isset($_POST['accueil']) && $_POST['accueil'] == 'Accueil') {
+	header("Location: blog.php");
+}else if(isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription') {
+	header("Location: inscription.php");
 }
 
 ?>
@@ -56,6 +60,8 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 			<span class="label">Mot de passe</span>
 			<input class="champ" type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass']))?>"/><br>
 			<input type="submit" name="connexion" value="Connexion" />
+			<input type="submit" name="accueil" value="Accueil" />
+			<input type="submit" name="inscription" value="Inscription" />
 		</div>
 		</form>
 		<?php 

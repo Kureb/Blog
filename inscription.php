@@ -50,6 +50,8 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 	}else{
 		$log = 'Au moins un champ est vide.<br>';
 	}
+}else if(isset($_POST['accueil']) && $_POST['accueil'] == 'Accueil') {
+	header("Location: blog.php");
 }
 
 ?>
@@ -76,6 +78,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 			<span class="label">E-mail</span>
 			<input class="champ" type="text" name="mail" value="<?php if (isset($_POST['mail'])) echo htmlentities(trim($_POST['mail']))?>"/><br>			
 			<input type="submit" name="inscription" value="Inscription" />
+			<input type="submit" name="accueil" value="Accueil" />
 		</div>
 		</form>
 		<?php
