@@ -90,10 +90,11 @@ class Affichage{
 	/* Fonction qui retourne le code HTML pour un billet */
 	static function afficherBillet($billet){
 		$croix = '';
+		$edit = '';
 		if(isset($_SESSION['login'])){
 		if($_SESSION['login']==$billet->getAttr("auteur")){
-				$croix = ' [<a href="admin.php?a=del&id='.$billet->getAttr("id"). '">X</a>]';
-			}
+				$croix = '[<a href="admin.php?a=del&id='.$billet->getAttr("id"). '">X</a>]';
+				$edit = '[<a href="admin.php?a=edit&id='.$billet->getAttr("id"). '">E</a>]';			}
 		}
 			
 
@@ -111,7 +112,7 @@ class Affichage{
 					"<h2>" . $billet->getAttr("titre") . "</h2>\n" .
 					//"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" . 
 					"<p>" . $contenu . "</p>\n" . 
-					"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur"). $croix . "</p>\n" .
+					"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur").' '.$croix.' '.$edit ."</p>\n" .
 					"</div>";
 		}		
 		return $code;
@@ -246,7 +247,7 @@ class Affichage{
 		$code = "<div class=\"AjoutArticle\">\n" ;
 		if(!isset($_SESSION['login'])){
 			$code .= "Tu n'es pas connecté, tu n'as donc pas accès à cette partie";
-			$code .= 'Peut-être veut te connecter, ou bien t\'inscrire.';
+			$code .= 'Peut-être veux-tu te connecter, ou bien t\'inscrire.';
 		}else{
 
 
@@ -303,6 +304,16 @@ class Affichage{
 	/* Créé l'html pour afficher les catégories sous forme
 	 * d'une liste */
 	static function listeCategorie(){
+		//Si l'url de la page a edit et id
+		//on réupère l'id pour récupérer la categorie du billet et la garder en mémoire
+		/*
+		if(isset($_GET['id']){
+			$id = $_GET['id'];
+			select titre from Categorie NATURAL JOIN Billets
+			where id=cat_id AND id= 63;
+		}
+		*/
+
 		$liste = Categorie::findAll();
 		$code = "";
 		if(sizeof($liste)==0)
@@ -318,6 +329,103 @@ class Affichage{
 		}
 		return $code;
 	}
+
+
+
+	static function editerBillet($billet){
+		/* Je en sais pas si ça marche mais on va essayer */
+		
+		if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer'){
+			if (isset($_POST['ajouterTitre']) && !empty($_POST['ajouterTitre'])){
+				if (isset($_POST['ajouterArticle']) && !empty($_POST['ajouterArticle'])){
+					$titre = $_POST['ajouterTitre'];
+					$body = $_POST['ajouterArticle'];
+					$categ = $_POST['categ'];
+
+					$cat = Categorie::findByTitre($categ);
+					$billet->setAttr("titre", $titre);
+					$billet->setAttr("body", $body);
+					$billet->setAttr("id", $billet->getAttr("id"));
+					$billet->setAttr("cat_id", $billet->getAttr("cat_id"));
+					$billet->setAttr("date", $billet->getAttr("date"));
+					$billet->setAttr("auteur", $billet->getAttr("auteur"));
+
+
+					//echo $b;
+					$res = $billet->update();
+					if($res==1){
+						$log = 'Billet bien édité. Redirection en cours';
+						$header = 'Refresh: 2; url=Blog.php?a=detail&id='.$billet->getAttr("id");
+						header($header);
+					} 
+					else $log ='Une erreur est arrivée.';
+
+					
+				}else{
+					$log = "Vous ne pouvez pas supprimer le contenu de l'article.";
+				}				
+			}else{
+				$log = "Vous ne pouvez pas supprimer le titre.";
+			}
+		}
+		/* Fin du test */
+
+
+
+		$code = "<div class=\"EditArticle\">\n" ;
+		if(!isset($_SESSION['login'])){
+			$code .= "Tu n'es pas connecté, tu n'as donc pas accès à cette partie";
+			$code .= 'Peut-être veux-tu te connecter, ou bien t\'inscrire.';
+		}else{
+
+
+		if(Utilisateur::estAdmin($_SESSION['login'])==false){	
+       		$code .= $_SESSION['login'] . ", vous n'avez pas les droits nécessaires pour éditer cet article";	
+		}else{
+			$categorie = Categorie::findAll();
+			
+			$code .= "<h2>Éditer un article</h2>";
+			$code .= "
+
+			<form method=\"post\" action=\"\">
+   			
+   			<p> <label for=\"ajouterTitre\">Titre de l'article</label><br>
+       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\">";
+       			$code .= $billet->getAttr("titre");
+       			$code .= "</textarea>
+       		</p>
+
+
+   			<p>
+       			<label for=\"ajouterArticle\">Zone d'écriture de l'article</label><br />
+       			<textarea name=\"ajouterArticle\" id=\"ajouterArticle\">";
+       			$code .= $billet->getAttr("body");
+       			$code .= "</textarea>
+   			";
+
+   			$code .= '<input type="submit" name="envoyer" value="Envoyer" />
+   			</p>';
+   			
+   			$code .=  self::listeCategorie();
+
+   			$code .= '</form>';
+   			//TODO créer ajoutmessage.php pour insérer dans la table
+
+
+		
+		}
+		}
+		if (isset($log)){ $code .= '<div class="message">'.$log.'</div>'; }
+		
+		$code .= "</div>";
+
+		
+
+		return $code;
+	}
+
+
+
 
 }
 

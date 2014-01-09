@@ -22,6 +22,7 @@ class AdminController extends Controller {
 
 	public function supprimerArticle($param){
 		$billet = Billet::findById($param);
+
 		//echo $billet;
 		$n = $billet->delete();
 		//header("Refresh: 0; url=Blog.php");
@@ -30,9 +31,13 @@ class AdminController extends Controller {
 	}
 
 	/* Envoi des données pour ajouter un message */
-	public function saveMessage($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
-
+	public function editerArticle($param){
+		$a = new Affichage();
+		$billet = Billet::findById($param);
+		$cat = Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$b  = $a->editerBillet($billet);
+		$a->affichageGeneral($b, $lol);
 	}
 
 	/* Affichage d'un formulaire pour ajouter une catégorie */
@@ -70,8 +75,14 @@ class AdminController extends Controller {
 					$this->addCategorie($key);
 					break;
 
-				case 'saveC':
-					$this->saveCategorie($key);
+				case 'edit':
+					if(array_search('id', array_keys($tab))==true){
+						if(sizeof($tab['id'])>0){
+							$this->editerArticle($tab['id']);
+						}
+					}elseif (array_search('id', array_keys($tab))==false) {
+						echo "Besoin d'un ID";
+					}
 					break;
 
 				case 'del':
@@ -82,6 +93,7 @@ class AdminController extends Controller {
 					}elseif (array_search('id', array_keys($tab))==false) {
 						echo "Besoin d'un ID";
 				}
+					break;
 
 				default:
 					//echo "action impossible <br>";

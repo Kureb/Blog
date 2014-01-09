@@ -43,14 +43,15 @@ public function __toString(){
 
 
 	public function update(){
+		/*
 		if(!isset($this->id)){
-			throw new Exception(__CLASS__ . ": Primary Key undifined : cannot update");	
+			throw new Exception(__CLASS__ . ": Primary Key undefined : cannot update");	
 		}
-
+		*/
 		$c = Base::getConnection();
 
 		$query = $c->prepare ("update billets set titre= ?, body= ?,
-								date= ?, cat_id= ?, auteur- ?
+								date= ?, cat_id= ?, auteur= ?
 								where id= ?");
 
 		//Liaison des paramètres
