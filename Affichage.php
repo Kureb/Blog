@@ -306,25 +306,30 @@ class Affichage{
 	static function listeCategorie(){
 		//Si l'url de la page a edit et id
 		//on réupère l'id pour récupérer la categorie du billet et la garder en mémoire
-		/*
-		if(isset($_GET['id']){
+		if(isset($_GET['id'])){
 			$id = $_GET['id'];
-			select titre from Categorie NATURAL JOIN Billets
-			where id=cat_id AND id= 63;
+			$art = Billet::findById($id);
+			$cat = $art->getAttr("cat_id");
+			$lol = Categorie::findById($cat);
+			$nom = $lol->getAttr("titre");
 		}
-		*/
+		
 
 		$liste = Categorie::findAll();
 		$code = "";
 		if(sizeof($liste)==0)
 			$code = "Aucune catégorie";
 		else{
-			$code = "<p>
-       					<label for=\"pays\">Dans quelle catégorie placez-vous le billet ?</label><br />
-       					<select name=\"categ\" id=\"categ\">";
+			$code = '<p>
+       					<label for="categ">Dans quelle catégorie placez-vous le billet ?</label><br />
+       					<select name="categ" id="categ">';
        		foreach ($liste as $categorie) {
-       			$code .= "<option value=". $categorie->getAttr("titre") .">" .$categorie->getAttr("titre"). "</option>";
+       			if($categorie->getAttr("titre")==$nom)
+       				$code .= "<option value=". $categorie->getAttr("titre") ." selected>" .$categorie->getAttr("titre"). "</option>";
+       			else
+       				$code .= "<option value=". $categorie->getAttr("titre") .">" .$categorie->getAttr("titre"). "</option>";
 			}
+			//$code .= '<select name="'.$nom.'" id="'.$nom.'">';
 			$code .= "</select></p>";
 		}
 		return $code;
@@ -333,8 +338,6 @@ class Affichage{
 
 
 	static function editerBillet($billet){
-		/* Je en sais pas si ça marche mais on va essayer */
-		
 		if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer'){
 			if (isset($_POST['ajouterTitre']) && !empty($_POST['ajouterTitre'])){
 				if (isset($_POST['ajouterArticle']) && !empty($_POST['ajouterArticle'])){
@@ -368,7 +371,7 @@ class Affichage{
 				$log = "Vous ne pouvez pas supprimer le titre.";
 			}
 		}
-		/* Fin du test */
+		
 
 
 

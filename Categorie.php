@@ -248,12 +248,14 @@ class Categorie {
       $dbres->bindParam(':id', $id);
       $dbres->execute();
       $categorie = false;
-      $d=$dbres->fetch(PDO::FETCH_OBJ) ;
+      $d=$dbres->fetch(PDO::FETCH_OBJ);
+      
+      if($d!=false){
       $categorie = new Categorie();
       $categorie->setAttr("id", $d->id);
       $categorie->setAttr("titre", $d->titre);
       $categorie->setAttr("description", $d->description);
-
+      }
       return $categorie;
 
 
@@ -311,9 +313,9 @@ class Categorie {
     $dbres = $c->prepare($query);
     $dbres->bindparam(':titre', $titre);
     $dbres->execute();
+    $d=$dbres->fetch(PDO::FETCH_OBJ);
     $categorie = false;
-      if($dbres!=false){
-        $d=$dbres->fetch(PDO::FETCH_OBJ) ;
+      if($d!=false){
         $categorie = new Categorie();
         $categorie->setAttr("id", $d->id);
         $categorie->setAttr("titre", $d->titre);
