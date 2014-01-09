@@ -11,13 +11,16 @@ class BlogController extends Controller{
 
 	public function listAction($param){
 		$a = new Affichage();
-		$b = Billet::findAll();
+		$b = Billet::findByCategorie($param);
 		$cat = Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
-		$c = $a->afficheListeBillets($b);
+		if (sizeof($b)==1) $c = $a->afficherBillet($b);
+		else $c = $a->afficheListeBillets($b);
 		$a->affichageGeneral($c, $lol);
 		
 	}
+
+
 
 
 	public function listActionParPage($param){
@@ -51,10 +54,14 @@ class BlogController extends Controller{
 		$cat = Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
 		$a->affichageGeneral($c, $lol);
-		
-		
 	}
 
+
+	public function parCategorie($param){
+
+	}
+
+	
 	public function catAction($param){
 		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
 	}
@@ -97,32 +104,17 @@ class BlogController extends Controller{
 						}
 					}elseif (array_search('id', array_keys($tab))==false) {
 						echo "Besoin d'un ID";
-				}
-					/*
-					}elseif(array_search('user', array_keys($tab))==true){
-						if(sizeof($tab['user'])>0){
-							$this->listParAuteur($tab['user']);
-						}
-					}elseif(array_search('user', array_keys($tab))==false){
-						echo "Besoin d'un ID";
-					}*/
-
-					//TODO gérer quand id=
-					//var_dump($tab['id']);
-					//else $this->detailAction($tab['id']);
-					/*
-					if(array_search('id', array_keys($tab))==true)	$this->detailAction($tab['id']);
-					if(array_search('user', array_keys($tab))==false) echo "Besoin d'un utilisateur";
-					if(array_search('user', array_keys($tab))==true) $this->listParAuteur($tab['user']);
-					*/
+					}
 					break;
 
 				case 'cat':
 					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
 					else /*echo "id : " . $tab['id'];*/
-						$this->catAction($key);
+						$this->listAction($tab['id']);
 						//TODO FAIRE affichage des catégories
 					break;
+
+
 
 				default:
 					//if(array_search('id', array_keys($tab))==false)

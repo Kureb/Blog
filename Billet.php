@@ -165,7 +165,32 @@ public function __toString(){
 			echo "Erreur, billet introuvable";
 		}
 
-		return billet;
+		return $billet;
+	}
+
+
+	public static function findByCategorie($cat_id){
+		$query = "select * from billets where cat_id = :cat_id";
+		$c = Base::getConnection();
+		$dbres = $c->prepare($query);
+		$dbres->bindParam(':cat_id', $cat_id);
+		$dbres->execute();
+		$d = $dbres->fetchAll();
+		$tab = Array();
+		if($d!=false){
+			foreach ($d as $ligne) {
+				$billet = new Billet();
+				$billet->setAttr("id", $ligne["id"]);
+				$billet->setAttr("titre", $ligne["titre"]);
+				$billet->setAttr("body", $ligne["body"]);
+				$billet->setAttr("cat_id", $ligne["cat_id"]);
+				$billet->setAttr("date", $ligne["date"]);
+				$billet->setAttr("auteur", $ligne["auteur"]);
+				array_push($tab, $billet);
+			}
+		}
+
+		return $tab;
 	}
 
 

@@ -123,7 +123,7 @@ class Affichage{
 	static function afficheListeBillets($liste){
 		$code = "";
 		//var_dump($liste);
-		if(sizeof($liste)==0){@@
+		if(sizeof($liste)==0){
 			$code = "<div class=\"Article\">\n";
 			$code = $code . "Aucun billet";
 			$code = $code . "</div>";
@@ -182,11 +182,12 @@ class Affichage{
 		if(sizeof($liste)==0)
 			$code = "Aucune catégorie";
 		else{
-			$code = '<span class="menudroitetitre">Liste des catégories</span><br>';
+			$code = 'Liste des catégories<br>';
 			foreach ($liste as $categorie) {
 				$titre = $categorie->getAttr("titre");
 				$span = $categorie->getAttr("description");
-				$code = $code . $titre . "<br>";
+				$id = Categorie::findByTitre($titre)->getAttr("id");
+				$code = $code . $titre . ' <a href="blog.php?a=cat&id='. $id .'">+</a><br>';
 				//TODO Ajouter span et petit icone, en faire une liste
 				//$code = $code . "<span TITLE =\"" . $span . ">" . $titre . "</span> <br>\n\t";
 			}
@@ -306,6 +307,7 @@ class Affichage{
 	static function listeCategorie(){
 		//Si l'url de la page a edit et id
 		//on réupère l'id pour récupérer la categorie du billet et la garder en mémoire
+		$nom = '';
 		if(isset($_GET['id'])){
 			$id = $_GET['id'];
 			$art = Billet::findById($id);
