@@ -84,11 +84,12 @@ class Affichage{
 		//Un utilisateur qui n'a pas posté n'est pas censé être admin
 		//mais autant avoir 2 vérifications plutôt qu'une
 		$croix = '';
-		if(Utilisateur::estAdmin($_SESSION['login'])==true){
-			if($_SESSION['login']==$billet->getAttr("auteur")){
+		if(isset($_SESSION['login'])){
+		if($_SESSION['login']==$billet->getAttr("auteur")){
 				$croix = ' [<a href="admin.php?a=del&id='.$billet->getAttr("id"). '">X</a>]';
 			}
-		}	
+		}
+			
 
 		//TOTO si article n'existe pas, ne pas afficher		
 
@@ -214,7 +215,11 @@ class Affichage{
 
 					//echo $b;
 					$res = $b->insert();
-					if($res==1) $log = 'Billet bien publié';
+					if($res==1){
+						$log = 'Billet bien publié. Redirection en cours';
+						$header = 'Refresh: 2; url=Blog.php?a=detail&id='.$b->getAttr("id");
+						header($header);
+					} 
 					else $log ='Une erreur';
 
 					
@@ -229,7 +234,7 @@ class Affichage{
 
 
 
-		$code = "<div class=\"Article\">\n" ;
+		$code = "<div class=\"AjoutArticle\">\n" ;
 		if(Utilisateur::estAdmin($_SESSION['login'])==false){
 			//tu peux pas test tarba
 			// <label for=\"ajouterTitre\">Titre de l'article</label><br />
@@ -271,7 +276,7 @@ class Affichage{
 		
 		}
 
-		if (isset($log)){ $code .= $log; }
+		if (isset($log)){ $code .= '<div class="message">'.$log.'</div>'; }
 		
 		$code .= "</div>";
 
