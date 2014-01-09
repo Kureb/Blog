@@ -104,13 +104,16 @@ public function __toString(){
 		$d = $dbres->fetch(PDO::FETCH_OBJ);
 		//echo "var_dump(d)";
 		//var_dump($d);
-		$bill = new Billet();
-		$bill->setAttr("id", $d->id);
-		$bill->setAttr("titre", $d->titre);
-		$bill->setAttr("body", $d->body);
-		$bill->setAttr("cat_id", $d->cat_id);
-		$bill->setAttr("date", $d->date);
-		$bill->setAttr("auteur", $d->auteur);
+		if($dbres!=false)
+		{		
+			$bill = new Billet();
+			$bill->setAttr("id", $d->id);
+			$bill->setAttr("titre", $d->titre);
+			$bill->setAttr("body", $d->body);
+			$bill->setAttr("cat_id", $d->cat_id);
+			$bill->setAttr("date", $d->date);
+			$bill->setAttr("auteur", $d->auteur);
+		}
 
 
 		return $bill;
@@ -152,7 +155,6 @@ public function __toString(){
 		$billet = false;
 		if($dbres!=false){
 			$d = $dbres->fetch(PDO::FETCH_OBJ);
-			$billet = new Billet();
 			$billet = new Billet();
 			$billet->setAttr("id", $d->id);
 			$billet->setAttr("titre", $d->titre);

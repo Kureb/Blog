@@ -90,7 +90,7 @@ class Affichage{
 			}
 		}
 		//TOTO si article n'existe pas, ne pas afficher		
-		if ($billet)==null echo 'pas';
+		if ($billet==false) echo 'pas';
 
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
