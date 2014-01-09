@@ -24,8 +24,15 @@ class AdminController extends Controller {
 		$billet = Billet::findById($param);
 		//echo $billet;
 		$n = $billet->delete();
-		if($n==1) $mes = "Suppression en cours";
+		header("Refresh: 0; url=Blog.php");
+		/*
+		if($n==1){
+			$mes = "Suppression en cours";
+			header("Refresh: 1; url=Blog.php");
+		} 
+
 		else $mes = "Erreur";
+		*/
 	}
 
 	/* Envoi des données pour ajouter un message */

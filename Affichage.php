@@ -99,8 +99,8 @@ class Affichage{
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
 		$code = "<div class=\"Article\">\n" .
-				"<h1>" . $billet->getAttr("titre") . "</h1>\n" .
-				//"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
+				"<h2>" . $billet->getAttr("titre") . "</h2>\n" .
+				//"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
 				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur"). $croix . "</p>\n" .
 				"</div>";
@@ -128,7 +128,7 @@ class Affichage{
 
 				
 				$code = $code . "<div class=\"Article\" >\n" .
-						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
+						"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
 						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
@@ -147,7 +147,7 @@ class Affichage{
 				$code = $code . '<div id="lol">';
 
 				$code = $code . "<div class=\"Article\">\n" .
-						"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" .
+						"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
 						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
 						"</div>\n";
@@ -245,7 +245,7 @@ class Affichage{
 		}else{
 			$categorie = Categorie::findAll();
 			//wesh fais comme chez toi
-			$code .= "<h1>Écrire un nouvel article</h1>";
+			$code .= "<h2>Écrire un nouvel article</h2>";
 			$code .= "
 
 			<form method=\"post\" action=\"admin.php?a=addM\">
