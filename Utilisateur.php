@@ -158,6 +158,27 @@ class Utilisateur{
 		return $user;
 
 	}
+
+
+	public static function findByMail($mail) {
+		$c = Base::getConnection();
+		$query = 'select * from utilisateurs where mail= :mail';
+		$dbres = $c->prepare($query);
+		$dbres->bindParam(':mail', $mail);
+		$dbres->execute();
+		$user = false;
+		$d = $dbres->fetch(PDO::FETCH_OBJ);
+		if($d != false){
+			$user = new Utilisateur();
+			$user->setAttr("login", $d->login);
+			$user->setAttr("userid", $d->userid);
+			$user->setAttr("password", $d->password);
+			$user->setAttr("mail", $d->mail);
+			$user->setAttr("chmod", $d->chmod);
+		}
+		return $user;
+
+	}
 /*
 	public static function findByLogin2($login) {
 		$c = Base::getConnection();

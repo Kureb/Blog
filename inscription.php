@@ -27,9 +27,12 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 		}else{
 			$pseudo = htmlentities($_POST['pseudo']);
 			$user = Utilisateur::findByLogin($pseudo);
+			$mail = Utilisateur::findByMail($_POST['mail']);
 
 			if($user!=false){
 				$log = 'Utilisateur déjà enregistré dans la base.<br>';
+			}elseif($mail!=false){
+				$log = 'Adresse mail déjà enregistrée dans la base de donnée.';
 			}
 			else{
 				$user = new Utilisateur();
