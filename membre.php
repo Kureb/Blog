@@ -12,6 +12,9 @@ include_once "Utilisateur.php";
 <html>
 	<head>
 	<title>Mon espace membre</title>
+	<meta charset="utf-8" />
+	<style type="text/css"></style>
+	<link rel="stylesheet" href="Membre.css" />
 	</head>
 	<body>
 		Bienvenue <?php echo $_SESSION['login']; ?><br>

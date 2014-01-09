@@ -1,9 +1,8 @@
 body {
-/*	background-color: rgb(220, 220, 220);
-*/    background-attachment: fixed;
+	background-attachment: fixed;
     font-family:"helvetica";
     font-size: 0.9em;
-    background-image:url(Test1_Triangle.jpg);
+    background-image:url(Test3_Membre.jpg);
 }
 
 #ban {
