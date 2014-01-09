@@ -21,6 +21,17 @@ class BlogController extends Controller{
 	}
 
 
+	public function listAuteur($param){
+		$a = new Affichage();
+		$nom = Utilisateur::findById($param)->getAttr("login");
+		$b = Billet::findByAuteur($nom);
+		$cat= Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$c = $a->afficheListeBillets($b);
+		$a->affichageGeneral($c, $lol);
+	}
+
+
 
 
 	public function listActionParPage($param){
@@ -112,6 +123,12 @@ class BlogController extends Controller{
 					else /*echo "id : " . $tab['id'];*/
 						$this->listAction($tab['id']);
 						//TODO FAIRE affichage des catégories
+					break;
+
+				case 'billets':
+					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
+					else /*echo "id : " . $tab['id'];*/
+						$this->listAuteur($tab['id']);
 					break;
 
 

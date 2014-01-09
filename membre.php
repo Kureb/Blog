@@ -24,7 +24,7 @@ include_once "Utilisateur.php";
 			$current_user = Utilisateur::findByLogin($_SESSION['login']);
 			$admin = $current_user->getAttr("chmod");
 			if($admin==1){
-				echo 'Voir ses articles.<br>';
+				echo '<a href="blog.php?a=billets&id='.$current_user->getAttr("userid").'"">Voir ses articles</a>.<br>';
 				echo '<a href="admin.php?a=addM">&eacutecrire un nouvel article</a>';
 			}
 		?>

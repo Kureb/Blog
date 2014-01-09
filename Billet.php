@@ -236,21 +236,24 @@ public function __toString(){
 		$dbres = $c->prepare($query);
 		$dbres->bindParam(':auteur', $auteur);
 		$dbres->execute();
-		$d = $dbres->fetch(PDO::FETCH_OBJ);
+		$d = $dbres->fetchAll();
 		$billet = false;
+		$tab = Array();
 		if($d!=false){
-			$billet = new Billet();
-			$billet->setAttr("id", $d->id);
-			$billet->setAttr("titre", $d->titre);
-			$billet->setAttr("body", $d->body);
-			$billet->setAttr("cat_id", $d->cat_id);
-			$billet->setAttr("auteur", $d->auteur);
-			$billet->setAttr("date", $d->date);
-		}else{
-			echo "Aucun billet pour cet auteur.";
+			foreach ($d as $ligne) {
+				$billet = new Billet();
+				$billet->setAttr("id", $ligne["id"]);
+				$billet->setAttr("titre", $ligne["titre"]);
+				$billet->setAttr("body", $ligne["body"]);
+				$billet->setAttr("cat_id", $ligne["cat_id"]);
+				$billet->setAttr("date", $ligne["date"]);
+				$billet->setAttr("auteur", $ligne["auteur"]);
+				array_push($tab, $billet);
+			}
+				
 		}
 
-		return billet;
+		return $tab;
 	}
 
 }
