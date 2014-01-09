@@ -81,13 +81,23 @@ class Affichage{
 
 	/* Fonction qui retourne le code HTML pour un billet */
 	static function afficherBillet($billet){
+		//Un utilisateur qui n'a pas posté n'est pas censé être admin
+		//mais autant avoir 2 vérifications plutôt qu'une
+		$croix = '';
+		if(Utilisateur::estAdmin($_SESSION['login'])==true){
+			if($_SESSION['login']==$billet->getAttr("auteur")){
+				$croix = ' [X]';
+			}
+		}		
+
+
 		$date = $billet->getAttr("date");
 		$date = substr($date, 0, 11) . "à " . substr($date, 11);
 		$code = "<div class=\"Article\">\n" .
 				"<h1>" . $billet->getAttr("titre") . "</h1>\n" .
 				//"<h1>" . $billet->getAttr("titre") . "</h1><br>\n" . 
 				"<p>" . $billet->getAttr("body") . "</p>\n" . 
-				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur")."</p>\n" .
+				"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur"). $croix . "</p>\n" .
 				"</div>";
 				
 		return $code;
