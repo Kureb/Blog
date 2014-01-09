@@ -60,7 +60,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 		<title>Inscription</title>
 		<meta charset="utf-8" />
 		<style type="text/css"></style>
-		<link rel="stylesheet" href="test.css" />
+		<link rel="stylesheet" href="Blogalex2.css" />
 	</head>
 
 	<body>
