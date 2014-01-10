@@ -17,6 +17,10 @@ include_once "Utilisateur.php";
 	<link rel="stylesheet" href="Membre.css" />
 	</head>
 	<body>
+		<div id="banniere">
+			<a href="blog.php"> <img id="ban" src="Banniere.jpg" border="0"> </a> 
+		</div> 
+	<div id="panel">
 		Bienvenue <?php echo $_SESSION['login']; ?><br>
 		<a href="Blog.php">Accueil</a>
 		<a href="deconnexion.php">D&eacute;connexion</a><br>
@@ -25,9 +29,10 @@ include_once "Utilisateur.php";
 			$admin = $current_user->getAttr("chmod");
 			if($admin==1){
 				echo '<a href="blog.php?a=billets&id='.$current_user->getAttr("userid").'"">Voir ses articles</a>.<br>';
-				echo '<a href="admin.php?a=addM">&eacutecrire un nouvel article</a>';
+				echo '<a href="admin.php?a=addM">&eacutecrire un nouvel article</a><br>';
 			}
+			echo '<a href="admin.php?a=supp">Supprimer son compte</a>';
 		?>
-
+		</div>
 	</body>
 

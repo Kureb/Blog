@@ -24,9 +24,30 @@ class AdminController extends Controller {
 		$billet = Billet::findById($param);
 
 		//echo $billet;
-		$n = $billet->delete();
+		if($billet->getAttr('auteur')==$_SESSION['login']){
+			$n = $billet->delete();
+			header("Location: blog.php");
+		}else{
+			echo "t'as pas le doit b&acirc;tard";
+		}
 		//header("Refresh: 0; url=Blog.php");
-		header("Location: Blog.php");
+		
+		
+	}
+
+
+
+
+	public function supprimerCompte(){
+		if(isset($_SESSION['login'])){
+		$current = Utilisateur::findByLogin($_SESSION['login']);
+		session_unset();
+		session_destroy();
+		$n = $current->delete();
+		header("Location: blog.php");
+		}
+		else echo "Vous n'avez rien à faire ici";
+		
 		
 	}
 
@@ -95,8 +116,15 @@ class AdminController extends Controller {
 				}
 					break;
 
+				case 'supp':
+					$this->supprimerCompte();
+						
+					break;
+
+
+
 				default:
-					//echo "action impossible <br>";
+					echo "Cette page n'existe pas <br>";
 					break;
 			}
 		}
