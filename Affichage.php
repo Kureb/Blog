@@ -93,8 +93,9 @@ class Affichage{
 		$edit = '';
 		if(isset($_SESSION['login'])){
 		if($_SESSION['login']==$billet->getAttr("auteur")){
-				$croix = '[<a href="admin.php?a=del&id='.$billet->getAttr("id"). '">X</a>]';
-				$edit = '[<a href="admin.php?a=edit&id='.$billet->getAttr("id"). '">E</a>]';			}
+				$croix = '<a href="admin.php?a=del&id='.$billet->getAttr("id"). '"><img src="suppr.png" id="edit" title="Supprimer le billet" alt="suppression" border="0"></img></a>';
+				$edit = '  <a href="admin.php?a=edit&id='.$billet->getAttr("id"). '"><img src="edit.png" id="edit" title="Editer le billet" alt="edition" border="0"></img></a>';
+			}
 		}
 			
 

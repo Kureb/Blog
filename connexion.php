@@ -21,7 +21,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 		}else{
 			$mdp = $user->getAttr("password");
 			if($mdp != sha1($_POST['pass'])){
-				$log = 'Mot de passe incorrecte.<br>';
+				$log = 'Mot de passe incorrect.<br>';
 			}else{
 				$log = 'Connexion en cours.<br>';
 				$_SESSION['login'] = $_POST['pseudo'];
