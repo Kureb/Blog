@@ -30,6 +30,7 @@ include_once "Utilisateur.php";
 			if($admin==1){
 				echo '<a href="blog.php?a=billets&id='.$current_user->getAttr("userid").'"">Voir ses articles</a>.<br>';
 				echo '<a href="admin.php?a=addM">&eacutecrire un nouvel article</a><br>';
+				echo '<a href="admin.php?a=addC">Ajouter une catégorie</a><br>';
 			}
 			echo '<a href="admin.php?a=supp">Supprimer son compte</a>';
 		?>

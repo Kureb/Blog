@@ -63,7 +63,7 @@ class AdminController extends Controller {
 
 	/* Affichage d'un formulaire pour ajouter une catégorie */
 	public function addCategorie($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
+		//if(isset($_SESSION)['login'])
 	}
 
 	/* Envoi des données pour ajouter une catégorie */
@@ -124,7 +124,7 @@ class AdminController extends Controller {
 
 
 				default:
-					echo "Cette page n'existe pas <br>";
+					//echo "Cette page n'existe pas <br>";
 					break;
 			}
 		}

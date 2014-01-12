@@ -106,14 +106,16 @@ class Affichage{
 			$code .= '</div>';
 		} 
 		else{
+			$categ = $billet->getAttr("cat_id");
+			$n_cat = Categorie::findById($categ);
 			$contenu = str_replace("\n","<br/>", $billet->getAttr("body")); 
 			$date = $billet->getAttr("date");
 			$date = substr($date, 0, 11) . "à " . substr($date, 11);
 			$code = "<div class=\"Article\">\n" .
 					"<h2>" . $billet->getAttr("titre") . "</h2>\n" .
 					//"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" . 
-					"<p>" . $contenu . "</p>\n" . 
-					"<p id = \"date\"><i>" . "publié le " . $date. "</i> par ". $billet->getAttr("auteur").' '.$croix.' '.$edit ."</p>\n" .
+					"<p>" . $contenu . "</p>\n" .
+					"<p id=\"date\"><i>publié le " . $date. "</i> par ". $billet->getAttr("auteur").' '.$croix.' '.$edit ."<br>dans la catégorie " .$n_cat->getAttr("titre")."</p>\n" .
 					"</div>";
 		}		
 		return $code;
@@ -198,13 +200,53 @@ class Affichage{
 
 
 
+	/* Affiche liste des 10 derniers articles
+	 * (mais juste le titre)
+	 */
+	static function afficheTitre10Derniers($liste){
+		$code = "";
+		//var_dump($liste);
+		if(sizeof($liste)==0){
+			$code = "<div class=\"TitreArticle\">\n";
+			$code = $code . "Aucun billet";
+			$code = $code . "</div>";
+			//TODO ajouter pagination
+			return $code;
+		}else if(sizeof($liste)==1){
+			foreach ($liste as $billet) {
+				$code = $code . "<div class=\"TitreArticle\" >\n" .
+						$billet->getAttr("titre") . "</h2><br>\n" .
+						"</div>\n";
+			}
+		}else{
+			foreach($liste as $billet){
+				$id = $billet->getAttr("id");
+				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
+				$date = $billet->getAttr("date");
+				$date = substr($date, 0, 11) . "à " . substr($date, 11);
+				
+				$code = $code . "<div class=\"TitreArticle\">\n" .
+						$billet->getAttr("titre") . 
+						"</div>\n";
+				
+			}
+			
+		}
+
+		
+		
+		return $code;
+	}
+
+
+
 	/* FAUTE DE FAIRE UNE AUTRE CLASSE CAR TROP RÉPÉTITIVE
 	 * SERONT CI-DESSOUS LES METHODES UTILISÉES POUR L'AFFICHAGE
 	 * DE LA PARTIE ADMINISTRATEUR */
 
 
 	/* Permet d'ajouter un article */
-	static function ajouterBillet(){
+	static function ajouterArticle(){
 		/* Je en sais pas si ça marche mais on va essayer */
 		if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer'){
 			if (isset($_POST['ajouterTitre']) && !empty($_POST['ajouterTitre'])){
