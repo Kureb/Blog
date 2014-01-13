@@ -179,6 +179,13 @@ body {
 	height: 30px;
 }
 
+#ajouterCategorie {
+	max-width: 550px;
+	width: 550px;
+	max-height: 200px;
+	height: 100px;
+}
+
 textarea {
 	text-align: left;
 }

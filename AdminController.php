@@ -67,14 +67,16 @@ class AdminController extends Controller {
 
 	/* Affichage d'un formulaire pour ajouter une catégorie */
 	public function addCategorie($param){
-		//if(isset($_SESSION)['login'])
+		$a = new Affichage();
+		$cat = Categorie::findAll();
+		$lol = $a->afficheListeCategorie($cat);
+		$liste = Billet::findUnCertainNombre(0,10);
+		$c = $a->ajouterCategorie();
+		$t = $a->afficheTitre10Derniers($liste);
+		$t = $a->affichageGeneral($c, $lol, $t);
 	}
 
-	/* Envoi des données pour ajouter une catégorie */
-	public function saveCategorie($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
-	}
-
+	
 	
 
 

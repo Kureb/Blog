@@ -352,9 +352,18 @@ class Affichage{
 		if(sizeof($liste)==0)
 			$code = "Aucune catégorie";
 		else{
+			/* Si on n'est pas en train d'ajouter une catégorie (càd on ajoute billet ou on l'édite) */
+			if(!$_GET['a']=='addC'){
 			$code = '<p>
        					<label for="categ">Dans quelle catégorie placez-vous le billet ?</label><br />
        					<select name="categ" id="categ">';
+       		/* Mais si on est en train d'ajouter une catégorie on change le label */
+       		}else{
+       		$code = '<p>
+       					<label for="categ">Voici les catégorie déjà existantes : </label><br />
+       					<select name="categ" id="categ">';
+       		}
+
        		foreach ($liste as $categorie) {
        			if($categorie->getAttr("titre")==$nom)
        				$code .= "<option value=". $categorie->getAttr("titre") ." selected>" .$categorie->getAttr("titre"). "</option>";
@@ -366,6 +375,9 @@ class Affichage{
 		}
 		return $code;
 	}
+
+
+
 
 
 
@@ -456,6 +468,100 @@ class Affichage{
 		
 
 		return $code;
+	}
+
+
+
+
+	static  function ajouterCategorie(){
+		if (isset($_POST['envoyer']) && $_POST['envoyer'] == 'Envoyer'){
+			if (isset($_POST['ajouterTitre']) && !empty($_POST['ajouterTitre'])){
+				if (isset($_POST['ajouterCategorie']) && !empty($_POST['ajouterCategorie'])){
+					$titre = $_POST['ajouterTitre'];
+					$body = $_POST['ajouterCategorie'];
+					
+
+					$c = new Categorie();
+					$c->setAttr("titre", $titre);
+					$c->setAttr("description", $body);
+
+					$res = $c->insert();
+
+
+					//echo $b;
+					if($res==1){
+						$log = 'Catégorie bien ajoutée. Redirection en cours vers l\'accueil.';
+						$header = 'Refresh: 2; url=blog.php';
+						header($header);
+					} 
+					else $log ='Une erreur est survenue. Veuillez réessayer.';
+
+					
+				}else{
+					$log = "Il manque la description.";
+				}				
+			}else{
+				$log = "Il manque un titre.";
+			}
+		}
+
+
+
+
+		$code = "<div class=\"AjoutArticle\">\n" ;
+				if(!isset($_SESSION['login'])){
+					$code .= "Tu n'es pas connecté, tu n'as donc pas accès à cette partie";
+					$code .= 'Peut-être veux-tu te connecter, ou bien t\'inscrire.';
+				}else{
+
+
+				if(Utilisateur::estAdmin($_SESSION['login'])==false){
+					//tu peux pas test tarba
+					// <label for=\"ajouterTitre\">Titre de l'article</label><br />
+					//<input id=\"ajouterTitre\" type=\"text\" name=\"titre\" autofocus>
+		       			
+		       		$code .= $_SESSION['login'] . ", vous n'avez pas les droits nécessaires pour écrire un nouvel article";	
+				}else{
+					$categorie = Categorie::findAll();
+					//wesh fais comme chez toi
+					$code .= "<h2>Ajouter une catégorie</h2>";
+					$code .= "
+
+					<form method=\"post\" action=\"admin.php?a=addC\">
+		   			
+		   			<p> <label for=\"ajouterTitre\">Titre de la catégorie</label><br>
+		       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\" maxlength=\"5\">";
+		       			if (isset($_POST['ajouterTitre'])) $code .= $_POST['ajouterTitre'];
+		       			$code .= "</textarea>
+		       		</p>
+
+
+		   			<p>
+		       			<label for=\"ajouterCategorie\">Description de la catégorie</label><br />
+		       			<textarea name=\"ajouterCategorie\" id=\"ajouterCategorie\">";
+		       			if (isset($_POST['ajouterCategorie'])) $code .= $_POST['ajouterCategorie'];
+		       			$code .= "</textarea>
+		   			";
+
+		   			$code .= '<input type="submit" name="envoyer" value="Envoyer" />
+		   			</p>';
+		   			
+		   			$code .=  self::listeCategorie();
+
+		   			$code .= '</form>';
+		   			//TODO créer ajoutmessage.php pour insérer dans la table
+
+
+				
+				}
+				}
+				if (isset($log)){ $code .= '<div class="message">'.$log.'</div>'; }
+				
+				$code .= "</div>";
+
+				
+
+				return $code;
 	}
 
 
