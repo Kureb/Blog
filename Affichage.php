@@ -161,10 +161,11 @@ class Affichage{
 				$code = $code . "<div class=\"Article\">\n" .
 						"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
-						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
+						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n"
+						 .
 						"</div>\n";
 				
-						$code = $code . "</div>\n";
+						
 			}
 			
 		}
@@ -187,7 +188,10 @@ class Affichage{
 				$titre = $categorie->getAttr("titre");
 				$span = $categorie->getAttr("description");
 				$id = Categorie::findByTitre($titre)->getAttr("id");
-				$code = $code . $titre . ' <a href="blog.php?a=cat&id='. $id .'">+</a><br>';
+				$lien = '<a href="blog.php?a=cat&id='. $id .'">+</a> ';
+				$code .= $lien . $titre . "<br>\n";
+				
+
 			}
 		}
 		return $code;
@@ -209,9 +213,10 @@ class Affichage{
 			}
 		}else{
 			foreach($liste as $billet){
-				$id = $billet->getAttr("id");
-				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
-				$code .= $billet->getAttr("titre") . "<br>\n";
+				$lien = '<a href="blog.php?a=detail&id='. $billet->getAttr("id") .'">+</a> ';
+				$code .= $lien . $billet->getAttr("titre") . "<br>\n";
+				//$code = $code . $titre . ' <a href="blog.php?a=cat&id='. $billet->getAttr("titre") .'">+</a><br>';
+			
 			}
 			
 		}

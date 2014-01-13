@@ -15,8 +15,10 @@ class AdminController extends Controller {
 		$a = new Affichage();
 		$cat = Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
-		$b = $a->ajouterBillet();
-		$a->affichageGeneral($b, $lol);
+		$b = $a->ajouterArticle();
+		$liste = Billet::findUnCertainNombre(0,10);
+		$t = $a->afficheTitre10Derniers($liste);
+		$a->affichageGeneral($b, $lol, $t);
 	}
 
 
@@ -58,7 +60,9 @@ class AdminController extends Controller {
 		$cat = Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
 		$b  = $a->editerBillet($billet);
-		$a->affichageGeneral($b, $lol);
+		$liste = Billet::findUnCertainNombre(0,10);
+		$t = $a->afficheTitre10Derniers($liste);
+		$a->affichageGeneral($b, $lol, $t);
 	}
 
 	/* Affichage d'un formulaire pour ajouter une catégorie */

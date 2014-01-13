@@ -13,6 +13,13 @@
 		</div> 
 		
 
+		<div id="droidroite">
+			<div id="lastarticles">
+			<p>Derniers Articles</p>
+			mesderniersarticles
+			</div>
+		</div>
+
 		
 		<div id="gauche">
 			<img id="sharing" src="Share.png">
@@ -37,9 +44,7 @@
 			mesarticles
 		</div>
 
-		<div id="lastarticles">
-			<p>mesderniersarticles<p/>
-		</div>
+		
 
 		
 		
