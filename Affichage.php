@@ -66,10 +66,10 @@ class Affichage{
 		$suiv = ">>";
 		$nb_billets = Billet::getNbBillet();
 		if($num>1)
-			$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '"><<</a>' ,$pagination);
+			$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '" title="Page précédente"><<</a>' ,$pagination);
 
 		if($nb_billets > $num*5)
-			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '">>></a>' ,$pagination);
+			$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '" title="Page suivante">>></a>' ,$pagination);
 		}
 
 		//Lien pour revenir en arrière si on est sur une page sans article
@@ -136,7 +136,7 @@ class Affichage{
 		}else if(sizeof($liste)==1){
 			foreach ($liste as $billet) {
 				$id = $billet->getAttr("id");
-				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
+				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '" title="afficher la suite">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 
@@ -154,7 +154,7 @@ class Affichage{
 		else{
 			foreach($liste as $billet){
 				$id = $billet->getAttr("id");
-				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
+				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '" title="afficher la suite">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 				
@@ -164,15 +164,10 @@ class Affichage{
 						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n"
 						 .
 						"</div>\n";
-				
-						
 			}
 			
 		}
-
-		
-		
-		return $code;
+	return $code;
 	}
 
 
@@ -188,7 +183,7 @@ class Affichage{
 				$titre = $categorie->getAttr("titre");
 				$span = $categorie->getAttr("description");
 				$id = Categorie::findByTitre($titre)->getAttr("id");
-				$lien = '<a href="blog.php?a=cat&id='. $id .'">+</a> ';
+				$lien = '<a href="blog.php?a=cat&id='. $id .'" title="'. $span .'">+</a> ';
 				$code .= $lien . $titre . "<br>\n";
 				
 
@@ -213,7 +208,9 @@ class Affichage{
 			}
 		}else{
 			foreach($liste as $billet){
-				$lien = '<a href="blog.php?a=detail&id='. $billet->getAttr("id") .'">+</a> ';
+				$date = $billet->getAttr("date");
+				$auteur = $billet->getAttr("auteur");
+				$lien = '<a href="blog.php?a=detail&id='. $billet->getAttr("id") .'" title="publié le '. $date .' par ' . $auteur .'">+</a> ';
 				$code .= $lien . $billet->getAttr("titre") . "<br>\n";
 				//$code = $code . $titre . ' <a href="blog.php?a=cat&id='. $billet->getAttr("titre") .'">+</a><br>';
 			
