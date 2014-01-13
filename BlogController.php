@@ -54,7 +54,7 @@ class BlogController extends Controller{
 	}
 
 
-	/*
+	//Affiche un seul article (trouvé par son Id, passé en param)
 	public function detailAction($param){
 		$a = new Affichage();
 		$b = Billet::findById($param);
@@ -65,7 +65,7 @@ class BlogController extends Controller{
 		$t = $a->afficheTitre10Derniers($liste);
 		$a->affichageGeneral($c, $lol, $t);
 	}
-	*/
+	
 
 
 	

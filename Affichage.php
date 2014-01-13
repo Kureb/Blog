@@ -58,6 +58,7 @@ class Affichage{
 				$info .= '';
 			}
 		}else{
+			$info .= '<img id="avatar" src="pasco.jpg">';
 			$info .= '<a href="connexion.php">Se connecter</a>';
 		}
 
