@@ -25,7 +25,7 @@ include_once "Utilisateur.php";
 		</div> 
 	<div id="panel">
 		Bienvenue <?php echo $_SESSION['login']; ?><br>
-		<a href="Blog.php">Accueil</a>
+		<a href="blog.php">Accueil</a>
 		<a href="deconnexion.php">D&eacute;connexion</a><br>
 		<?php 
 			$current_user = Utilisateur::findByLogin($_SESSION['login']);

@@ -97,10 +97,10 @@ class Affichage{
 			$nb_billets = Billet::getNbBillet();
 			//On affiche seulement le lien vers la page précédente si on est au minimum à la page 2
 			if($num>1)
-				$pagination = str_replace($prec, '<a href="Blog.php?page=' . ($num-1) . '" title="Page précédente"><<</a>' ,$pagination);
+				$pagination = str_replace($prec, '<a href="blog.php?page=' . ($num-1) . '" title="Page précédente"><<</a>' ,$pagination);
 			//On affiche seulement le lien vers la page suivante si il reste des articles après la page courante (5 par page)
 			if($nb_billets > $num*5)
-				$pagination = str_replace($suiv, '<a href="Blog.php?page=' . ($num+1) . '" title="Page suivante">>></a>' ,$pagination);
+				$pagination = str_replace($suiv, '<a href="blog.php?page=' . ($num+1) . '" title="Page suivante">>></a>' ,$pagination);
 		}
 
 		//Lien pour revenir en arrière si on est sur une page sans article
@@ -180,7 +180,7 @@ class Affichage{
 		}else if(sizeof($liste)==1){
 			foreach ($liste as $billet) {
 				$id = $billet->getAttr("id");
-				$link = '<a href="Blog.php?a=detail&amp;id=' . $id . '" title="afficher la suite">(suite)</a>';
+				$link = '<a href="blog.php?a=detail&amp;id=' . $id . '" title="afficher la suite">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 
@@ -196,7 +196,7 @@ class Affichage{
 		}else{
 			foreach($liste as $billet){
 				$id = $billet->getAttr("id");
-				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '" title="afficher la suite">(suite)</a>';
+				$link = '<a id_lien=' .$id . ' href="blog.php?a=detail&amp;id=' . $id . '" title="afficher la suite">(suite)</a>';
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 				
@@ -291,7 +291,7 @@ class Affichage{
 					//Si pas d'erreur on prévient l'utilisateur et on le redirige vers son article
 					if($res==1){
 						$log = 'Billet bien publié. Redirection en cours';
-						$header = 'Refresh: 2; url=Blog.php?a=detail&id='.$b->getAttr("id");
+						$header = 'Refresh: 2; url=blog.php?a=detail&id='.$b->getAttr("id");
 						header($header);
 					}
 					//Sinon on lui dit qu'il y a eu une erreur
@@ -439,7 +439,7 @@ class Affichage{
 					//Si tout va bien, ou notifie l'utilisateur et on le redirige vers l'article édité
 					if($res==1){
 						$log = 'Billet bien édité. Redirection en cours';
-						$header = 'Refresh: 2; url=Blog.php?a=detail&id='.$billet->getAttr("id");
+						$header = 'Refresh: 2; url=blog.php?a=detail&id='.$billet->getAttr("id");
 						header($header);
 					} 
 					//Sinon on le prévient qu'il y a eu une erreur
