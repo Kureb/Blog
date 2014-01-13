@@ -73,13 +73,13 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 		<form action="inscription.php" method="post">
 	 	<div class="center">
 	 		<span class="label">Pseudo</span>
-	 		<input class="champ" type="text" name="pseudo" value="<?php if (isset($_POST['pseudo'])) echo htmlentities(trim($_POST['pseudo'])); ?>"/><br>
+	 		<input class="champ" type="text" name="pseudo" maxlength="20" value="<?php if (isset($_POST['pseudo'])) echo htmlentities(trim($_POST['pseudo'])); ?>"/><br>
 			<span class="label">Mot de passe</span>
-			<input class="champ" type="password" name="pass" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass']))?>"/><br>
+			<input class="champ" type="password" name="pass" maxlength="20" value="<?php if (isset($_POST['pass'])) echo htmlentities(trim($_POST['pass']))?>"/><br>
 			<span class="label">Mot de passe (bis)</span>
-			<input class="champ" type="password" name="pass_c" value="<?php if (isset($_POST['pass_c'])) echo htmlentities(trim($_POST['pass_c']))?>"/><br>
+			<input class="champ" type="password" name="pass_c" maxlength="20" value="<?php if (isset($_POST['pass_c'])) echo htmlentities(trim($_POST['pass_c']))?>"/><br>
 			<span class="label">E-mail</span>
-			<input class="champ" type="text" name="mail" value="<?php if (isset($_POST['mail'])) echo htmlentities(trim($_POST['mail']))?>"/><br>			
+			<input class="champ" type="text" name="mail" maxlength="50" value="<?php if (isset($_POST['mail'])) echo htmlentities(trim($_POST['mail']))?>"/><br>			
 			<input type="submit" name="inscription" value="Inscription" />
 			<input type="submit" name="accueil" value="Accueil" />
 		</div>

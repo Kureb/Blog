@@ -297,7 +297,7 @@ class Affichage{
 			<form method=\"post\" action=\"admin.php?a=addM\">
    			
    			<p> <label for=\"ajouterTitre\">Titre de l'article</label><br>
-       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\">";
+       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\" maxlength=\"64\">";
        			if (isset($_POST['ajouterTitre'])) $code .= $_POST['ajouterTitre'];
        			$code .= "</textarea>
        		</p>
@@ -437,7 +437,7 @@ class Affichage{
 			<form method=\"post\" action=\"\">
    			
    			<p> <label for=\"ajouterTitre\">Titre de l'article</label><br>
-       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\">";
+       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\" maxlength=\"64\">";
        			$code .= $billet->getAttr("titre");
        			$code .= "</textarea>
        		</p>
@@ -530,7 +530,7 @@ class Affichage{
 					<form method=\"post\" action=\"admin.php?a=addC\">
 		   			
 		   			<p> <label for=\"ajouterTitre\">Titre de la catégorie</label><br>
-		       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\" maxlength=\"5\">";
+		       			<textarea name=\"ajouterTitre\" id=\"ajouterTitre\" maxlength=\"64\">";
 		       			if (isset($_POST['ajouterTitre'])) $code .= $_POST['ajouterTitre'];
 		       			$code .= "</textarea>
 		       		</p>
