@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 /*
  * Gestion de la partie admin

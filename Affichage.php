@@ -310,7 +310,7 @@ class Affichage{
 		//Si aucun n'utilisateur n'est connecté on lui proposer d'aller se connecter
 		$code = "<div class=\"AjoutArticle\">\n" ;
 		if(!isset($_SESSION['login'])){
-			$code .= "Tu n'es pas connecté, tu n'as donc pas accès à cette partie";
+			$code .= "Tu n'es pas connecté, tu n'as donc pas accès à cette partie<br>";
 			$code .= 'Peut-être veux-tu te connecter, ou bien t\'inscrire.';
 		}else{
 			//S'il est connecté mais qu'il n'a pas les droit d'admin, on le luit dit
