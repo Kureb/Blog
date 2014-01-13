@@ -53,8 +53,8 @@ class Utilisateur{
 		}
 
 		$c = Base::getConnection();
-
-		$this->password = sha1($this->password);
+		$salt = $this->getAttr("login");
+		$this->password = sha1(sha1($this->password).$salt);
 		$query = $c->prepare("update utilisateurs set login= ?, 
 					password= ?, mail= ?, chmod= ?
 					where userid= ?");
@@ -88,7 +88,8 @@ class Utilisateur{
 
 	public function insert(){
 		$nb = 0;
-		$query = "INSERT INTO Utilisateurs VALUES(null, '".$this->login."','".sha1($this->password)."', '".$this->mail."', '".$this->chmod."')";
+		$salt = $this->login;
+		$query = "INSERT INTO Utilisateurs VALUES(null, '".$this->login."','".sha1(sha1($this->password).$salt)."', '".$this->mail."', '".$this->chmod."')";
 		$c = Base::getConnection();
 		$nb = $c->exec($query);
 		$this->setAttr("chmod", "0");

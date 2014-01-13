@@ -20,7 +20,8 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 			$log = "Cet utilisateur n'existe pas.<br>";
 		}else{
 			$mdp = $user->getAttr("password");
-			if($mdp != sha1($_POST['pass'])){
+			$salt = $user->getAttr("login");
+			if($mdp != sha1(sha1($_POST['pass']).$salt)){
 				$log = 'Mot de passe incorrect.<br>';
 			}else{
 				$log = 'Connexion en cours.<br>';
