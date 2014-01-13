@@ -14,9 +14,11 @@ class BlogController extends Controller{
 		$b = Billet::findByCategorie($param);
 		$cat = Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
+		$liste = Billet::findUnCertainNombre(0,10);
+		$t = $a->afficheTitre10Derniers($liste);
 		if (sizeof($b)==1) $c = $a->afficherBillet($b);
 		else $c = $a->afficheListeBillets($b);
-		$a->affichageGeneral($c, $lol);
+		$a->affichageGeneral($c, $lol, $t);
 		
 	}
 
@@ -28,7 +30,9 @@ class BlogController extends Controller{
 		$cat= Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
 		$c = $a->afficheListeBillets($b);
-		$a->affichageGeneral($c, $lol);
+		$liste = Billet::findUnCertainNombre(0,10);
+		$t = $a->afficheTitre10Derniers($liste);
+		$a->affichageGeneral($c, $lol, $t);
 	}
 
 
@@ -42,7 +46,9 @@ class BlogController extends Controller{
 		$cat = Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
 		$c = $a->afficheListeBillets($b);
-		$a->affichageGeneral($c, $lol);
+		$liste = Billet::findUnCertainNombre(0,10);
+		$t = $a->afficheTitre10Derniers($liste);
+		$a->affichageGeneral($c, $lol, $t);
 	}
 
 
@@ -52,7 +58,9 @@ class BlogController extends Controller{
 		$cat = Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
 		$c = $a->afficheListeBillets($b);
-		$a->affichageGeneral($c, $lol);
+		$liste = Billet::findUnCertainNombre(0,10);
+		$t = $a->afficheTitre10Derniers($liste);
+		$a->affichageGeneral($c, $lol, $t);
 	}
 
 
@@ -64,7 +72,9 @@ class BlogController extends Controller{
 		$c = $a->afficherBillet($b);
 		$cat = Categorie::findAll();
 		$lol = $a->afficheListeCategorie($cat);
-		$a->affichageGeneral($c, $lol);
+		$liste = Billet::findUnCertainNombre(0,10);
+		$t = $a->afficheTitre10Derniers($liste);
+		$a->affichageGeneral($c, $lol, $t);
 	}
 
 

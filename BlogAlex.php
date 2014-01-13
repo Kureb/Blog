@@ -14,17 +14,6 @@
 		
 
 		
-		<!-- 
-		<div class="topbarre">
-		<div class="container">
-			<div class="menu">Accueil</div>
-			<div class="menu">Connexion</div>
-			<div class="menu">Test LOL</div>
-			<div class="menu">LOL Test</div>
-		</div>
-		</div>
-		 -->
-		
 		<div id="gauche">
 			<img id="sharing" src="Share.png">
 			<div id="Auteur">
@@ -41,10 +30,18 @@
 			</div>
 		</div>
 
+
+
+
 		<div id="droite">
 			mesarticles
 		</div>
 
+		<div id="lastarticles">
+			<p>mesderniersarticles<p/>
+		</div>
+
+		
 		
 
 

@@ -9,9 +9,10 @@ class Affichage{
 
 
 
-	function affichageGeneral($articles, $categorie/*$contenu_central, $menu_droite, $menu_gauche*/){
+	function affichageGeneral($articles, $categorie, $derniersarticles/*$contenu_central, $menu_droite, $menu_gauche*/){
 		$file = 'BlogAlex.php';
 		$content = file_get_contents($file);
+		$content = str_replace("mesderniersarticles", "$derniersarticles", $content);
 		$content = str_replace("mesarticles", "$articles", $content);
 		$content = str_replace("mescategories", "$categorie", $content);
 		$content = str_replace("auteurlol", self::infoUser(), $content);
@@ -157,8 +158,6 @@ class Affichage{
 				$date = $billet->getAttr("date");
 				$date = substr($date, 0, 11) . "à " . substr($date, 11);
 				
-				$code = $code . '<div id="lol">';
-
 				$code = $code . "<div class=\"Article\">\n" .
 						"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
@@ -166,8 +165,6 @@ class Affichage{
 						"</div>\n";
 				
 						$code = $code . "</div>\n";
-				//$code = $code . self::afficherBillet($billet);
-				
 			}
 			
 		}
@@ -191,8 +188,6 @@ class Affichage{
 				$span = $categorie->getAttr("description");
 				$id = Categorie::findByTitre($titre)->getAttr("id");
 				$code = $code . $titre . ' <a href="blog.php?a=cat&id='. $id .'">+</a><br>';
-				//TODO Ajouter span et petit icone, en faire une liste
-				//$code = $code . "<span TITLE =\"" . $span . ">" . $titre . "</span> <br>\n\t";
 			}
 		}
 		return $code;
@@ -207,28 +202,16 @@ class Affichage{
 		$code = "";
 		//var_dump($liste);
 		if(sizeof($liste)==0){
-			$code = "<div class=\"TitreArticle\">\n";
-			$code = $code . "Aucun billet";
-			$code = $code . "</div>";
-			//TODO ajouter pagination
-			return $code;
+			$code = $code . "Aucun article";
 		}else if(sizeof($liste)==1){
 			foreach ($liste as $billet) {
-				$code = $code . "<div class=\"TitreArticle\" >\n" .
-						$billet->getAttr("titre") . "</h2><br>\n" .
-						"</div>\n";
+				$code = $billet->getAttr("titre") . "</h2><br>\n";
 			}
 		}else{
 			foreach($liste as $billet){
 				$id = $billet->getAttr("id");
 				$link = '<a id_lien=' .$id . ' href="Blog.php?a=detail&amp;id=' . $id . '">(suite)</a>';
-				$date = $billet->getAttr("date");
-				$date = substr($date, 0, 11) . "à " . substr($date, 11);
-				
-				$code = $code . "<div class=\"TitreArticle\">\n" .
-						$billet->getAttr("titre") . 
-						"</div>\n";
-				
+				$code .= $billet->getAttr("titre") . "<br>\n";
 			}
 			
 		}
@@ -243,8 +226,7 @@ class Affichage{
 	/* FAUTE DE FAIRE UNE AUTRE CLASSE CAR TROP RÉPÉTITIVE
 	 * SERONT CI-DESSOUS LES METHODES UTILISÉES POUR L'AFFICHAGE
 	 * DE LA PARTIE ADMINISTRATEUR */
-
-
+	
 	/* Permet d'ajouter un article */
 	static function ajouterArticle(){
 		/* Je en sais pas si ça marche mais on va essayer */
@@ -457,8 +439,7 @@ class Affichage{
    			$code .=  self::listeCategorie();
 
    			$code .= '</form>';
-   			//TODO créer ajoutmessage.php pour insérer dans la table
-
+   			
 
 		
 		}
