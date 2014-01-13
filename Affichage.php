@@ -24,6 +24,14 @@ class Affichage{
 	static function infoUser(){
 		$info = '';
 		if (!empty($_SESSION['login'])){
+			if($_SESSION['login']=='Vincent')
+				$info .= '<img id="avatar" src="test.jpg">';
+			elseif($_SESSION['login']=='Alexandre')
+				$info .= '<img id="avatar" src="alex.jpg">';
+			elseif($_SESSION['login']=='Professeur')
+				$info .= '<img id="avatar" src="professeur.jpg">';
+			else $info.= '<img id="avatar" src="utilisateur.jpg">';
+				
 			$info .= 'Bonjour <a href="membre.php" title="accéder à mon espace membre">'.htmlentities($_SESSION['login']).'</a><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
 			include_once 'Utilisateur.php';
@@ -78,6 +86,8 @@ class Affichage{
 			$pagination = '<a href="javascript:history.back();" title="Précédent">Précédent</a>';
 		} 
 
+		$pagination .= '<br><br><span id="copyright">BOULANGER Vincent <br> DAUSSY Alexandre<br>';
+		$pagination .= 'S3C 2013-2014</span>';
 		
 		return $pagination;
 		
