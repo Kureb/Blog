@@ -24,8 +24,7 @@
 		<div id="gauche">
 			<img id="sharing" src="Share.png">
 			<div id="Auteur">
-				<!-- <img id="avatar" src="test.jpg">
-				 --><p> auteurlol </p>
+				<p> auteur </p>
 			</div>
 
 			<div id="categorie">

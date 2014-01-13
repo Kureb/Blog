@@ -208,16 +208,7 @@ class Categorie {
     $nb = $c->exec($query);
     $this->setAttr("id", $c->LastInsertId());
     return $nb;
-   /*
-    *  A ECRIRE :
-    *  CONSTRUIT et exécute LA REQUETE
-    *  INSERT INTO Categorie (titre, description) VALUES ( 'titre', 'desription' )
-    *  PUIS PLACE LA VALEUR DE ID (AUTO-INCREMENT)
-    *  DANS L'OBJET COURANT (UTILISE pour cela LA méthode pdo LastInsertId)
-    *
-    *
-    */
-   //throw new Exception("méthode insert() non implantée");
+   
   }
 		
 
@@ -232,15 +223,7 @@ class Categorie {
    *   @return Categorie renvoie un objet de type Categorie
    */
     public static function findById($id) {
-      /* Code de base
-      $c = Base::getConnection();
-      $query = $c->prepare("select * from categorie where id=?") ;
-      $query->bindParam(1, $id, PDO::PARAM_INT);
-      $dbres = $query->execute();
-
-      $d = $query->fetch(PDO::FETCH_BOTH);
-      */
-
+      
 
       $c = Base::getConnection();
       $query = 'select * from categorie where id= :id';
@@ -273,14 +256,6 @@ class Categorie {
      *   @return Array renvoie un tableau de categorie
      */    
     public static function findAll() {
-
-    /**
-     *    A ECRIRE ENTIEREMENT
-     *    SELECTIONNE TOUTES LES LIGNES DE LA TABLE
-     *    ET LES RETOURNE SOUS LA FORME D'UN TABLEAU D'OBJETS
-     *
-     *
-     */
 
     $query = "select * from categorie";
     $pdo = Base::getConnection();

@@ -1,30 +1,32 @@
 <?php
 include_once "Utilisateur.php";
-//error_reporting(-1);
 
 
 
 session_start();
+//Si l'utilisateur est déjà connecté on l'amène sur son espace membre
 if (!empty($_SESSION['login'])){
 	$log = 'Vous êtes déjà connecté, vous ne pouvez pas vous inscrire.<br>';
 	header("Refresh: 2, url=membre.php");
 }
 
 
-
-//if(isset($_POST['login'], $_POST['pass'], $_POST['pass_c']!=''){
+//Si tout est bon
 if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 	if( (isset($_POST['pseudo']) && !empty($_POST['pseudo']))
 		&& (isset($_POST['pass']) && !empty($_POST['pass']))
 		&& (isset($_POST['pass_c']) && !empty($_POST['pass_c']))
 		&& (isset($_POST['mail']) && !empty($_POST['mail']))){
+
 		//on vérifie le mail
 		if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}.[a-z]{2,4}$#", $_POST['mail'])){
 			$log = 'Adresse mail non valide.<br>';
-		}	
+		}
+		//Les mots de passe	
 		elseif($_POST['pass'] != $_POST['pass_c']){
 			$log = 'Les deux mots de passe ne correspondent pas.<br>';
 		}else{
+			//On vérifie que ni le pseudo ni le mail n'est déjà dans notre base de données
 			$pseudo = htmlentities($_POST['pseudo']);
 			$user = Utilisateur::findByLogin($pseudo);
 			$mail = Utilisateur::findByMail($_POST['mail']);
@@ -35,24 +37,26 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 				$log = 'Adresse mail déjà enregistrée dans la base de donnée.';
 			}
 			else{
+				//Tout ba bien, on crée l'utilisateur
 				$user = new Utilisateur();
 				$user->setAttr("login", $_POST['pseudo']);
 				$user->setAttr("password", $_POST['pass']);
 				$user->setAttr("mail", $_POST['mail']);
-				//$user->setAttr("chmod", "0");
+				//On l'insère dans la BDD
 				$user->insert();
 
 				$log = 'Inscription prise en compte. Merci '. $pseudo .' ! <br>';
 				$log .= 'Connexion en cours. <br>';
-
+				//On le redirige vers l'accueil
 				$_SESSION['login'] = $_POST['pseudo'];
-				header("Refresh: 1; url=Blog.php");
+				header("Refresh: 1; url=blog.php");
 			}
 		}
 
 	}else{
 		$log = 'Au moins un champ est vide.<br>';
 	}
+//S'il appuie sur le bouton accueil on l'envoie à l'accueil
 }else if(isset($_POST['accueil']) && $_POST['accueil'] == 'Accueil') {
 	header("Location: blog.php");
 }

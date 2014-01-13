@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 /* Gère les actions des visiteurs et
  * la navigation sur le blog
  * BOULANGER Vincent & DAUSSY Alexandre
@@ -9,6 +10,7 @@ include_once 'Affichage.php';
 
 class BlogController extends Controller{
 
+	//Affichage de base de la page d'accueil
 	public function listAction($param){
 		$a = new Affichage();
 		$b = Billet::findByCategorie($param);
@@ -22,7 +24,7 @@ class BlogController extends Controller{
 		
 	}
 
-
+	//Affiche les articles d'un auteur
 	public function listAuteur($param){
 		$a = new Affichage();
 		$nom = Utilisateur::findById($param)->getAttr("login");
@@ -37,7 +39,7 @@ class BlogController extends Controller{
 
 
 
-
+	//Affiche les articles en fonction du numéro de page
 	public function listActionParPage($param){
 		$debut = $param * 5 - 5 ;
 		$fin = $debut + 5; 
@@ -52,21 +54,8 @@ class BlogController extends Controller{
 	}
 
 
-	public function listParAuteur($param){
-		$a = new Affichage();
-		$b = Billet::findByAuteur($param);
-		$cat = Categorie::findAll();
-		$lol = $a->afficheListeCategorie($cat);
-		$c = $a->afficheListeBillets($b);
-		$liste = Billet::findUnCertainNombre(0,10);
-		$t = $a->afficheTitre10Derniers($liste);
-		$a->affichageGeneral($c, $lol, $t);
-	}
-
-
+	/*
 	public function detailAction($param){
-		//echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";
-		//var_dump($param);
 		$a = new Affichage();
 		$b = Billet::findById($param);
 		$c = $a->afficherBillet($b);
@@ -76,16 +65,10 @@ class BlogController extends Controller{
 		$t = $a->afficheTitre10Derniers($liste);
 		$a->affichageGeneral($c, $lol, $t);
 	}
+	*/
 
-
-	public function parCategorie($param){
-
-	}
 
 	
-	public function catAction($param){
-		echo "Methode : " . __FUNCTION__ . "<br> Parametre : " . $param . "<br>";  
-	}
 
 	/* Analyse les paramètres reçus dans la requête et appelle
 	 * la méthode adéquate
@@ -98,9 +81,7 @@ class BlogController extends Controller{
 		 * Si la clé est detail ou cat, on aura alors aussi
 		 * besoin de son id
 		 */
-		//echo "Contenu de \$_GET <br> " ;
-		//var_dump($_GET);
-
+		
 		//si y'a pas de paramètre dans l'URL on affiche les 5 derniers articles
 		if(sizeof($tab)==0) {
 			$tab = array("page" => 1);
@@ -109,10 +90,8 @@ class BlogController extends Controller{
 
 		foreach ($tab as $key => $value) {
 			if($key == "page"){
-				//var_dump($value);
 				$this->listActionParPage($value);
 			}
-			//echo "key : $key <br>  value : $value <br>";
 			switch ($value) {
 				case 'list':
 					$this->listActionParPage($value);
@@ -130,15 +109,12 @@ class BlogController extends Controller{
 
 				case 'cat':
 					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
-					else /*echo "id : " . $tab['id'];*/
-						$this->listAction($tab['id']);
-						//TODO FAIRE affichage des catégories
+					else $this->listAction($tab['id']);
 					break;
 
 				case 'billets':
 					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
-					else /*echo "id : " . $tab['id'];*/
-						$this->listAuteur($tab['id']);
+					else $this->listAuteur($tab['id']);
 					break;
 
 
@@ -156,17 +132,5 @@ class BlogController extends Controller{
 
 
 }
-
-/* Permet de tester nos fonctions */
-
-/*$b = new BlogController();
-$b->listAction("param1"); echo "<br>";
-$b->detailAction("param2"); echo "<br>";
-echo "<p>Pour tester la methode callAction, ajoutez \"?cle=valeur\" 
-a la fin de l'URL (ce que vous voulez, ex ?nom=Daussy ou ?nom=Daussy?id=5) et reactualisez<br></p>";
-$tab = $_GET;
-if ($tab != null) $b->callAction($tab);*/
-/* Fin des tests */
-
 
 ?>

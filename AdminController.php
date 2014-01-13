@@ -22,36 +22,37 @@ class AdminController extends Controller {
 	}
 
 
+	/* Permet de supprimer un article */
 	public function supprimerArticle($param){
 		$billet = Billet::findById($param);
 
-		//echo $billet;
+		//Vérification si l'utilisateur courant à cette permission ou on
 		if($billet->getAttr('auteur')==$_SESSION['login']){
 			$n = $billet->delete();
 			header("Location: blog.php");
 		}else{
-			echo "t'as pas le doit b&acirc;tard";
+			echo "Tu n'as pas le droit de supprimer cet article.";
 		}
-		//header("Refresh: 0; url=Blog.php");
-		
-		
 	}
 
 
 
-
+	/* Permet de supprimer son compte */
 	public function supprimerCompte(){
+		//Si un utilisateur veut supprimer son compte
+		//on le déconnecte puis on supprime son compte
 		if(isset($_SESSION['login'])){
-		$current = Utilisateur::findByLogin($_SESSION['login']);
-		session_unset();
-		session_destroy();
-		$n = $current->delete();
-		header("Location: blog.php");
-		}
-		else echo "Vous n'avez rien à faire ici";
-		
-		
+			$current = Utilisateur::findByLogin($_SESSION['login']);
+			session_unset();
+			session_destroy();
+			$n = $current->delete();
+			header("Location: blog.php");
+		//Sinon c'est qu'il a atteint cette url sans en avoir l'autorisation
+		}else{
+			echo "Vous n'avez rien à faire ici";
+		}	
 	}
+
 
 	/* Envoi des données pour ajouter un message */
 	public function editerArticle($param){
@@ -64,6 +65,7 @@ class AdminController extends Controller {
 		$t = $a->afficheTitre10Derniers($liste);
 		$a->affichageGeneral($b, $lol, $t);
 	}
+
 
 	/* Affichage d'un formulaire pour ajouter une catégorie */
 	public function addCategorie($param){
@@ -103,6 +105,7 @@ class AdminController extends Controller {
 					break;
 
 				case 'edit':
+					//Fonctionne seulement si l'id d'un article est spécifié
 					if(array_search('id', array_keys($tab))==true){
 						if(sizeof($tab['id'])>0){
 							$this->editerArticle($tab['id']);
@@ -113,7 +116,8 @@ class AdminController extends Controller {
 					break;
 
 				case 'del':
-				if(array_search('id', array_keys($tab))==true){
+					//Fonctionne seulement si l'id d'un article est précisé
+					if(array_search('id', array_keys($tab))==true){
 						if(sizeof($tab['id'])>0){
 							$this->supprimerArticle($tab['id']);
 						}
@@ -139,10 +143,5 @@ class AdminController extends Controller {
 	
 
 }
-/*
-$a = new AdminController();
-$a->addMessage(5);
-$lol = "lol";
-$a->addCategorie($lol);
-*/
+
 ?>

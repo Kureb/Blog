@@ -15,7 +15,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 
 		$pseudo = htmlentities($_POST['pseudo']);
 		$user = Utilisateur::findByLogin($pseudo);
-
+		//Si l'utilisateur n'existe pas
 		if($user==false){
 			$log = "Cet utilisateur n'existe pas.<br>";
 		}else{
@@ -24,13 +24,12 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 			if($mdp != sha1(sha1($_POST['pass']).$salt)){
 				$log = 'Mot de passe incorrect.<br>';
 			}else{
+				//Sinon tout est bon, on le connecte et on le redirige vers l'accueil
 				$log = 'Connexion en cours.<br>';
 				$_SESSION['login'] = $_POST['pseudo'];
-				header("Refresh: 1; url=Blog.php"); 
+				header("Refresh: 1; url=blog.php"); 
 			}
 		}
-
-
 	}else{
 		$log = 'Au moins un champ est vide.<br>';
 	}
@@ -43,7 +42,7 @@ if (isset($_POST['connexion']) && $_POST['connexion'] == 'Connexion'){
 ?>
 
 
-
+<!-- Code html du formulaire-->
 <html>
 	<head>
 		<title>Connexion</title>

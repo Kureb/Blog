@@ -2,13 +2,17 @@
 
 include_once 'Base.php';
 
+/* Sur la même base que Billet ou Catégorie
+ * Ne sera donc pas détaillé
+ */
+
 class Utilisateur{
 
 	private $userid;
 	private $login;
-	private $password;
+	private $password;///haché, salé, rehaché (sha1)
 	private $mail;
-	private $chmod;
+	private $chmod; //1 si admin, 0 sinon
 
 
 	public function __toString(){
@@ -180,44 +184,6 @@ class Utilisateur{
 		return $user;
 
 	}
-/*
-	public static function findByLogin2($login) {
-		$c = Base::getConnection();
-		$query = 'select * from utilisateurs where login = :login';
-		$dbres = $c->prepare($query);
-		$dbres->bindParam(':login', $login);
-		$dbres->execute();
-		$d = $dbres->fetch(PDO::FETCH_OBJ);
-		if($d == false) return false;
-		$util = new Utilisateur();
-		$d=$dbres->fetch(PDO::FETCH_OBJ);
-	    $util->setAttr("userid", $d->getAttr("userid"));
-	    $util->setAttr("login", $d->getAttr("login"));
-	    $util->setAttr("password",$d->getAttr("password"));
-	    $util->setAttr("mail", $d->getAttr("mail"));
-		
-	  	return $util;
-	}
-
-
-	public static function findByLoginmoi($login){
-		$c = Base::getConnection();
-		$query = 'select * from utilisateurs where login= :login';
-		$dbres = $c->prepare($query);
-		$dbres->bindParam(':login', $login);
-		$dbres->execute();
-		//$user = false;
-		$d = $dbres->fetch(PDO::FETCH_OBJ);
-		if($d==false) return false;
-		$user = new Utilisateur();
-		$user->setAttr("userid", $d->userid);
-		$user->setAttr("login", $login);
-		$user->setAttr("password", $d->password);
-		$user->setAttr("mail", $d->mail);
-
-		return $user;
-	}
-*/
 
 
 	public static function getNbUser(){

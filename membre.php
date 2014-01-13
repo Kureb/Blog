@@ -1,6 +1,9 @@
 <?php 
 
 session_start();
+
+//Si un utilisateur non connecté essaue d'accéder à cette partie
+//on le redirige immédiatemment vers la page de connexion
 if (!isset($_SESSION['login'])){
 	header('Location: connexion.php');
 }
@@ -36,4 +39,5 @@ include_once "Utilisateur.php";
 		?>
 		</div>
 	</body>
+</html>
 
