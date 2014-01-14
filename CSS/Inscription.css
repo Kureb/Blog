@@ -2,8 +2,14 @@ body {
 	background-attachment: fixed;
     font-family:"helvetica";
     font-size: 0.9em;
-    background-image:url(../img/Test2_Minions.jpg);
-    background-size: 95%;
+    background-image:url(../img/Test2_Minions.jpg)no-repeat center fixed;
+ 	margin:0;
+ 	padding:0; 
+	-webkit-background-size: cover; /* pour Chrome et Safari */
+	-moz-background-size: cover; /* pour Firefox */
+	-o-background-size: cover; /* pour Opera */
+	background-size: cover; /* version standardisée */;
+
 }
 .message {
 	-moz-border-radius: 20px 40px;
