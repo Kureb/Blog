@@ -7,7 +7,7 @@ session_start();
 //Si l'utilisateur est déjà connecté on l'amène sur son espace membre
 if (!empty($_SESSION['login'])){
 	$log = 'Vous êtes déjà connecté, vous ne pouvez pas vous inscrire.<br>';
-	header("Refresh: 2, url=membre.php");
+	header("Refresh: 2, url=blog.php");
 }
 
 

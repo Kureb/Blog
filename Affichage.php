@@ -49,11 +49,12 @@ class Affichage{
 				$info .= '<img id="avatar" src="img/professeur.jpg">';
 			else $info.= '<img id="avatar" src="img/utilisateur.jpg">';
 				
-			$info .= 'Bonjour <a href="membre.php" title="accéder à mon espace membre">'.htmlentities($_SESSION['login']).'</a><br>';
+			$info .= 'Bonjour <a href="#">'.htmlentities($_SESSION['login']).'</a><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
 			include_once 'Utilisateur.php';
 			if(Utilisateur::estAdmin($_SESSION['login'])==true){
 				//$info .= '<a href="blog.php?a=billets&id='.$current_user->getAttr("userid").'"">Voir ses articles</a>.<br>';
+				$info .= '<br><br><br><br>';
 				$info .= '<a href="admin.php?a=addM">&eacutecrire un nouvel article</a><br>';
 				$info .= '<a href="admin.php?a=addC">Ajouter une catégorie</a><br>';
 			;
@@ -224,15 +225,15 @@ class Affichage{
 	static function afficheListeCategorie($liste){
 		$code = "";
 		if(sizeof($liste)==0)
-			$code = "Aucune catégorie";
+			$code = "Aucune catégorie.";
 		else{
-			$code = 'Liste des catégories<br>';
+			$code = 'Liste des catégories :<br><br>';
 			foreach ($liste as $categorie) {
 				$titre = $categorie->getAttr("titre");
 				$span = $categorie->getAttr("description");
 				$id = Categorie::findByTitre($titre)->getAttr("id");
-				$lien = '<a href="blog.php?a=cat&id='. $id .'" title="'. $span .'">+</a> ';
-				$code .= $lien . $titre . "<br>\n";
+				$lien = '<a href="blog.php?a=cat&id='. $id .'" title="'. $span .'">';
+				$code .= $lien . $titre . "</a><br>\n";
 			}
 		}
 		return $code;
