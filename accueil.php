@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Projet Web</title>
+		<title>Et à la fin...</title>
 		<meta charset="utf-8" />
 		<style type="text/css"></style>
 		<link rel="stylesheet" href="CSS/Principal.css" />
@@ -9,7 +9,7 @@
 
 	<body>
 	<div id="banniere">
-			<a href="blog.php"> <img id="ban" src="img/Banniere.jpg" border="0"> </a> 
+			<a href="blog.php"> <img id="ban" src="img/Banniere.png" border="0"> </a> 
 		</div> 
 		
 
@@ -22,7 +22,7 @@
 
 		
 		<div id="gauche">
-			<img id="sharing" src="img/Share.png">
+			<!-- <img id="sharing" src="img/Share.png"> -->
 			<div id="Auteur">
 				<p> auteur </p>
 			</div>
