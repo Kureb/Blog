@@ -3,7 +3,7 @@ body {
 */    background-attachment: fixed;
     font-family:"helvetica";
     font-size: 0.9em;
-    background-image:url(Test1_Triangle.jpg);
+    background-image:url(../img/Test1_Triangle.jpg);
 }
 
 #ban {
