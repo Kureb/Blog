@@ -2,6 +2,7 @@ body {
   	background-attachment: fixed;
     font-family:"helvetica";
     font-size: 0.9em;
+<<<<<<< HEAD
     background:url(../img/Test1_Triangle.jpg)no-repeat center fixed;
  	margin:0;
  	padding:0; 
@@ -9,6 +10,15 @@ body {
 	-moz-background-size: cover; /* pour Firefox */
 	-o-background-size: cover; /* pour Opera */
 	background-size: cover; /* version standardisée */
+=======
+    margin:0;
+  	padding:0;
+  	background: url(../img/Test1_Triangle.jpg) no-repeat center fixed; 
+  	-webkit-background-size: cover; /* pour Chrome et Safari */
+  	-moz-background-size: cover; /* pour Firefox */
+  	-o-background-size: cover; /* pour Opera */
+  	background-size: cover; /* version standardisée */
+>>>>>>> d44f3b2cff2dad3c8238298a825d98f6da20d61f
 }
 .message {
 	-moz-border-radius: 20px 40px;
