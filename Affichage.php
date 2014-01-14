@@ -54,7 +54,7 @@ class Affichage{
 			include_once 'Utilisateur.php';
 			if(Utilisateur::estAdmin($_SESSION['login'])==true){
 				//$info .= '<a href="blog.php?a=billets&id='.$current_user->getAttr("userid").'"">Voir ses articles</a>.<br>';
-				$info .= '<br><br><br><br>';
+				$info .= '<br><br><br>';
 				$info .= '<a href="admin.php?a=addM">&eacutecrire un nouvel article</a><br>';
 				$info .= '<a href="admin.php?a=addC">Ajouter une catégorie</a><br>';
 			;
