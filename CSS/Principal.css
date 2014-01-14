@@ -100,7 +100,7 @@ body {
 	box-shadow: 2px 2px 15px black;
 }
 #lastarticles a{
-        color:rgb(240,240,240);
+    color:rgb(240,240,240);
 }
 #lastarticles p{
 	font: black;
@@ -209,7 +209,7 @@ form>p {
 	display: inline-block;
 }
 #infologin{
-	font: rgb(220, 220, 220);
+	color: rgb(220, 220, 220);
 }
 .AjoutArticle, .EditArticle {
 	padding-top: 2%;
