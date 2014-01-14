@@ -24,9 +24,12 @@ body {
 #ban {
 	border-radius: 150px 80px 150px 80px;
 	height: 70px;
-	width: 100%;
+	width: 98%;
 	z-index: 1;
 	position: relative;
+	margin-top: 0.4%;
+	margin-left: 1%;
+	margin-right: 1%;
 }
 #gauche {
 	float: left;
@@ -38,6 +41,7 @@ body {
 	margin-top: -4.5%;
 	margin-bottom: 0;
 	position: fixed;
+	margin-left: 1%;
 }
 #droidroite {
 	float: right;
