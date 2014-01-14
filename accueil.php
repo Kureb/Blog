@@ -39,7 +39,7 @@
 
 
 
-		<div id="droite">
+		<div id="centre">
 			mesarticles
 		</div>
 
