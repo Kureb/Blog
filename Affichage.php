@@ -53,7 +53,10 @@ class Affichage{
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
 			include_once 'Utilisateur.php';
 			if(Utilisateur::estAdmin($_SESSION['login'])==true){
-				$info .= '';
+				//$info .= '<a href="blog.php?a=billets&id='.$current_user->getAttr("userid").'"">Voir ses articles</a>.<br>';
+				$info .= '<a href="admin.php?a=addM">&eacutecrire un nouvel article</a><br>';
+				$info .= '<a href="admin.php?a=addC">Ajouter une catégorie</a><br>';
+			;
 			}else{ //TODO mettre une image (étoile?) pour les admins
 				$info .= '';
 			}
@@ -247,15 +250,15 @@ class Affichage{
 			foreach ($liste as $billet) {
 				$date = $billet->getAttr("date");
 				$auteur = $billet->getAttr("auteur");
-				$lien = '<a href="blog.php?a=detail&id='. $billet->getAttr("id") .'" title="publié le '. $date .' par ' . $auteur .'">+</a> ';
-				$code = $billet->getAttr("titre") . "</h2><br>\n";
+				$lien = '<a href="blog.php?a=detail&id='. $billet->getAttr("id") .'" title="publié le '. $date .' par ' . $auteur .'" ';
+				$code = $billet->getAttr("titre") . "</a></h2><br>\n";
 			}
 		}else{
 			foreach($liste as $billet){
 				$date = $billet->getAttr("date");
 				$auteur = $billet->getAttr("auteur");
-				$lien = '<a href="blog.php?a=detail&id='. $billet->getAttr("id") .'" title="publié le '. $date .' par ' . $auteur .'">+</a> ';
-				$code .= $lien . $billet->getAttr("titre") . "<br>\n";
+				$lien = '<a href="blog.php?a=detail&id='. $billet->getAttr("id") .'" title="publié le '. $date .' par ' . $auteur .'"> ';
+				$code .= $lien . $billet->getAttr("titre") . "</a><br>\n";
 			}
 			
 		}
