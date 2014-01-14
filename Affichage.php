@@ -153,8 +153,10 @@ class Affichage{
 			$code = "<div class=\"Article\">\n" .
 					"<h2>" . $billet->getAttr("titre") . "</h2>\n" .
 					"<p>" . $contenu . "</p>\n" .
-					"<p id=\"date\"><i>publié le " . $date. "</i> par ". $billet->getAttr("auteur").' '.$croix.' '.$edit ."<br>dans la catégorie " .$n_cat->getAttr("titre")."</p>\n" .
-					"</div>";
+					"\n " .
+					"</div>".
+					"<div id=\"info\"><spam id=\"cat\">Dans la catégorie : " .$n_cat->getAttr("titre")."</spam>
+					<spam id=\"date\"><i>publié le : " . $date. "</i> par <b>". $billet->getAttr("auteur").' '.$croix.' '.$edit ."</b></spam></div>";
 		}		
 		return $code;
 	}
