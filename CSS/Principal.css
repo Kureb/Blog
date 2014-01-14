@@ -10,12 +10,17 @@ h2 {
 
 }
 body {
-	background-color: rgb(220, 220, 220);
-    background-attachment: fixed;
+	background-attachment: fixed;
     font-family:"helvetica";
     font-size: 0.9em;
-    background-image:url(../img/Test3_Membre.jpg);
-    background-size: 100%;
+    
+    margin:0;
+  padding:0;
+  background: url(../img/Test3_Membre.jpg) no-repeat center fixed; 
+  -webkit-background-size: cover; /* pour Chrome et Safari */
+  -moz-background-size: cover; /* pour Firefox */
+  -o-background-size: cover; /* pour Opera */
+  background-size: cover; /* version standardisée */
 }
 #ban {
 	border-radius: 150px 80px 150px 80px;
