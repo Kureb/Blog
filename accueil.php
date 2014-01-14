@@ -13,7 +13,7 @@
 		</div> 
 		
 
-		<div id="droidroite">
+		<div id="droite">
 			<div id="lastarticles">
 			<p>10 derniers articles :</p>
 			mesderniersarticles
