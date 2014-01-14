@@ -49,7 +49,7 @@ class Affichage{
 				$info .= '<img id="avatar" src="img/professeur.jpg">';
 			else $info.= '<img id="avatar" src="img/utilisateur.jpg">';
 				
-			$info .= 'Bonjour <a href="#">'.htmlentities($_SESSION['login']).'</a><br>';
+			$info .= 'Bonjour <span id="infologin">'.htmlentities($_SESSION['login']).'</span><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
 			include_once 'Utilisateur.php';
 			if(Utilisateur::estAdmin($_SESSION['login'])==true){
