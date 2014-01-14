@@ -25,8 +25,12 @@ include_once "Utilisateur.php";
 		</div> 
 	<div id="panel">
 		Bienvenue <?php echo $_SESSION['login']; ?><br>
-		<a href="blog.php">Accueil</a>
-		<a href="deconnexion.php">D&eacute;connexion</a><br>
+		<div id="accueil"> 
+			<a href="blog.php">Accueil</a> 
+		</div>
+		<div id="deco">
+			<a href="deconnexion.php">D&eacute;connexion</a><br>
+		</div>
 		<?php 
 			$current_user = Utilisateur::findByLogin($_SESSION['login']);
 			$admin = $current_user->getAttr("chmod");

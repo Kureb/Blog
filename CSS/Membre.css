@@ -3,6 +3,7 @@ body {
     font-family:"helvetica";
     font-size: 0.9em;
     background-image:url(../img/Test3_Membre.jpg);
+    background-size: 100%;
 }
 
 #ban {
@@ -14,48 +15,6 @@ body {
 	opacity: 0.7;
 }
 
-.artdiv{
-	background-color: pink;
-	float: right;
-}
-
-
-
-
-#gauche {
-	float: left;
-	width: 22%;
-	border-radius: 20px;
-	overflow: auto;
-	padding: 1px;
-	height: 99%;
-	margin-top: -5.5%;
-	margin-bottom: 0;
-	z-index: -1;
-	position: fixed;
-}
-
-
-#Global #droite {
-	float: right;
-	width: 77%;
-	margin-left: 22%;
-}
-
-#gauche a{
-        color:rgb(220,220,220);
-}
-
-.Article a{
-        color:rgb(150, 150, 150);
-}
-
-#sharing {
-	width: 90%;
-	border-radius: 186px 46px;
-	margin-left: 30px;
-}
-
 #avatar{
         float: left;
         width: 25%;
@@ -65,38 +24,9 @@ body {
         margin-bottom: 5px;
         box-shadow: 7px 7px 10px rgb(20, 20, 20);
 }
-
-#Auteur {
-	background-color: rgb(100, 100, 100);
-        border-radius:20px ;
-        overflow: auto;
-        height: 23%;
-        padding: 3%;
-        margin-top: 15px;
-        margin-bottom: 2%;
-
+a {
+	color:rgb(230,230,230);
 }
-
-#categorie {
-	background-color: rgb(125, 125, 125);
-	border-radius:20px ;
-	overflow: auto;
-	padding: 3%;
-	height: 43%;
-	margin-top: 0;
-	margin-bottom: 2%;
-}
-
-#footer {
-    overflow: auto;
-    background-color: rgb(150, 150, 150);
-    height: 10%;
-    padding: 3%;
-    border-radius: 20px;
-}
-
-
-
 
 #panel {
 	background-position: center;
@@ -112,51 +42,6 @@ body {
 }
 
 
-
-
-#date{
-	text-align: right;
-}
-
-/*
-#pagination{
-	background-color: #FC4349;
-	color: black;
-	text-align: center;	
-	height: 20px;
-	position: absolute;
-	bottom: 2px;
-	left: 0;
-	right: 0;
-}
-*/
-
-
-#ajouterArticle {
-	width: 550px;
-	height: 400px;
-	max-width: 550px;
-	max-height: 400px;
-}
-
-
-#ajouterTitre {
-	max-width: 550px;
-	max-height: 30px;
-	width: 550px;
-	height: 30px;
-}
-
-textarea {
-	text-align: left;
-}
-
-
-form>p {
-	display: inline-block;
-	vertical-align: middle;
-}
-
 .message {
 	-moz-border-radius: 20px 40px;
 	-webkit-border-radius: 20px 40px;
@@ -164,36 +49,9 @@ form>p {
 	padding: 20px;
 	margin: auto;
 	width: 500px;
-	background: url('black_40p.png');
+	background-color: rgb(39, 40, 34);
 	color: #ffffff;
 	text-align: center;
 	font-weight: bold;
 	margin-top: 20px;
 }
-
-
-
-.formulaire {
-	text-align: center;
-}
-
-.center {
-	text-align: center;
-}
-
-
-.champ {
-	text-align: left;
-	width: 150px;
-}
-
-.label {
-	text-align: left;
-	vertical-align: top;
-	width: 160px;
-	display: inline-block;
-}
-
-
-
-

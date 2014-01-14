@@ -15,6 +15,8 @@ body {
     background-attachment: fixed;
     font-family:"helvetica";
     font-size: 0.9em;
+    background-image:url(../img/Test3_Membre.jpg);
+    background-size: 100%;
 }
 
 #ban {
@@ -101,18 +103,17 @@ body {
 }
 
 #Auteur {
-	background-color: rgb(100, 100, 100);
-        border-radius:20px ;
-        overflow: auto;
-        height: 23%;
-        padding: 3%;
-        margin-top: 15px;
-        margin-bottom: 2%;
-
+	background-color: rgb(80, 80, 80);
+    border-radius:20px ;
+    overflow: auto;
+    height: 23%;
+    padding: 3%;
+    margin-top: 15px;
+    margin-bottom: 2%;
 }
 
 #lastarticles {
-	background-color: rgb(125, 125, 125);
+	background-color: rgb(80, 80, 80);
 	border-radius:20px ;
 	overflow: auto;
 	padding: 3%;
@@ -121,12 +122,17 @@ body {
 	margin-top: 15px;
 	padding-left: 5px;
 	position: fixed;
+	opacity: 0.7;
+	box-shadow: 2px 2px 15px black;
+}
+#lastarticles a{
+        color:rgb(220,220,220);
 }
 
 
 
 #categorie {
-	background-color: rgb(125, 125, 125);
+	background-color: rgb(100, 100, 100);
 	border-radius:20px ;
 	overflow: auto;
 	padding: 3%;
@@ -141,6 +147,7 @@ body {
     height: 17%;
     padding: 3%;
     border-radius: 20px;
+    opacity: 0.7;
 }
 
 
@@ -154,6 +161,8 @@ body {
 	margin-top: 1%;
 	padding-top: 2%;
 	padding-right: 2%;
+	opacity: 0.85;
+	box-shadow: 2px 2px 15px black;
 }
 
 #info{
