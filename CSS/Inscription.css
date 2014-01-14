@@ -4,6 +4,7 @@ body {
     font-family:"helvetica";
     font-size: 0.9em;
     background-image:url(../img/Test2_Minions.jpg);
+    background-size: 95%;
 }
 
 #ban {

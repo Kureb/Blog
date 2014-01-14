@@ -4,6 +4,7 @@ body {
     font-family:"helvetica";
     font-size: 0.9em;
     background-image:url(../img/Test1_Triangle.jpg);
+    background-size: 180%;
 }
 
 #ban {
