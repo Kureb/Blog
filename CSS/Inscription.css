@@ -2,7 +2,7 @@ body {
 	background-attachment: fixed;
     font-family:"helvetica";
     font-size: 0.9em;
-    background-image:url(../img/Test2_Minions.jpg)no-repeat center fixed;
+    background:url(../img/Test2_Minions.jpg)no-repeat center fixed;
  	margin:0;
  	padding:0; 
 	-webkit-background-size: cover; /* pour Chrome et Safari */
