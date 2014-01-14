@@ -84,6 +84,7 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 			<input class="champ" type="password" name="pass_c" maxlength="20" value="<?php if (isset($_POST['pass_c'])) echo htmlentities(trim($_POST['pass_c']))?>"/><br>
 			<span class="label">E-mail</span>
 			<input class="champ" type="text" name="mail" maxlength="50" value="<?php if (isset($_POST['mail'])) echo htmlentities(trim($_POST['mail']))?>"/><br>			
+			<br><br>
 			<input type="submit" name="inscription" value="Inscription" />
 			<input type="submit" name="accueil" value="Accueil" />
 		</div>
