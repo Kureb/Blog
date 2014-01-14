@@ -4,12 +4,12 @@
 		<title>Projet Web</title>
 		<meta charset="utf-8" />
 		<style type="text/css"></style>
-		<link rel="stylesheet" href="Principal.css" />
+		<link rel="stylesheet" href="CSS/Principal.css" />
 	</head>
 
 	<body>
 	<div id="banniere">
-			<a href="blog.php"> <img id="ban" src="Banniere.jpg" border="0"> </a> 
+			<a href="blog.php"> <img id="ban" src="img/Banniere.jpg" border="0"> </a> 
 		</div> 
 		
 
@@ -22,7 +22,7 @@
 
 		
 		<div id="gauche">
-			<img id="sharing" src="Share.png">
+			<img id="sharing" src="img/Share.png">
 			<div id="Auteur">
 				<p> auteur </p>
 			</div>

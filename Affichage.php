@@ -42,12 +42,12 @@ class Affichage{
 		$info = '';
 		if (!empty($_SESSION['login'])){
 			if($_SESSION['login']=='Vincent')
-				$info .= '<img id="avatar" src="test.jpg">';
+				$info .= '<img id="avatar" src="img/test.jpg">';
 			elseif($_SESSION['login']=='Alexandre')
-				$info .= '<img id="avatar" src="alex.jpg">';
+				$info .= '<img id="avatar" src="img/alex.jpg">';
 			elseif($_SESSION['login']=='Professeur')
-				$info .= '<img id="avatar" src="professeur.jpg">';
-			else $info.= '<img id="avatar" src="utilisateur.jpg">';
+				$info .= '<img id="avatar" src="img/professeur.jpg">';
+			else $info.= '<img id="avatar" src="img/utilisateur.jpg">';
 				
 			$info .= 'Bonjour <a href="membre.php" title="accéder à mon espace membre">'.htmlentities($_SESSION['login']).'</a><br>';
 			$info .= '<a href="deconnexion.php">Se déconnecter</a><br>';
@@ -58,7 +58,7 @@ class Affichage{
 				$info .= '';
 			}
 		}else{
-			$info .= '<img id="avatar" src="pasco.jpg">';
+			$info .= '<img id="avatar" src="img/pasco.jpg">';
 			$info .= '<a href="connexion.php">Se connecter</a>';
 		}
 
@@ -130,8 +130,8 @@ class Affichage{
 		$edit = '';
 		if(isset($_SESSION['login'])){
 			if($_SESSION['login']==$billet->getAttr("auteur")){
-				$croix = '<a href="admin.php?a=del&id='.$billet->getAttr("id"). '"><img src="suppr.png" id="edit" title="Supprimer le billet" alt="suppression" border="0"></img></a>';
-				$edit = '  <a href="admin.php?a=edit&id='.$billet->getAttr("id"). '"><img src="edit.png" id="edit" title="Editer le billet" alt="edition" border="0"></img></a>';
+				$croix = '<a href="admin.php?a=del&id='.$billet->getAttr("id"). '"><img src="img/suppr.png" id="edit" title="Supprimer le billet" alt="suppression" border="0"></img></a>';
+				$edit = '  <a href="admin.php?a=edit&id='.$billet->getAttr("id"). '"><img src="img/edit.png" id="edit" title="Editer le billet" alt="edition" border="0"></img></a>';
 			}
 		}
 			
@@ -155,8 +155,8 @@ class Affichage{
 					"<p>" . $contenu . "</p>\n" .
 					"\n " .
 					"</div>".
-					"<div id=\"info\"><spam id=\"cat\">Dans la catégorie : " .$n_cat->getAttr("titre")."</spam>
-					<spam id=\"date\"><i>publié le : " . $date. "</i> par <b>". $billet->getAttr("auteur").' '.$croix.' '.$edit ."</b></spam></div>";
+					"<div id=\"info\"><span id=\"cat\">Dans la catégorie : " .$n_cat->getAttr("titre")."</span>
+					<span id=\"date\"><i>publié le : " . $date. "</i> par <b>". $billet->getAttr("auteur").' '.$croix.' '.$edit ."</b></span></div>";
 		}		
 		return $code;
 	}
@@ -190,7 +190,7 @@ class Affichage{
 				$code = $code . "<div class=\"Article\" >\n" .
 						"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
-						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n" .
+						"<span id=\"date2\"><i>" . "publié le " . $date. "</i></span>\n" .
 						"</div>\n";
 				
 			}
@@ -205,7 +205,7 @@ class Affichage{
 				$code = $code . "<div class=\"Article\">\n" .
 						"<h2>" . $billet->getAttr("titre") . "</h2><br>\n" .
 						"<p>" . substr($billet->getAttr("body"),0,220) . "..." . $link . "</p>\n" .
-						"<p id=\"date\"><i>" . "publié le " . $date. "</i></p>\n"
+						"<p id=\"date2\"><i>" . "publié le " . $date. "</i></p>\n"
 						 .
 						"</div>\n";
 			}

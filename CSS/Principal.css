@@ -1,7 +1,7 @@
 h2 {
 	color: rgb(120,120,120);
     text-align: center;
-    background-image:url(Banniere_Article.jpg);
+    background-image:url(../img/Banniere_Article.jpg);
     margin-top: -8px; 
     border-radius: 80px 150px;
     height: 25px;
@@ -172,6 +172,10 @@ body {
 	float:right;
 }
 
+#date2{
+	text-align: right;
+}
+
 #cat {
 	float: left;
 }
@@ -250,9 +254,7 @@ form>p {
     background-color: rgb(255, 255, 255);
 	text-align: justify;
 	border-radius:20px 40px;
-/*	 padding:1%;
-
-*/	margin-top: 1%;
+	margin-top: 1%;
 	padding-right: 2%;
 	padding-left: 2%; 
 	float: right;
@@ -263,9 +265,10 @@ form>p {
 
 
 #edit {
-	height: 30px;
-	width: 30px;
-	margin-bottom: -0.5em;
+	height: 25px;
+	width: 25px;
+	margin-bottom: -0.6em;
+	margin-top: -0.2em;
 }
 
 

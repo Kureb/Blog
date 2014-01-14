@@ -17,11 +17,11 @@ include_once "Utilisateur.php";
 	<title>Mon espace membre</title>
 	<meta charset="utf-8" />
 	<style type="text/css"></style>
-	<link rel="stylesheet" href="Membre.css" />
+	<link rel="stylesheet" href="CSS/Membre.css" />
 	</head>
 	<body>
 		<div id="banniere">
-			<a href="blog.php"> <img id="ban" src="Banniere.jpg" border="0"> </a> 
+			<a href="blog.php"> <img id="ban" src="img/Banniere.jpg" border="0"> </a> 
 		</div> 
 	<div id="panel">
 		Bienvenue <?php echo $_SESSION['login']; ?><br>
