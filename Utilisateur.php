@@ -81,7 +81,7 @@ class Utilisateur{
 	public function delete(){
 		$nb = 0;
 		if(isset($this->userid)){
-			$query = "DELETE FROM Utilisateurs Where userid =" . $this->userid;
+			$query = "DELETE FROM utilisateurs Where userid =" . $this->userid;
 			$c = Base::getConnection();
 			$nb = $c->exec($query);
 		}
@@ -93,10 +93,10 @@ class Utilisateur{
 	public function insert(){
 		$nb = 0;
 		$salt = $this->login;
-		$query = "INSERT INTO Utilisateurs VALUES(null, '".$this->login."','".sha1(sha1($this->password).$salt)."', '".$this->mail."', '".$this->chmod."')";
+		$query = "INSERT INTO utilisateurs VALUES(null, '".$this->login."','".sha1(sha1($this->password).$salt)."', '".$this->mail."', '".$this->chmod."')";
 		$c = Base::getConnection();
 		$nb = $c->exec($query);
-		$this->setAttr("chmod", "0");
+		$this->setAttr("chmod", 0);
 		$this->setAttr("userid", $c->LastInsertId());
 
 		return $nb;

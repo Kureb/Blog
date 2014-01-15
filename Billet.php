@@ -70,7 +70,7 @@ class Billet{
 	public function delete(){
 		$nb = 0;
 		if(isset($this->id)){
-			$query = "DELETE FROM Billets Where id = " . $this->id;
+			$query = "DELETE FROM billets Where id = " . $this->id;
 			$c = Base::getConnection();
 			$nb = $c->exec($query);
 		}
@@ -83,7 +83,7 @@ class Billet{
 	//Retourne 0 si erreur, & sinon
 	public function insert(){
 		$nb = 0;
-		$query = "INSERT INTO Billets VALUES(null,'".$this->titre."', '".$this->body."', '".$this->cat_id."', '".$this->date."', '".$this->auteur."')";
+		$query = "INSERT INTO billets VALUES(null,'".$this->titre."', '".$this->body."', '".$this->cat_id."', '".$this->date."', '".$this->auteur."')";
 		$c = Base::getConnection();
 		$nb = $c->exec($query);
 		$this->setAttr("id", $c->LastInsertId());

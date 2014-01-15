@@ -203,10 +203,10 @@ class Categorie {
    */									
   public function insert() {
     $nb = 0;
-    $query = "INSERT INTO Categorie VALUES(null,'".$this->titre."', '".$this->description."')";
+    $query = "INSERT INTO categorie VALUES(null,'".$this->titre."', '".$this->description."')";
     $c = Base::getConnection();
-    $nb = $c->exec($query);
     $this->setAttr("id", $c->LastInsertId());
+    $nb = $c->exec($query);
     return $nb;
    
   }

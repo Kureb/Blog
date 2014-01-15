@@ -103,26 +103,23 @@ class BlogController extends Controller{
 							$this->detailAction($tab['id']);
 						}
 					}elseif (array_search('id', array_keys($tab))==false) {
-						echo "Besoin d'un ID";
+						Header('Location: blog.php');
 					}
 					break;
 
 				case 'cat':
-					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
+					if(array_search('id', array_keys($tab))==false) Header('Location: blog.php');
 					else $this->listAction($tab['id']);
 					break;
 
 				case 'billets':
-					if(array_search('id', array_keys($tab))==false) echo "Besoin d'un id"; 
+					if(array_search('id', array_keys($tab))==false) Header('Location: blog.php');
 					else $this->listAuteur($tab['id']);
 					break;
 
 
 
 				default:
-					//if(array_search('id', array_keys($tab))==false)
-					//echo "action impossible <br>";
-					//$this->detailAction(null);
 					break;
 			}
 		}

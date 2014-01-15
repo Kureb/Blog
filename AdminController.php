@@ -112,7 +112,7 @@ class AdminController extends Controller {
 							$this->editerArticle($tab['id']);
 						}
 					}elseif (array_search('id', array_keys($tab))==false) {
-						echo "Besoin d'un ID";
+						Header('Location: blog.php');
 					}
 					break;
 
@@ -123,19 +123,17 @@ class AdminController extends Controller {
 							$this->supprimerArticle($tab['id']);
 						}
 					}elseif (array_search('id', array_keys($tab))==false) {
-						echo "Besoin d'un ID";
+						Header('Location: blog.php');
 				}
 					break;
 
 				case 'supp':
 					$this->supprimerCompte();
-						
 					break;
 
 
 
 				default:
-					//echo "Cette page n'existe pas <br>";
 					break;
 			}
 		}

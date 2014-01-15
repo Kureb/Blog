@@ -42,12 +42,14 @@ if (isset($_POST['inscription']) && $_POST['inscription'] == 'Inscription'){
 				$user->setAttr("login", $_POST['pseudo']);
 				$user->setAttr("password", $_POST['pass']);
 				$user->setAttr("mail", $_POST['mail']);
+
 				//On l'insère dans la BDD
 				$user->insert();
 
 				$log = 'Inscription prise en compte. Merci '. $pseudo .' ! <br>';
 				$log .= 'Connexion en cours. <br>';
 				//On le redirige vers l'accueil
+				
 				$_SESSION['login'] = $_POST['pseudo'];
 				header("Refresh: 1; url=blog.php");
 			}

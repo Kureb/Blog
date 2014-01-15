@@ -40,7 +40,7 @@ class Affichage{
 	 */
 	static function infoUser(){
 		$info = '';
-		if (!empty($_SESSION['login'])){
+		if ((!empty($_SESSION['login'])) && ($_SESSION['login']!=NULL)){
 			if($_SESSION['login']=='Vincent')
 				$info .= '<img id="avatar" src="img/test.jpg">';
 			elseif($_SESSION['login']=='Alexandre')
@@ -57,6 +57,7 @@ class Affichage{
 				$info .= '<br><br><br>';
 				$info .= '<a href="admin.php?a=addM">&eacutecrire un nouvel article</a><br>';
 				$info .= '<a href="admin.php?a=addC">Ajouter une catégorie</a><br>';
+				$info .= '<a href="admin.php?a=supp">Supprimer son compte</a><br>';
 			;
 			}else{ //TODO mettre une image (étoile?) pour les admins
 				$info .= '';
@@ -134,7 +135,7 @@ class Affichage{
 		$croix = '';
 		$edit = '';
 		if(isset($_SESSION['login'])){
-			if($_SESSION['login']==$billet->getAttr("auteur")){
+			if($_SESSION['login']==($billet->getAttr("auteur"))){
 				$croix = '<a href="admin.php?a=del&id='.$billet->getAttr("id"). '"><img src="img/suppr.png" id="edit" title="Supprimer le billet" alt="suppression" border="0"></img></a>';
 				$edit = '  <a href="admin.php?a=edit&id='.$billet->getAttr("id"). '"><img src="img/edit.png" id="edit" title="Editer le billet" alt="edition" border="0"></img></a>';
 			}
@@ -437,7 +438,7 @@ class Affichage{
 					$billet->setAttr("titre", $titre);
 					$billet->setAttr("body", $body);
 					$billet->setAttr("id", $billet->getAttr("id"));
-					$billet->setAttr("cat_id", $billet->getAttr("cat_id"));
+					$billet->setAttr("cat_id", $cat->getAttr("id"));
 					$billet->setAttr("date", $billet->getAttr("date"));
 					$billet->setAttr("auteur", $billet->getAttr("auteur"));
 
